@@ -1,0 +1,16 @@
+ping: true
+atReply: true
+imagePaths: []
+sendLocalImg: true
+pixiv: true
+imgRecallDelay: 0
+yuscript: true
+miraiImg: false
+batchImg: true
+recallMinPeriod: 200
+ipList: true
+welcome: true
+muteTip: true
+miraiHandle: false
+reverseAtReply: true
+cmdPrefix: /

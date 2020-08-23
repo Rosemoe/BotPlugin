@@ -1,0 +1,6 @@
+name: "BotCore"
+author: "Rosemoe"
+version: "1.0.0"
+main: "io.github.rosemoe.botPlugin.TestPlugin"
+info: "Core of rose robot"
+depends: []

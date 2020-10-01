@@ -18,7 +18,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import io.github.rosemoe.botPlugin.Speed;
 import com.rose.yuscript.YuContext;
 import com.rose.yuscript.annotation.ScriptMethod;
 import com.rose.yuscript.tree.YuExpression;
@@ -36,7 +35,7 @@ import static com.rose.yuscript.YuInterpreter.*;
 @SuppressWarnings("unused")
 public class YuMethod {
 	
-	public final static ConcurrentHashMap<Long, Speed> map = new ConcurrentHashMap<>();
+	//public final static ConcurrentHashMap<Long, Speed> map = new ConcurrentHashMap<>();
 	
 	/**
 	 * No instance
@@ -61,7 +60,7 @@ public class YuMethod {
 
 	@ScriptMethod
 	public static void syso(YuContext context,Object[] value) {
-	    StringBuilder sb = new StringBuilder();
+	    /*StringBuilder sb = new StringBuilder();
 		
 		for(Object obj : value)
 			sb.append(obj).append('\n');
@@ -79,7 +78,7 @@ public class YuMethod {
 			context.getDeclaringInterpreter().getGroup().sendMessageAsync(sb.toString());
 		}else if(v) {
 			context.getDeclaringInterpreter().getGroup().sendMessageAsync( "YuScript一分钟内在本群发送的消息数目内已达到上限, 一分钟之后再发吧~");
-		}
+		}*/
 	}
 
 	private static Message translateMiraiCode(StringBuilder text) {

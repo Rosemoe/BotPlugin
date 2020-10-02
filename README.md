@@ -22,7 +22,7 @@ A plugin for mirai console with image sender,pixiv querying and more.
 * Intellij Idea 2020.2.2
 当前项目Mirai环境:
 * Mirai Core 1.3.1
-* Mirai Console 1.0-M4 
+* Mirai Console 1.0-RC-dev-29
 ***在本项目的Release中可以直接下载编译好的jar文件!如果不是需要研究,你可以直接下载***
 ## 开始使用
 先运行一次Mirai Console,然后停止   

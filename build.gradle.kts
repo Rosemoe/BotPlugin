@@ -3,32 +3,34 @@ import java.util.*
 
 plugins {
     kotlin("jvm") version "1.4.0"
+    kotlin("plugin.serialization") version "1.4.0"
+    kotlin("kapt") version "1.4.0"
     java
     id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
 group = "io.github.Rosemoe"
-version = "2.0.1"
+version = "2.0.2"
 
 repositories {
+    mavenLocal()
     jcenter()
-    maven(url = "https://dl.bintray.com/kotlin/kotlin-eap")
-    maven(url = "https://mirrors.huaweicloud.com/repository/maven")
     mavenCentral()
 }
 
 val miraiCoreVersion = "1.3.1"
-val miraiConsoleVersion = "1.0-M4"
+val miraiConsoleVersion = "1.0-RC-dev-29"
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
     compileOnly("net.mamoe:mirai-core:$miraiCoreVersion")
     compileOnly("net.mamoe:mirai-console:$miraiConsoleVersion")
 
+    val autoService = "1.0-rc7"
+    kapt("com.google.auto.service", "auto-service", autoService)
+    compileOnly("com.google.auto.service", "auto-service-annotations", autoService)
+
     testImplementation(kotlin("stdlib-jdk8"))
-    testImplementation("net.mamoe:mirai-core:$miraiCoreVersion")
-    testImplementation("net.mamoe:mirai-console:$miraiConsoleVersion")
-    testImplementation("net.mamoe:mirai-console-pure:$miraiConsoleVersion")
 }
 
 java {
@@ -37,12 +39,6 @@ java {
 }
 
 tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
 
     val assemblePlugin by creating(DefaultTask::class.java) {
         group = "plugin"
@@ -79,6 +75,11 @@ tasks {
             copyBuildOutput()
         }
     }
+}
+
+kotlin.target.compilations.all {
+    kotlinOptions.freeCompilerArgs += "-Xjvm-default=enable"
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 @Throws(IOException::class)

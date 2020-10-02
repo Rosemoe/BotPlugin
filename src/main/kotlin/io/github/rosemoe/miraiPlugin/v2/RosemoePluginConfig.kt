@@ -6,7 +6,7 @@ import net.mamoe.mirai.console.data.value
 /**
  * Config for [RosemoePlugin]
  */
-object RosemoePluginConfig : AutoSavePluginConfig() {
+object RosemoePluginConfig : AutoSavePluginConfig("PluginConfig") {
 
     /**
      * Top-level users for User Access Control
@@ -21,7 +21,7 @@ object RosemoePluginConfig : AutoSavePluginConfig() {
     /**
      * Prefix in group for commands outside
      */
-    var commandPrefix: String by value()
+    var commandPrefix: String by value("/")
 
     /**
      * Paths for images
@@ -36,26 +36,26 @@ object RosemoePluginConfig : AutoSavePluginConfig() {
     /**
      * Delay for image recalling
      */
-    var imageRecallDelay: Long by value()
+    var imageRecallDelay: Long by value(60000L)
 
     /**
      * Min interval for recalling a message
      */
-    var recallMinPeriod: Long by value()
+    var recallMinPeriod: Long by value(180L)
 
     /**
      * Max Image count for batch image sender (In one request)
      */
-    var maxImageRequestCount: Int by value()
+    var maxImageRequestCount: Int by value(16)
 
-    var proxyEnabled: Boolean by value()
+    var proxyEnabled: Boolean by value(false)
 
-    var proxyType: String by value()
+    var proxyType: String by value("http")
 
-    var proxyAddress: String by value()
+    var proxyAddress: String by value("127.0.0.1")
 
-    var proxyPort: Int by value()
+    var proxyPort: Int by value(1080)
 
-    var allowR18ImageInPixiv: Boolean by value()
+    var allowR18ImageInPixiv: Boolean by value(false)
 
 }

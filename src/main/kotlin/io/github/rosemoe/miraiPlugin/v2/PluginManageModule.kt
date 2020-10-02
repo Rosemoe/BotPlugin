@@ -233,7 +233,7 @@ internal fun RosemoePlugin.registerManageCommands() {
             return@register
         }
         val m = rest.getLong()
-        val time = if (m == -1L) 30000 else m
+        val time = if (m == -1L) 60000 else m
         config.imageRecallDelay = time
         event.sendBackAsync("recallDelay的值设置为$time")
     }

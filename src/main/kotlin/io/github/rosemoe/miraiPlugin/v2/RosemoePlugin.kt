@@ -20,10 +20,9 @@ import kotlin.collections.ArrayList
 object RosemoePlugin : ListenerHost, KotlinPlugin(
     net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription(
         id = "io.github.Rosemoe.miraiPlugin.v2.RosemoePlugin",
-        version = "2.0.0",
-        name = "RosemoePlugin"
+        version = version
     ) {
-        name("RosemoePlugin")
+        name("RosemoeBotPlugin")
         author("Rosemoe")
     }
 ) {

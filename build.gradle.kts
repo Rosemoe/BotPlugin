@@ -27,8 +27,8 @@ dependencies {
 
     testImplementation(kotlin("stdlib-jdk8"))
     testImplementation("net.mamoe:mirai-core:$miraiCoreVersion")
-    testImplementation("net.mamoe:mirai-core-qqandroid:$miraiCoreVersion")
     testImplementation("net.mamoe:mirai-console:$miraiConsoleVersion")
+    testImplementation("net.mamoe:mirai-console-pure:$miraiConsoleVersion")
 }
 
 java {
@@ -54,7 +54,7 @@ tasks {
         doFirst {
             fun removeOldVersions() {
                 File("$targetDirectory/").walk()
-                    .filter { it.name.matches(Regex("""Rose-.*-all.jar""")) }
+                    .filter { it.name.matches(Regex("""(.|[.])*.jar""")) }
                     .forEach {
                         it.delete()
                         println("deleting old files: ${it.name}")
@@ -92,6 +92,7 @@ fun InputStream.transferTo1(out: OutputStream): Long {
         transferred += read.toLong()
     }
     close()
+    out.flush()
     out.close()
     return transferred
 }

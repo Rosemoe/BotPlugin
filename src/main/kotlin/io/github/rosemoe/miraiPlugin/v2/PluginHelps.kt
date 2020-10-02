@@ -30,7 +30,7 @@ fun RosemoePlugin.registerHelps() {
         - 禁言时提示
         关于:
         BotPlugin (https://github.com/Rosemoe/BotPlugin) for Mirai Console, which is create by Rosemoe
-        Version 2.0.1 (Build 2020/10/2 16:01)
+        Version 2.0.1 (Build time 2020/10/2 18:13)
         使用GitHub上的邮件地址联系我.
         运行于 Mirai (https://github.com/mamoe/mirai) 平台
     """.trimIndent())

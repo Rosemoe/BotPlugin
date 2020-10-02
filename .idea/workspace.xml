@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="94c55dfd-30b6-410f-b206-44bda515c691" name="Default Changelist" comment="修复了玄学编译bugs">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RosemoeBotPlugin" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RosemoeBotPlugin" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="RosemoeBotPlugin" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="plugin" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:\JetBrains\IDEA Community\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1iJkISKplPBbzk82cKDBdPnqEWF" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="android.sdk.path" value="$PROJECT_DIR$/../../AndroidSdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="RosemoeBotPlugin [assemblePlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assemblePlugin" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.RosemoeBotPlugin [assemblePlugin]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="94c55dfd-30b6-410f-b206-44bda515c691" name="Default Changelist" comment="" />
+      <created>1601633027671</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601633027671</updated>
+    </task>
+    <task id="LOCAL-00001" summary="修复了玄学编译bugs">
+      <created>1601633923064</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1601633923064</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="修复了玄学编译bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复了玄学编译bugs" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="173" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601634015419">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="173" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.860@0.0.1440.860" timestamp="1601634015419" />
+    <state x="313" y="0" key="CommitChangelistDialog2" timestamp="1601634278900">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="313" y="0" key="CommitChangelistDialog2/0.0.1440.860@0.0.1440.860" timestamp="1601634278900" />
+    <state width="1341" height="199" key="GridCell.Tab.0.bottom" timestamp="1601634063575">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state width="1341" height="199" key="GridCell.Tab.0.bottom/0.0.1440.860@0.0.1440.860" timestamp="1601634063575" />
+    <state width="1341" height="199" key="GridCell.Tab.0.center" timestamp="1601634063574">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state width="1341" height="199" key="GridCell.Tab.0.center/0.0.1440.860@0.0.1440.860" timestamp="1601634063574" />
+    <state width="1341" height="199" key="GridCell.Tab.0.left" timestamp="1601634063574">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state width="1341" height="199" key="GridCell.Tab.0.left/0.0.1440.860@0.0.1440.860" timestamp="1601634063574" />
+    <state width="1341" height="199" key="GridCell.Tab.0.right" timestamp="1601634063574">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state width="1341" height="199" key="GridCell.Tab.0.right/0.0.1440.860@0.0.1440.860" timestamp="1601634063574" />
+    <state x="220" y="8" key="SettingsEditor" timestamp="1601634051443">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="220" y="8" key="SettingsEditor/0.0.1440.860@0.0.1440.860" timestamp="1601634051443" />
+  </component>
+</project>

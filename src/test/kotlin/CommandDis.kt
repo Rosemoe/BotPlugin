@@ -1,9 +1,14 @@
-package io.github.rosemoe.miraiPlugin.v2
-
-import net.mamoe.mirai.message.GroupMessageEvent
 import java.util.HashMap
 
-class CommandDispatcher {
+fun main() {
+    val d = CommandDis()
+    d.register("settings") {
+        rest -> println(114514)
+    }
+    d.dispatch("/settings")
+}
+
+class CommandDis {
 
     private val root = Node()
 
@@ -29,18 +34,10 @@ class CommandDispatcher {
         }
     }
 
-    fun register(path: String, action: (GroupMessageEvent,String) -> Unit) {
+    fun register(path: String, action: (String) -> Unit) {
         register(path, object : Action {
-            override fun invoke(event: GroupMessageEvent, restContent: String) {
-                action(event, restContent)
-            }
-        })
-    }
-
-    fun register(path: String, action: (GroupMessageEvent) -> Unit) {
-        register(path, object : Action {
-            override fun invoke(event: GroupMessageEvent, restContent: String) {
-                action(event)
+            override fun invoke(restContent: String) {
+                action(restContent)
             }
         })
     }
@@ -61,8 +58,8 @@ class CommandDispatcher {
     }
 
     @Throws(Throwable::class)
-    fun dispatch(event: GroupMessageEvent) {
-        var text = event.message.toString()
+    fun dispatch(event: String) {
+        var text = event
         if (text.startsWith("[mirai:source")) {
             text = text.substring(text.indexOf("]") + 1)
         }
@@ -75,7 +72,7 @@ class CommandDispatcher {
                 val name = text.substring(regionStart, regionEnd)
                 val next = node.children[name]
                 if (next == null) {
-                    node.action?.invoke(event, text.substring(regionStart))
+                    node.action?.invoke(text.substring(regionStart))
                     break
                 } else {
                     node = next
@@ -84,7 +81,7 @@ class CommandDispatcher {
                 regionEnd = getWordEnd(regionStart, text)
             }
             if (regionStart >= regionEnd) {
-                node.action?.invoke(event, "")
+                node.action?.invoke("")
             }
         }
     }
@@ -97,7 +94,7 @@ class CommandDispatcher {
     interface Action {
 
         @Throws(Throwable::class)
-        fun invoke(event : GroupMessageEvent, restContent : String)
+        fun invoke(restContent : String)
 
     }
 

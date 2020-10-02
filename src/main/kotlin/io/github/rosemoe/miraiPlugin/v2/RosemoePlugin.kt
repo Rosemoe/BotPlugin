@@ -53,6 +53,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         registerPingCommands()
         registerIpCommands()
         registerPixivCommands()
+        registerHelps()
         startRecallManager()
     }
 

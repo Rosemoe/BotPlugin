@@ -9,12 +9,17 @@ import java.io.File
 import java.lang.NumberFormatException
 
 internal fun RosemoePlugin.registerImageCommands() {
-    dispatcher.register("sendImage", { event,restContent ->
+    dispatcher.register("sendImage") { event, restContent ->
         if (isModuleEnabled("BatchImage") && isModuleEnabled("ImageSender")) {
             try {
                 val count = restContent.trim().toInt()
                 if (count > config.maxImageRequestCount) {
-                    event.sendBackAsync(messageChainOf(At(event.sender), PlainText("请求数量太多啦! 一次最多请求${kotlin.math.max(0, config.maxImageRequestCount)}张图片哦")))
+                    event.sendBackAsync(
+                        messageChainOf(
+                            At(event.sender),
+                            PlainText("请求数量太多啦! 一次最多请求${kotlin.math.max(0, config.maxImageRequestCount)}张图片哦")
+                        )
+                    )
                 } else {
                     for (i in 1..count) {
                         sendImageForEvent(event)
@@ -24,7 +29,7 @@ internal fun RosemoePlugin.registerImageCommands() {
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("数字格式不对,请重试")))
             }
         }
-    })
+    }
 }
 
 internal fun RosemoePlugin.initializeImageList() {
@@ -48,7 +53,7 @@ internal fun RosemoePlugin.initializeImageList() {
         }
     }
 
-    imageListLock.writeLock().lock()
+    imageListLock.lockWrite()
     try {
         logger.verbose("Removing previous images...")
         imageList.clear()
@@ -59,19 +64,19 @@ internal fun RosemoePlugin.initializeImageList() {
 
         logger.info("Image load succeeded. Indexed image count = ${imageList.size}")
     } finally {
-        imageListLock.writeLock().unlock()
+        imageListLock.unlockWrite()
     }
 }
 
 private fun RosemoePlugin.randomImageFile(): File? {
-    imageListLock.readLock().lock()
+    imageListLock.lockRead()
     try {
         val size = imageList.size
         if (size > 0) {
             return imageList[imageRandom.nextInt(size)]
         }
     } finally {
-        imageListLock.readLock().unlock()
+        imageListLock.unlockRead()
     }
     return null
 }

@@ -19,13 +19,12 @@ fun RosemoePlugin.applyProxySettings() {
 }
 
 fun RosemoePlugin.registerPixivCommands() {
-    dispatcher.register("pixiv/illust", {
-        event, rest ->
+    dispatcher.register("pixiv/illust") { event, rest ->
         if (!isModuleEnabled("Pixiv")) {
             return@register
         }
         val args = rest.trim().split(Regex("[ \\n\\t]+")).toMutableList()
-        for ((index,arg) in args.withIndex()) {
+        for ((index, arg) in args.withIndex()) {
             args[index] = arg.trim()
         }
         pluginLaunch {
@@ -46,7 +45,7 @@ fun RosemoePlugin.registerPixivCommands() {
                 }
                 2 -> {
                     val artworkId = args[0].getLong()
-                    val index= args[1].getLong().toInt()
+                    val index = args[1].getLong().toInt()
                     if (artworkId != -1L && index != -1) {
                         try {
                             val s = getArtworkImage(event.group, artworkId, index)
@@ -64,7 +63,7 @@ fun RosemoePlugin.registerPixivCommands() {
                 }
             }
         }
-    })
+    }
 }
 
 var proxy = false
@@ -129,14 +128,16 @@ internal fun getArtworkInformation(gp: Group, artworkId: Long): MessageChain {
     sb.append("\n标签:")
     val tags = artwork.getJSONObject("tags").getJSONArray("tags")
     var r18 = false
-    for (i in 0 until tags.length()) {
-        val tag = tags.getJSONObject(i)
-        if (tag.getString("tag").toLowerCase().contains("r-18")) {
-            r18 = true
-        }
-        sb.append(tag.getString("tag"))
-        if (i + 1 != tag.length()) {
-            sb.append(", ")
+    if (!RosemoePlugin.config.allowR18ImageInPixiv) {
+        for (i in 0 until tags.length()) {
+            val tag = tags.getJSONObject(i)
+            if (tag.getString("tag").toLowerCase().contains("r-18")) {
+                r18 = true
+            }
+            sb.append(tag.getString("tag"))
+            if (i + 1 != tag.length()) {
+                sb.append(", ")
+            }
         }
     }
     var msg= messageChainOf(PlainText(sb.toString()))
@@ -180,10 +181,13 @@ private fun getArtworkImage(gp: Group, artworkId: Long, index: Int): Message {
     val originUrl = urls["original"].toString()
     val tags = artwork.getJSONObject("tags").getJSONArray("tags")
     var r18 = false
-    for (i in 0 until tags.length()) {
-        val tag = tags.getJSONObject(i)
-        if (tag.getString("tag").toLowerCase().contains("r-18")) {
-            r18 = true
+    if (!RosemoePlugin.config.allowR18ImageInPixiv) {
+        for (i in 0 until tags.length()) {
+            val tag = tags.getJSONObject(i)
+            if (tag.getString("tag").toLowerCase().contains("r-18")) {
+                r18 = true
+                break
+            }
         }
     }
     return if (r18) {

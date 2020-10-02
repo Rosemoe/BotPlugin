@@ -195,7 +195,7 @@ internal fun RosemoePlugin.registerManageCommands() {
     rootDispatcher.register("settings/reload", ::reloadConfig)
     rootDispatcher.register("settings/reloadBase", ::reloadBaseConfig)
     rootDispatcher.register("settings/set/ImagePathList", ::setImagePathList)
-    rootDispatcher.register("settings/get/ImagePathList", { event, _ ->
+    rootDispatcher.register("settings/get/ImagePathList") { event, _ ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
@@ -206,8 +206,8 @@ internal fun RosemoePlugin.registerManageCommands() {
             msg.append(it).append(';')
         }
         event.sendBackAsync(msg.toString())
-    })
-    rootDispatcher.register("settings/set/Prefix", { event, prefix ->
+    }
+    rootDispatcher.register("settings/set/Prefix") { event, prefix ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
@@ -216,16 +216,17 @@ internal fun RosemoePlugin.registerManageCommands() {
         config.commandPrefix = prefix.trim()
         dispatcher.prefix = config.commandPrefix
         rootDispatcher.prefix = config.commandPrefix
-    })
-    rootDispatcher.register("settings/get/Prefix", { event, _ ->
+        event.sendBackAsync("当前的前缀是:${dispatcher.prefix}")
+    }
+    rootDispatcher.register("settings/get/Prefix") { event, _ ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
         event.sendBackAsync("当前的前缀是:${dispatcher.prefix}")
-    })
-    rootDispatcher.register("settings/set/RecallDelay", { event, rest ->
+    }
+    rootDispatcher.register("settings/set/RecallDelay") { event, rest ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
@@ -235,16 +236,16 @@ internal fun RosemoePlugin.registerManageCommands() {
         val time = if (m == -1L) 30000 else m
         config.imageRecallDelay = time
         event.sendBackAsync("recallDelay的值设置为$time")
-    })
-    rootDispatcher.register("settings/get/RecallDelay", { event, _ ->
+    }
+    rootDispatcher.register("settings/get/RecallDelay") { event, _ ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
         event.sendBackAsync("recallDelay的值为${config.imageRecallDelay}")
-    })
-    rootDispatcher.register("settings/set/RecallInterval", { event, rest ->
+    }
+    rootDispatcher.register("settings/set/RecallInterval") { event, rest ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
@@ -254,15 +255,15 @@ internal fun RosemoePlugin.registerManageCommands() {
         val time = if (m == -1L) 180 else m
         config.recallMinPeriod = time
         event.sendBackAsync("recallInterval的值设置为$time")
-    })
-    rootDispatcher.register("settings/get/RecallInterval", { event, _ ->
+    }
+    rootDispatcher.register("settings/get/RecallInterval") { event, _ ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
         event.sendBackAsync("recallInterval的值为${config.recallMinPeriod}")
-    })
+    }
     rootDispatcher.register("darklist/add", ::addToDarkList)
     rootDispatcher.register("darklist/remove", ::removeDarkListGroup)
     rootDispatcher.register("darklist/list", ::listDarklistGroups)

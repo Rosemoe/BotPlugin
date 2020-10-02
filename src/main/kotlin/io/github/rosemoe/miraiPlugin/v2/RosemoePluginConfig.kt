@@ -50,10 +50,12 @@ object RosemoePluginConfig : AutoSavePluginConfig() {
 
     var proxyEnabled: Boolean by value()
 
-    var proxyType:String by value()
+    var proxyType: String by value()
 
     var proxyAddress: String by value()
 
-    var proxyPort:Int by value()
+    var proxyPort: Int by value()
+
+    var allowR18ImageInPixiv: Boolean by value()
 
 }

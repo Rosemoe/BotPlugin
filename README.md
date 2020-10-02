@@ -19,13 +19,16 @@ A plugin for mirai console with image sender,pixiv querying and more.
 打包的插件自动复制在项目文件夹的release目录下!    
 环境:
 * Oracle Open JDK 14
-* Intellij Idea 2020.2.2
+* Intellij Idea 2020.2.2   
+
 当前项目Mirai环境:
+
 * Mirai Core 1.3.1
 * Mirai Console 1.0-RC-dev-29   
-***在本仓库的Releases中可以直接下载编译好的jar文件!如果不是需要研究,你可以直接下载***
+
+**在本仓库的Releases中可以直接下载编译好的jar文件!如果不是需要研究,你可以直接下载**
 ## 开始使用
-先运行一次Mirai Console,然后停止   
+先带着插件运行一次Mirai Console,然后停止   
 在`mirai文件夹/config/RosemoeBotPlugin/PluginConfig.yml`中把   
 ```yml
 managers: []
@@ -43,12 +46,12 @@ managers:
   - 12345678
 ```   
 然后重新运行Mirai Console   
-然后发送
+然后用Manager账号在群聊发送
 ```Kotlin
 /settings set ImagePathList 图片或者图片文件夹路径(可用';'分割)
 ```
-设定你的图片路径表   
-即可开始使用   
+设定你的图片路径表,即可开始使用   
+如果不想被其他人知道你的图片路径,也可以参照README.md最下方的PluginConfig.yml示例手动写路径表
 ## 群聊指令表
 非常建议您先读完下面的指令表再使用
 ### 设置部分

@@ -1,6 +1,6 @@
 # BotPlugin
-一个运行于Mirai Console的插件    
-A plugin for mirai console with image sender,pixiv querying and more.
+一个运行于[Mirai Console](https://github.com/mamoe/mirai-console)的插件    
+A plugin for [mirai console](https://github.com/mamoe/mirai-console) with image sender,pixiv querying and more.
 ## 功能
 * 发送本地圖庫的圖片(请手动下载赫图,另提供指令sendImage一次发送多张)(发送带有'图'和'来'的消息或者色图来图片(不知道这图我也没办法,你可以用图片ID发出去))
 * 发送在线的Pixiv的圖片(允许设置代理,说得好像不设置代理谁进得去呢?)
@@ -14,19 +14,27 @@ A plugin for mirai console with image sender,pixiv querying and more.
 ## 特色
 * 单线程撤回发出的本地图片(防止请求过于频繁被服务器拒绝)
 * CommandDispatcher(?蜜汁操作,指令派发)
-## 编译说明
-在我的电脑上build.gradle.kts和settings.gradle.kts会报错,但是这不影响gradle编译.直接使用Gradle Task里面的plugin/assemblePlugin即可编译插件   
-打包的插件自动复制在项目文件夹的release目录下!    
-环境:
-* Oracle Open JDK 14
-* Intellij Idea 2020.2.2   
 
-当前项目Mirai环境:
+**在本仓库的Releases中可以直接下载编译好的jar文件!如果不是需要研究,你可以直接下载**
+## 简单使用
+- 下载Release里发布的jar.
+- [启动Mirai-Consle](https://github.com/mamoe/mirai-console/blob/master/docs/Run.md)
+- 复制jar到Console工作目录下的plugins里
+- 运行Console
+## 准备工作
+### 安装 IDE 插件 
+-  Mirai Console 提供 IntelliJ 插件来提升开发体验。
+
+- [Kotlin Jvm Blocking Bridge](https://github.com/mamoe/kotlin-jvm-blocking-bridge) ([JetBrains 插件仓库](https://plugins.jetbrains.com/plugin/14816-kotlin-jvm-blocking-bridge), [一键安装](https://plugins.jetbrains.com/embeddable/install/14816))：帮助 Java 用户调用 Kotlin suspend 函数
+- [Mirai Console IntelliJ](../tools/intellij-plugin/) ([JetBrains 插件仓库](https://plugins.jetbrains.com/plugin/15094-mirai-console), [一键安装](https://plugins.jetbrains.com/embeddable/install/15094))：提供错误检查等功能
+### JVM环境:
+* 桌面 JVM：最低 Java 8，但推荐 Java 11  
+
+### 当前项目Mirai环境:
 
 * Mirai Core 1.3.1
 * Mirai Console 1.0-RC-dev-29   
 
-**在本仓库的Releases中可以直接下载编译好的jar文件!如果不是需要研究,你可以直接下载**
 ## 开始使用
 先带着插件运行一次Mirai Console,然后停止   
 在`mirai文件夹/config/RosemoeBotPlugin/PluginConfig.yml`中把   

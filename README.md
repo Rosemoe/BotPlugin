@@ -18,11 +18,12 @@ A plugin for mirai console with image sender,pixiv querying and more.
 在我的电脑上build.gradle.kts和settings.gradle.kts会报错,但是这不影响gradle编译.直接使用Gradle里面的plugin/assemblePlugin即可编译插件   
 打包的插件自动复制在项目文件夹的release目录下!    
 环境:
-* Adopt JDK 8
-* Intellij Idea 2020.2.2
+* Open JDK 14
+* Intellij Idea 2020.3
 当前项目Mirai环境:
-* Mirai Core 1.3.1
-* Mirai Console 1.0-RC-dev-29
+* Mirai Core 1.3.3
+* Mirai Console 1.0.0   
+***如果需要编译,请删去或者修改gradle.properties中的代理设定!!!***   
 ***在本项目的Release中可以直接下载编译好的jar文件!如果不是需要研究,你可以直接下载***
 ## 开始使用
 先运行一次Mirai Console,然后停止   

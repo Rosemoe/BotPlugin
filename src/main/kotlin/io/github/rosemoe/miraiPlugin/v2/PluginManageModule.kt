@@ -166,7 +166,6 @@ internal fun RosemoePlugin.registerManageCommands() {
                 } else {
                     msg.append(group.name).append(" (").append(groups[index]).append(")")
                 }
-                msg.append("\n")
             }
             event.sendBackAsync(msg.toString())
         } finally {

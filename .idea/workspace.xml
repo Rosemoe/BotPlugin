@@ -22,21 +22,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94c55dfd-30b6-410f-b206-44bda515c691" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/RosemoeBotPlugin.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.2/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="94c55dfd-30b6-410f-b206-44bda515c691" name="Default Changelist" comment="更新mirai console到1.0.0&#10;修改黑名单显示">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginManageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginManageModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Version.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Version.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/CommandDis.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +72,9 @@
         <option value="Kotlin File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="BRANCH" value="master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -204,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601640822926</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="更新mirai console到1.0.0&#10;修改黑名单显示">
+      <created>1605847836377</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605847836377</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -212,7 +209,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -227,7 +230,8 @@
     <MESSAGE value="修复Gradle Task" />
     <MESSAGE value="删除无用类" />
     <MESSAGE value="更新Mirai Console版本到1.0-RC-dev-29" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新Mirai Console版本到1.0-RC-dev-29" />
+    <MESSAGE value="更新mirai console到1.0.0&#10;修改黑名单显示" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新mirai console到1.0.0&#10;修改黑名单显示" />
   </component>
   <component name="WindowStateProjectService">
     <state x="558" y="86" key="#Inspections" timestamp="1601638245778">
@@ -246,29 +250,37 @@
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="500" y="184" key="FileChooserDialogImpl/0.0.1440.860@0.0.1440.860" timestamp="1605332055401" />
-    <state width="1341" height="199" key="GridCell.Tab.0.bottom" timestamp="1601642742604">
+    <state width="1340" height="206" key="GridCell.Tab.0.bottom" timestamp="1605847767152">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1341" height="199" key="GridCell.Tab.0.bottom/0.0.1440.860@0.0.1440.860" timestamp="1601642742604" />
-    <state width="1341" height="199" key="GridCell.Tab.0.center" timestamp="1601642742604">
+    <state width="1340" height="206" key="GridCell.Tab.0.bottom/0.0.1440.860@0.0.1440.860" timestamp="1605847767152" />
+    <state width="1340" height="206" key="GridCell.Tab.0.center" timestamp="1605847767152">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1341" height="199" key="GridCell.Tab.0.center/0.0.1440.860@0.0.1440.860" timestamp="1601642742604" />
-    <state width="1341" height="199" key="GridCell.Tab.0.left" timestamp="1601642742604">
+    <state width="1340" height="206" key="GridCell.Tab.0.center/0.0.1440.860@0.0.1440.860" timestamp="1605847767152" />
+    <state width="1340" height="206" key="GridCell.Tab.0.left" timestamp="1605847767152">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1341" height="199" key="GridCell.Tab.0.left/0.0.1440.860@0.0.1440.860" timestamp="1601642742604" />
-    <state width="1341" height="199" key="GridCell.Tab.0.right" timestamp="1601642742604">
+    <state width="1340" height="206" key="GridCell.Tab.0.left/0.0.1440.860@0.0.1440.860" timestamp="1605847767152" />
+    <state width="1340" height="206" key="GridCell.Tab.0.right" timestamp="1605847767152">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1341" height="199" key="GridCell.Tab.0.right/0.0.1440.860@0.0.1440.860" timestamp="1601642742604" />
+    <state width="1340" height="206" key="GridCell.Tab.0.right/0.0.1440.860@0.0.1440.860" timestamp="1605847767152" />
+    <state x="136" y="68" key="MergeDialog" timestamp="1605848129456">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="136" y="68" key="MergeDialog/0.0.1440.860@0.0.1440.860" timestamp="1605848129456" />
+    <state x="355" y="190" key="MultipleFileMergeDialog" timestamp="1605848129464">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="355" y="190" key="MultipleFileMergeDialog/0.0.1440.860@0.0.1440.860" timestamp="1605848129464" />
     <state x="220" y="8" key="SettingsEditor" timestamp="1605353447534">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="220" y="8" key="SettingsEditor/0.0.1440.860@0.0.1440.860" timestamp="1605353447534" />
-    <state x="311" y="161" key="Vcs.Push.Dialog.v2" timestamp="1601640826987">
+    <state x="311" y="161" key="Vcs.Push.Dialog.v2" timestamp="1605847838722">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="311" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.860@0.0.1440.860" timestamp="1601640826987" />
+    <state x="311" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.860@0.0.1440.860" timestamp="1605847838722" />
   </component>
 </project>

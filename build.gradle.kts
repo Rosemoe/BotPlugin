@@ -1,6 +1,3 @@
-import java.io.*
-import java.util.*
-
 plugins {
     val kotlinVersion = "1.4.10"
     kotlin("jvm") version kotlinVersion

@@ -22,16 +22,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94c55dfd-30b6-410f-b206-44bda515c691" name="Default Changelist" comment="增加了生成PetPet Gif功能&#10;更新console至1.1.0">
+    <list default="true" id="94c55dfd-30b6-410f-b206-44bda515c691" name="Default Changelist" comment="修复bugs">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPetPetModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPetPetModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPixivModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPixivModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginRecallWorker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginRecallWorker.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Version.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Version.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/json/JSON.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/json/JSONArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/json/JSONException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/json/JSONObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/json/JSONStringer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/json/JSONTokener.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607067011789</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="修复bugs">
+      <created>1607077391618</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1607077391618</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -272,6 +280,7 @@
     <MESSAGE value="merge branch" />
     <MESSAGE value="更新更新更新更新更新更新" />
     <MESSAGE value="增加了生成PetPet Gif功能&#10;更新console至1.1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加了生成PetPet Gif功能&#10;更新console至1.1.0" />
+    <MESSAGE value="修复bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复bugs" />
   </component>
 </project>

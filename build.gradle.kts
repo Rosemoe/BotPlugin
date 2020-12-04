@@ -24,6 +24,7 @@ dependencies {
     compileOnly("net.mamoe:mirai-core:$miraiCoreVersion")
     compileOnly("net.mamoe:mirai-console:$miraiConsoleVersion")
     implementation("com.squareup:gifencoder:0.10.1")
+    implementation("org.json:org.json:2.0")
 
     testImplementation(kotlin("stdlib-jdk8"))
 }

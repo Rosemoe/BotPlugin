@@ -33,7 +33,7 @@ val hands: Array<BufferedImage> by lazy {
     val handImage = ImageIO.read(
         getTargetImage(
             "https://benisland.neocities.org/petpet/img/sprite.png",
-            "${RosemoePlugin.dataFolderPath}${File.separator}/hand.png"
+            "${RosemoePlugin.dataFolderPath}${File.separator}hand.png"
         )
     )
     Array(MAX_FRAME) {
@@ -42,7 +42,7 @@ val hands: Array<BufferedImage> by lazy {
 }
 
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {
-    val outputFile = File("${RosemoePlugin.dataFolderPath}${File.separator}${id}/petpet.gif")
+    val outputFile = File("${RosemoePlugin.dataFolderPath}${File.separator}${id}${File.separator}petpet.gif")
     runInterruptible(Dispatchers.IO) {
         logger.info("Generating in Dispatchers.IO")
         val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
@@ -95,7 +95,7 @@ fun generateFrame(head: BufferedImage, i: Int): BufferedImage {
 private fun getUserHead(url: String, memberId: Long): File {
     return getTargetImage(
         url,
-        "${RosemoePlugin.dataFolderPath}${File.separator}$memberId/tx.png",
+        "${RosemoePlugin.dataFolderPath}${File.separator}${memberId}${File.separator}tx.png",
         false
     )
 }
@@ -118,6 +118,7 @@ private fun getTargetImage(url: String, pathname: String, isUseCache: Boolean = 
         connect()
     }
     if (!file.exists()) {
+        file.parentFile.mkdirs()
         file.createNewFile()
     }
     val `is` = connection.inputStream

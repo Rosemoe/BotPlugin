@@ -42,19 +42,23 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
 
     internal val dispatcher = CommandDispatcher()
     internal val rootDispatcher = CommandDispatcher()
-    private val TEST_REQ = arrayOf("PluginTest", ".moe")
+    private val TEST_REQ = arrayOf("PluginTest.moe")
 
     override fun onEnable() {
         super.onEnable()
         initOrReloadConfig()
         registerEvents(this, this.coroutineContext)
+        registerCommands()
+        startRecallManager()
+    }
+
+    private fun registerCommands() {
         registerImageCommands()
         registerManageCommands()
         registerPingCommands()
         registerIpCommands()
         registerPixivCommands()
         registerHelps()
-        startRecallManager()
     }
 
     @EventHandler
@@ -154,12 +158,10 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
     @EventHandler
     @Suppress("unused")
     suspend fun onMemberNudge(event: MemberNudgedEvent) {
-        if (isDarklistGroup(event)) {
+        if (isDarklistGroup(event) || !isModuleEnabled("PetPet")) {
             return
         }
-        if (!isModuleEnabled("PetPet")) {
-            return
-        }
+        logger.info(event.toString())
         val url = event.member.avatarUrl.replace("s=640","s=100")
         generateGifAndSend(url, event.group, event.member.id)
     }

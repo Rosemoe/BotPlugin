@@ -3,11 +3,11 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
     java
-    id("net.mamoe.mirai-console") version "1.0.0"
+    id("net.mamoe.mirai-console") version "1.1.0"
 }
 
 group = "io.github.Rosemoe"
-version = "2.0.4"
+version = "2.1.0"
 
 repositories {
     mavenLocal()
@@ -17,12 +17,13 @@ repositories {
 }
 
 val miraiCoreVersion = "1.3.3"
-val miraiConsoleVersion = "1.0.0"
+val miraiConsoleVersion = "1.1.0"
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
     compileOnly("net.mamoe:mirai-core:$miraiCoreVersion")
     compileOnly("net.mamoe:mirai-console:$miraiConsoleVersion")
+    implementation("com.squareup:gifencoder:0.10.1")
 
     testImplementation(kotlin("stdlib-jdk8"))
 }

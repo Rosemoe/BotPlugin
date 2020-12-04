@@ -10,11 +10,12 @@ A plugin for [mirai console](https://github.com/mamoe/mirai-console) with image 
 * 在群聊中更新某些配置(带有用户控制(废话))
 * 设置群聊黑名单(注意settings和darklist指令全局可用,黑名单群settings指令只回復manager)
 * 禁言,取消禁言,加群,退群提示(注意:有臭味
+* PetPet图片生成(群聊被戳一戳时)
 * 没了
 ## 特色
 * 单线程撤回发出的本地图片(防止请求过于频繁被服务器拒绝)
-* CommandDispatcher(?蜜汁操作,指令派发)
-**在本仓库的Releases中可以直接下载编译好的jar文件!如果不是需要研究,你可以直接下载**
+* CommandDispatcher(?蜜汁操作,指令派发)    
+**在本仓库的Releases中可以直接下载编译好的jar文件! 如果不是需要研究,你可以直接下载**
 ## 简单使用
 - 下载Release里发布的jar.
 - [启动Mirai-Consle](https://github.com/mamoe/mirai-console/blob/master/docs/Run.md)
@@ -29,7 +30,7 @@ A plugin for [mirai console](https://github.com/mamoe/mirai-console) with image 
 * 桌面 JVM：最低 Java 8，但推荐 Java 11  
 ### 当前项目Mirai环境:
 * Mirai Core 1.3.3
-* Mirai Console 1.0.0   
+* Mirai Console 1.1.0   
 ## 开始使用
 先带着插件运行一次Mirai Console,然后停止   
 在`mirai文件夹/config/RosemoeBotPlugin/PluginConfig.yml`中把   

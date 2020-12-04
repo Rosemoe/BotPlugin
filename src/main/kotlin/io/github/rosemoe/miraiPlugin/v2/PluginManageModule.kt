@@ -20,7 +20,8 @@ val allowedModuleName = listOf(
     "Welcome",
     "MuteTip",
     "ReverseAtReply",
-    "ReverseAtReplyImage"
+    "ReverseAtReplyImage",
+    "PetPet"
 )
 
 val darklistLock = ReentrantReadWriteLock(true)

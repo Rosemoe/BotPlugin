@@ -42,18 +42,23 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
 
     internal val dispatcher = CommandDispatcher()
     internal val rootDispatcher = CommandDispatcher()
+    private val TEST_REQ = arrayOf("PluginTest.moe")
 
     override fun onEnable() {
         super.onEnable()
         initOrReloadConfig()
         registerEvents(this, this.coroutineContext)
+        registerCommands()
+        startRecallManager()
+    }
+
+    private fun registerCommands() {
         registerImageCommands()
         registerManageCommands()
         registerPingCommands()
         registerIpCommands()
         registerPixivCommands()
         registerHelps()
-        startRecallManager()
     }
 
     @EventHandler
@@ -69,6 +74,12 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
             // Dispatch message
             if (isModuleEnabled("ImageSender") && (event.message.containsTexts(IMAGE_REQUEST) || event.message.containsImage("B407F708-A2C6-A506-3420-98DF7CAC4A57"))) {
                 sendImageForEvent(event)
+            }
+            if (isModuleEnabled("PetPet") && event.message.containsTexts(TEST_REQ)) {
+                pluginLaunch {
+                    val url = event.sender.avatarUrl.replace("s=640", "s=100")
+                    generateGifAndSend(url, event.group, event.sender.id)
+                }
             }
             handleAtReply(event)
             dispatcher.dispatch(event)
@@ -142,6 +153,17 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
             event.group.sendMessage("${event.member.nick} (${event.member.id}) 滚蛋了,丢人!!!")
         else
             event.group.sendMessage("${event.member.nick} (${event.member.id}) 被飞出去了,丢人!!!")
+    }
+
+    @EventHandler
+    @Suppress("unused")
+    suspend fun onMemberNudge(event: MemberNudgedEvent) {
+        if (isDarklistGroup(event) || !isModuleEnabled("PetPet")) {
+            return
+        }
+        logger.info(event.toString())
+        val url = event.member.avatarUrl.replace("s=640","s=100")
+        generateGifAndSend(url, event.group, event.member.id)
     }
 
     internal fun isModuleEnabled(name: String): Boolean {

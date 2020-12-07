@@ -73,8 +73,7 @@ var proxyPort = 1080
 
 @Throws(Throwable::class)
 fun getArtworkSource(artworkId: Long): StringBuilder {
-    val connection: HttpsURLConnection
-    connection = if (proxy) {
+    val connection: HttpsURLConnection = if (proxy) {
         val proxyInstance = Proxy(proxyType, InetSocketAddress(proxyAddress, proxyPort))
         URL("https://www.pixiv.net/artworks/$artworkId").openConnection(proxyInstance) as HttpsURLConnection
     } else {
@@ -224,8 +223,7 @@ private fun getTargetImage(gp: Group, url: String, artworkId: Long, proxy: Boole
         }
         return res
     }
-    val connection: HttpsURLConnection
-    connection = if (proxy) {
+    val connection: HttpsURLConnection = if (proxy) {
         val proxyInstance = Proxy(proxyType, InetSocketAddress(proxyAddress, proxyPort))
         URL(url).openConnection(proxyInstance) as HttpsURLConnection
     } else {

@@ -46,7 +46,7 @@ fun RosemoePlugin.startRecallManager() {
     }
 }
 
-fun RosemoePlugin.scheduleRecall(receipt: MessageReceipt<Group>, delay: Long) {
+fun scheduleRecall(receipt: MessageReceipt<Group>, delay: Long) {
     taskQueue.put(Request(delay, receipt))
 }
 

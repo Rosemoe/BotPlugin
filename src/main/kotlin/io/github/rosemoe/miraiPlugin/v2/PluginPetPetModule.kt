@@ -14,11 +14,11 @@ import java.net.URL
 import javax.imageio.ImageIO
 import kotlin.math.max
 
-const val OUT_SIZE = 112//hand size
-const val MAX_FRAME = 5
+private const val OUT_SIZE = 112//hand size
+private const val MAX_FRAME = 5
 
 private const val squish = 1.25
-pruvate const val scale = 0.875
+private const val scale = 0.875
 private const val spriteY = 20.0
 private const val duration = 16L
 

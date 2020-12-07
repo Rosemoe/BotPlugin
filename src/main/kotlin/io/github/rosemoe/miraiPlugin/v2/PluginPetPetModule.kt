@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
 import kotlin.math.max
 
@@ -50,7 +51,7 @@ suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long
         val outputStream = FileOutputStream(outputFile)
         GifEncoder(outputStream, OUT_SIZE, OUT_SIZE, 0).run {
             val buffer = IntArray(OUT_SIZE * OUT_SIZE)
-            val options = ImageOptions()
+            val options = ImageOptions().setDelay(duration,TimeUnit.MILLISECONDS)
             for (i in 0 until MAX_FRAME) {
                 generateFrame(head, i).getRGB(0, 0, OUT_SIZE, OUT_SIZE, buffer, 0, OUT_SIZE)
                 addImage(buffer, OUT_SIZE, options)

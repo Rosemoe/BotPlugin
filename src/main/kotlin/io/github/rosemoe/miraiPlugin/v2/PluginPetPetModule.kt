@@ -14,14 +14,15 @@ import java.net.URL
 import javax.imageio.ImageIO
 import kotlin.math.max
 
-const val OUT_SIZE = 112//hand size
-const val MAX_FRAME = 5
+private const val OUT_SIZE = 112//hand size
+private const val MAX_FRAME = 5
 
-const val squish = 1.25
-const val scale = 0.875
-const val spriteY = 20.0
+private const val squish = 1.25
+private const val scale = 0.875
+private const val spriteY = 20.0
+private const val duration = 16L
 
-val frameOffsets = listOf(
+private val frameOffsets = listOf(
     mapOf("x" to 0, "y" to 0, "w" to 0, "h" to 0),
     mapOf("x" to -4, "y" to 12, "w" to 4, "h" to -12),
     mapOf("x" to -12, "y" to 18, "w" to 12, "h" to -18),
@@ -29,7 +30,7 @@ val frameOffsets = listOf(
     mapOf("x" to -4, "y" to 0, "w" to 0, "h" to 0)
 )
 
-val hands: Array<BufferedImage> by lazy {
+private val hands: Array<BufferedImage> by lazy {
     val handImage = ImageIO.read(
         getTargetImage(
             "https://benisland.neocities.org/petpet/img/sprite.png",
@@ -65,7 +66,7 @@ operator fun <K, V> Map<K, V>.minus(x: K): V {
     return getValue(x)
 }
 
-fun getSpriteFrame(i: Int): Map<String, Int> {
+private fun getSpriteFrame(i: Int): Map<String, Int> {
     val offset = frameOffsets[i]
     return mapOf(
         "dx" to ((offset - "x") * squish * 0.4).toInt(),
@@ -75,7 +76,7 @@ fun getSpriteFrame(i: Int): Map<String, Int> {
     )
 }
 
-fun generateFrame(head: BufferedImage, i: Int): BufferedImage {
+private fun generateFrame(head: BufferedImage, i: Int): BufferedImage {
     val cf = getSpriteFrame(i)
     val result = BufferedImage(OUT_SIZE, OUT_SIZE, BufferedImage.TYPE_INT_ARGB)
     result.createGraphics().apply {

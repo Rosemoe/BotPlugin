@@ -1,14 +1,16 @@
 package io.github.rosemoe.miraiPlugin.v2
 
-import com.squareup.gifencoder.GifEncoder
-import com.squareup.gifencoder.ImageOptions
+import io.github.rosemoe.miraiPlugin.v2.gifmaker.GifEncoder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.message.sendImage
 import java.awt.Color
 import java.awt.image.BufferedImage
-import java.io.*
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.imageio.ImageIO
@@ -20,7 +22,7 @@ private const val MAX_FRAME = 5
 private const val squish = 1.25
 private const val scale = 0.875
 private const val spriteY = 20.0
-private const val duration = 16L
+private const val duration = 16
 
 private val frameOffsets = listOf(
     mapOf("x" to 0, "y" to 0, "w" to 0, "h" to 0),
@@ -48,16 +50,17 @@ suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long
         logger.info("Generating in Dispatchers.IO")
         val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
         val outputStream = FileOutputStream(outputFile)
-        GifEncoder(outputStream, OUT_SIZE, OUT_SIZE, 0).run {
-            val buffer = IntArray(OUT_SIZE * OUT_SIZE)
-            val options = ImageOptions()
+        GifEncoder().run {
+            delay = duration
+            repeat = 0//无限循环播放
+            setTransparent(Color.TRANSLUCENT)
+            start(outputStream)
             for (i in 0 until MAX_FRAME) {
-                generateFrame(head, i).getRGB(0, 0, OUT_SIZE, OUT_SIZE, buffer, 0, OUT_SIZE)
-                addImage(buffer, OUT_SIZE, options)
+                addFrame(generateFrame(head, i))
             }
-            finishEncoding()
+            finish()
+            logger.info("生成完毕")
         }
-        outputStream.close()
     }
     group.sendImage(outputFile)
 }
@@ -80,9 +83,9 @@ private fun generateFrame(head: BufferedImage, i: Int): BufferedImage {
     val cf = getSpriteFrame(i)
     val result = BufferedImage(OUT_SIZE, OUT_SIZE, BufferedImage.TYPE_INT_ARGB)
     result.createGraphics().apply {
-        color = Color.WHITE
-        drawRect(0, 0, OUT_SIZE, OUT_SIZE)
-        fillRect(0, 0, OUT_SIZE, OUT_SIZE)
+        //color = Color.WHITE
+        //drawRect(0, 0, OUT_SIZE, OUT_SIZE)
+        //fillRect(0, 0, OUT_SIZE, OUT_SIZE)
         create().apply {
             translate(cf - "dx" + 15, cf - "dy" + 15)
             drawImage(head, 0, 0, ((cf - "dw") * 0.9).toInt(), ((cf - "dh") * 0.9).toInt(), null)

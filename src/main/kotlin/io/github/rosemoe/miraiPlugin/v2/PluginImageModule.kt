@@ -1,10 +1,10 @@
 package io.github.rosemoe.miraiPlugin.v2
 
-import net.mamoe.mirai.message.GroupMessageEvent
+import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.messageChainOf
-import net.mamoe.mirai.message.uploadImage
+import net.mamoe.mirai.utils.uploadImage
 import java.io.File
 import java.lang.NumberFormatException
 

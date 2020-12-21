@@ -6,13 +6,17 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runInterruptible
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.message.MessageReceipt
-import net.mamoe.mirai.message.recall
+import net.mamoe.mirai.message.bot
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 
 val taskQueue = LinkedBlockingQueue<Request>(8192 * 2)
 
 suspend fun <E : Any?> BlockingQueue<E>.awaitTake() : E = runInterruptible (Dispatchers.IO) { take() }
+
+suspend fun recall(target: MessageReceipt<Group>) {
+    net.mamoe.mirai.Mirai.recallMessage(target.bot, target.source)
+}
 
 /**
  * This is to work around the shit Tencent protocol
@@ -26,7 +30,7 @@ fun RosemoePlugin.startRecallManager() {
             val req = taskQueue.awaitTake()
             if (req.expectedTime <= System.currentTimeMillis()) {
                 try {
-                    req.target.recall()
+                    recall(req.target)
                     logger.info("Recalled a message")
                     val interval = config.recallMinPeriod
                     delay(if(interval <= 0L) 180L else interval)

@@ -1,6 +1,6 @@
 package io.github.rosemoe.miraiPlugin.v2
 
-import net.mamoe.mirai.message.GroupMessageEvent
+import net.mamoe.mirai.event.events.GroupMessageEvent
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream

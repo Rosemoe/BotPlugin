@@ -5,7 +5,7 @@ import com.squareup.gifencoder.ImageOptions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
 import net.mamoe.mirai.contact.Group
-import net.mamoe.mirai.message.sendImage
+import net.mamoe.mirai.utils.sendImage
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.*

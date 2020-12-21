@@ -9,9 +9,10 @@ import net.mamoe.mirai.event.EventHandler
 import net.mamoe.mirai.event.ListenerHost
 import net.mamoe.mirai.event.events.*
 import net.mamoe.mirai.event.registerEvents
-import net.mamoe.mirai.message.GroupMessageEvent
+import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.MessageReceipt
 import net.mamoe.mirai.message.data.*
+import net.mamoe.mirai.utils.MiraiExperimentalApi
 import java.io.File
 import java.util.*
 import java.util.concurrent.locks.ReentrantReadWriteLock
@@ -155,6 +156,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
             event.group.sendMessage("${event.member.nick} (${event.member.id}) 被飞出去了,丢人!!!")
     }
 
+    @MiraiExperimentalApi
     @EventHandler
     @Suppress("unused")
     suspend fun onMemberNudge(event: MemberNudgedEvent) {

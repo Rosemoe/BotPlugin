@@ -1,7 +1,6 @@
 package io.github.rosemoe.miraiPlugin.v2
 
-import io.github.rosemoe.miraiPlugin.v2.RosemoePlugin.sendBackAsync
-import net.mamoe.mirai.message.GroupMessageEvent
+import net.mamoe.mirai.event.events.GroupMessageEvent
 import java.net.Inet4Address
 import java.net.Inet6Address
 import java.net.InetAddress

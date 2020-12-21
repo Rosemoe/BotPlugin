@@ -3,7 +3,7 @@ package io.github.rosemoe.miraiPlugin.v2
 import kotlinx.coroutines.runBlocking
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.message.data.*
-import net.mamoe.mirai.message.uploadImage
+import net.mamoe.mirai.utils.uploadImage
 import org.json.JSONObject
 import java.io.*
 import java.net.InetSocketAddress

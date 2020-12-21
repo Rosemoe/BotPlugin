@@ -1,7 +1,7 @@
 package io.github.rosemoe.miraiPlugin.v2
 
 import net.mamoe.mirai.getGroupOrNull
-import net.mamoe.mirai.message.GroupMessageEvent
+import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.messageChainOf
@@ -161,7 +161,7 @@ internal fun RosemoePlugin.registerManageCommands() {
                 targetPage * ITEM_COUNT_EACH_PAGE - 1
             )) {
                 msg.append("\n").append(index + 1).append(":")
-                val group = event.bot.getGroupOrNull(groups[index])
+                val group = event.bot.getGroup(groups[index])
                 if (group == null) {
                     msg.append(groups[index]).append(" (查询名称失败)")
                 } else {

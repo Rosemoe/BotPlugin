@@ -22,11 +22,12 @@ A plugin for [Mirai Console](https://github.com/mamoe/mirai-console) with image 
 - 复制jar到Console工作目录下的plugins里
 - 见下方'开始使用'栏目
 ### 当前项目环境:
-* Mirai Core 1.3.3
-* Mirai Console 1.1.0  
-* Kotlin 1.4.10   
+* Mirai Core 2.0-M1
+* Mirai Console 2.0-M1  
+* Kotlin 1.4.21   
 * OpenJdk 14   
-* Intellij IDEA 2020.3
+* Intellij IDEA 2020.3   
+**注意! 在编译本项目之前,请留意删除gradle.properties中的网络代理设置**   
 ## 开始使用
 建议使用 Java 11或者更高版本的Java    
 先带着插件运行一次Mirai Console,然后停止   

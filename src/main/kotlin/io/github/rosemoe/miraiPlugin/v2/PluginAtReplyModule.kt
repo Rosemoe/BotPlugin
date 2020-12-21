@@ -3,9 +3,10 @@ package io.github.rosemoe.miraiPlugin.v2
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.runInterruptible
-import net.mamoe.mirai.message.GroupMessageEvent
+import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.*
-import net.mamoe.mirai.message.uploadImage
+import net.mamoe.mirai.message.data.Image.Key.queryUrl
+import net.mamoe.mirai.utils.uploadImage
 import java.awt.image.BufferedImage
 import java.io.IOException
 import java.net.URL

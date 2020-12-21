@@ -254,7 +254,7 @@ open class GifEncoder {
      * @return false if open or initial write failed.
      */
     fun start(file: String): Boolean {
-        var ok = true
+        var ok:Boolean
         try {
             out = BufferedOutputStream(FileOutputStream(file))
             ok = start(out)

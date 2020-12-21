@@ -1,27 +1,30 @@
 package io.github.rosemoe.miraiPlugin.v2
 
-import com.squareup.gifencoder.GifEncoder
-import com.squareup.gifencoder.ImageOptions
+import io.github.rosemoe.miraiPlugin.v2.gifmaker.GifEncoder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.utils.sendImage
 import java.awt.Color
 import java.awt.image.BufferedImage
-import java.io.*
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.imageio.ImageIO
 import kotlin.math.max
 
-const val OUT_SIZE = 112//hand size
-const val MAX_FRAME = 5
+private const val OUT_SIZE = 112//hand size
+private const val MAX_FRAME = 5
 
-const val squish = 1.25
-const val scale = 0.875
-const val spriteY = 20.0
+private const val squish = 1.25
+private const val scale = 0.875
+private const val spriteY = 20.0
+private const val duration = 16
 
-val frameOffsets = listOf(
+private val frameOffsets = listOf(
     mapOf("x" to 0, "y" to 0, "w" to 0, "h" to 0),
     mapOf("x" to -4, "y" to 12, "w" to 4, "h" to -12),
     mapOf("x" to -12, "y" to 18, "w" to 12, "h" to -18),
@@ -29,7 +32,7 @@ val frameOffsets = listOf(
     mapOf("x" to -4, "y" to 0, "w" to 0, "h" to 0)
 )
 
-val hands: Array<BufferedImage> by lazy {
+private val hands: Array<BufferedImage> by lazy {
     val handImage = ImageIO.read(
         getTargetImage(
             "https://benisland.neocities.org/petpet/img/sprite.png",
@@ -47,16 +50,17 @@ suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long
         logger.info("Generating in Dispatchers.IO")
         val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
         val outputStream = FileOutputStream(outputFile)
-        GifEncoder(outputStream, OUT_SIZE, OUT_SIZE, 0).run {
-            val buffer = IntArray(OUT_SIZE * OUT_SIZE)
-            val options = ImageOptions()
+        GifEncoder().run {
+            delay = duration
+            repeat = 0//无限循环播放
+            setTransparent(Color.TRANSLUCENT)
+            start(outputStream)
             for (i in 0 until MAX_FRAME) {
-                generateFrame(head, i).getRGB(0, 0, OUT_SIZE, OUT_SIZE, buffer, 0, OUT_SIZE)
-                addImage(buffer, OUT_SIZE, options)
+                addFrame(generateFrame(head, i))
             }
-            finishEncoding()
+            finish()
+            logger.info("生成完毕")
         }
-        outputStream.close()
     }
     group.sendImage(outputFile)
 }
@@ -65,7 +69,7 @@ operator fun <K, V> Map<K, V>.minus(x: K): V {
     return getValue(x)
 }
 
-fun getSpriteFrame(i: Int): Map<String, Int> {
+private fun getSpriteFrame(i: Int): Map<String, Int> {
     val offset = frameOffsets[i]
     return mapOf(
         "dx" to ((offset - "x") * squish * 0.4).toInt(),
@@ -75,13 +79,13 @@ fun getSpriteFrame(i: Int): Map<String, Int> {
     )
 }
 
-fun generateFrame(head: BufferedImage, i: Int): BufferedImage {
+private fun generateFrame(head: BufferedImage, i: Int): BufferedImage {
     val cf = getSpriteFrame(i)
     val result = BufferedImage(OUT_SIZE, OUT_SIZE, BufferedImage.TYPE_INT_ARGB)
     result.createGraphics().apply {
-        color = Color.WHITE
-        drawRect(0, 0, OUT_SIZE, OUT_SIZE)
-        fillRect(0, 0, OUT_SIZE, OUT_SIZE)
+        //color = Color.WHITE
+        //drawRect(0, 0, OUT_SIZE, OUT_SIZE)
+        //fillRect(0, 0, OUT_SIZE, OUT_SIZE)
         create().apply {
             translate(cf - "dx" + 15, cf - "dy" + 15)
             drawImage(head, 0, 0, ((cf - "dw") * 0.9).toInt(), ((cf - "dh") * 0.9).toInt(), null)

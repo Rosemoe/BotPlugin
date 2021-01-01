@@ -8,8 +8,8 @@ import net.mamoe.mirai.contact.MemberPermission
 import net.mamoe.mirai.event.EventHandler
 import net.mamoe.mirai.event.ListenerHost
 import net.mamoe.mirai.event.events.*
-import net.mamoe.mirai.event.registerEvents
 import net.mamoe.mirai.event.events.GroupMessageEvent
+import net.mamoe.mirai.event.globalEventChannel
 import net.mamoe.mirai.message.MessageReceipt
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.utils.MiraiExperimentalApi
@@ -48,7 +48,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
     override fun onEnable() {
         super.onEnable()
         initOrReloadConfig()
-        registerEvents(this, this.coroutineContext)
+        globalEventChannel(this.coroutineContext).registerListenerHost(this)
         registerCommands()
         startRecallManager()
     }

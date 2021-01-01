@@ -6,14 +6,16 @@ import kotlinx.coroutines.runInterruptible
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.message.data.Image.Key.queryUrl
-import net.mamoe.mirai.utils.uploadImage
+import net.mamoe.mirai.utils.ExternalResource.Companion.toExternalResource
 import java.awt.image.BufferedImage
+import java.io.File
 import java.io.IOException
 import java.net.URL
 import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 import javax.imageio.ImageIO
+import javax.imageio.stream.ImageInputStream
 
 private val random = Random()
 
@@ -53,7 +55,10 @@ fun RosemoePlugin.handleAtReply(event: GroupMessageEvent) {
                     try {
                         chain = if (isModuleEnabled("ReverseAtReplyImage")) chain.plus(
                             event.group.uploadImage(
-                                runInterruptible(Dispatchers.IO) { rotateImage(sub) }
+                                runInterruptible(Dispatchers.IO) {
+                                    val rotatedImage = rotateImage(sub)
+                                    makeImageResource(rotatedImage)
+                                }
                             )
                         ) else chain.plus(sub)
                     } catch (e: IOException) {

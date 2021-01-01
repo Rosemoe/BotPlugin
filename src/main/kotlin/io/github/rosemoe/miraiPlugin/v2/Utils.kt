@@ -3,9 +3,13 @@ package io.github.rosemoe.miraiPlugin.v2
 import net.mamoe.mirai.message.data.Image
 import net.mamoe.mirai.message.data.MessageChain
 import net.mamoe.mirai.message.data.PlainText
+import net.mamoe.mirai.utils.ExternalResource
+import net.mamoe.mirai.utils.ExternalResource.Companion.toExternalResource
 import java.awt.image.BufferedImage
+import java.io.File
 import java.lang.StringBuilder
 import java.util.concurrent.locks.ReentrantReadWriteLock
+import javax.imageio.ImageIO
 
 fun MessageChain.containsImage( id: String): Boolean {
     for (element in this) {
@@ -104,4 +108,11 @@ fun String.getLong() : Long {
     } catch (e: NumberFormatException) {
         -1
     }
+}
+
+fun makeImageResource(image: BufferedImage) : ExternalResource {
+    val file = File.createTempFile("buffered-", ".tmp", File("${RosemoePlugin.dataFolder.absolutePath}${File.separator}Cache${File.separator}Image").also { if(!it.exists()) it.mkdirs() })
+    ImageIO.write(image, "png", file)
+    file.deleteOnExit()
+    return file.toExternalResource()
 }

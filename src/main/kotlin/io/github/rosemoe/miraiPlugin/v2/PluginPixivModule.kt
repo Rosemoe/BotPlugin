@@ -3,7 +3,7 @@ package io.github.rosemoe.miraiPlugin.v2
 import kotlinx.coroutines.runBlocking
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.message.data.*
-import net.mamoe.mirai.utils.uploadImage
+import net.mamoe.mirai.utils.ExternalResource.Companion.toExternalResource
 import org.json.JSONObject
 import java.io.*
 import java.net.InetSocketAddress
@@ -215,11 +215,11 @@ private fun getArtworkImage(gp: Group, artworkId: Long, index: Int): Message {
 
 @Throws(IOException::class)
 private fun getTargetImage(gp: Group, url: String, artworkId: Long, proxy: Boolean): Image {
-    val file = File("${RosemoePlugin.dataFolderPath}${File.separator}${url.substring(url.lastIndexOf("/") + 1)}")
+    val file = File("${RosemoePlugin.dataFolderPath}${File.separator}Cache${File.separator}Pixiv${File.separator}${url.substring(url.lastIndexOf("/") + 1)}")
     val res : Image
     if (file.exists()) {
         runBlocking(RosemoePlugin.coroutineContext) {
-            res = gp.uploadImage(file)
+            res = gp.uploadImage(file.toExternalResource())
         }
         return res
     }
@@ -259,11 +259,11 @@ private fun getTargetImage(gp: Group, url: String, artworkId: Long, proxy: Boole
     connection.disconnect()
     if (tmp.renameTo(file)) {
         runBlocking (RosemoePlugin.coroutineContext) {
-            res = gp.uploadImage(file)
+            res = gp.uploadImage(file.toExternalResource())
         }
     } else {
         runBlocking (RosemoePlugin.coroutineContext) {
-            res = gp.uploadImage(tmp)
+            res = gp.uploadImage(tmp.toExternalResource())
         }
         tmp.delete()
     }

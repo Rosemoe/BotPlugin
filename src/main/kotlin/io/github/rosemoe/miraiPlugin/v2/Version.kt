@@ -1,4 +1,4 @@
 package io.github.rosemoe.miraiPlugin.v2
 
-const val version = "2.1.2"
-const val build = "2020/12/19 19:14"
+const val version = "2.2.0"
+const val build = "2021/1/1 20:57"

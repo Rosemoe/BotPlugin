@@ -1,6 +1,5 @@
 package io.github.rosemoe.miraiPlugin.v2
 
-import net.mamoe.mirai.getGroupOrNull
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.PlainText
@@ -183,7 +182,7 @@ internal fun RosemoePlugin.registerManageCommands() {
         config.imagePathList.clear()
         val list = restContent.split(';')
         for (item in list) {
-            if (!item.isBlank())
+            if (item.isNotBlank())
                 config.imagePathList.add(item.trim())
         }
         initializeImageList()

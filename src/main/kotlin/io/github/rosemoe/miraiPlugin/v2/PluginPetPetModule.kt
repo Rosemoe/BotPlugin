@@ -4,7 +4,7 @@ import io.github.rosemoe.miraiPlugin.v2.gifmaker.GifEncoder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
 import net.mamoe.mirai.contact.Group
-import net.mamoe.mirai.utils.sendImage
+import net.mamoe.mirai.utils.ExternalResource.Companion.toExternalResource
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.File
@@ -45,24 +45,22 @@ private val hands: Array<BufferedImage> by lazy {
 }
 
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {
-    val outputFile = File("${RosemoePlugin.dataFolderPath}${File.separator}${id}${File.separator}petpet.gif")
+    val outputFile = File("${RosemoePlugin.dataFolderPath}${File.separator}Cache${File.separator}Personal${File.separator}${id}${File.separator}PetPet.gif")
     runInterruptible(Dispatchers.IO) {
-        logger.info("Generating in Dispatchers.IO")
         val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
         val outputStream = FileOutputStream(outputFile)
         GifEncoder().run {
             delay = duration
-            repeat = 0//无限循环播放
+            repeat = 0
             setTransparent(Color.TRANSLUCENT)
             start(outputStream)
             for (i in 0 until MAX_FRAME) {
                 addFrame(generateFrame(head, i))
             }
             finish()
-            logger.info("生成完毕")
         }
     }
-    group.sendImage(outputFile)
+    group.sendMessage(group.uploadImage(outputFile.toExternalResource()))
 }
 
 operator fun <K, V> Map<K, V>.minus(x: K): V {

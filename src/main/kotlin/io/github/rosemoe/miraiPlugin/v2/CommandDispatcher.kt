@@ -1,6 +1,10 @@
 package io.github.rosemoe.miraiPlugin.v2
 
 import net.mamoe.mirai.event.events.GroupMessageEvent
+import net.mamoe.mirai.message.data.Message
+import net.mamoe.mirai.message.data.MessageChain
+import net.mamoe.mirai.message.data.MessageSource
+import java.lang.StringBuilder
 import java.util.HashMap
 
 class CommandDispatcher {
@@ -60,12 +64,24 @@ class CommandDispatcher {
         dfsRegister(0, aliasForEach, root, action)
     }
 
+    private fun toString(msg: Message, sb: StringBuilder) {
+        if (msg is MessageSource) {
+            return
+        }
+        if (msg is MessageChain) {
+            for (subMsg in msg) {
+                toString(subMsg, sb)
+            }
+        } else {
+            sb.append(msg.toString())
+        }
+    }
+
     @Throws(Throwable::class)
     fun dispatch(event: GroupMessageEvent) {
-        var text = event.message.toString()
-        if (text.startsWith("[mirai:source")) {
-            text = text.substring(text.indexOf("]") + 1)
-        }
+        var text = StringBuilder().also{
+            toString(event.message, it)
+        }.toString()
         if (text.startsWith(prefix)) {
             text = text.substring(prefix.length)
             var regionStart = getNextWordStart(0, text)

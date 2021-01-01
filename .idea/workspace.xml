@@ -22,21 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94c55dfd-30b6-410f-b206-44bda515c691" name="Default Changelist" comment="merge remote/origin into local">
+    <list default="true" id="94c55dfd-30b6-410f-b206-44bda515c691" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/RosemoeBotPlugin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RosemoeBotPlugin.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginAtReplyModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginAtReplyModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginImageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginImageModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginManageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginManageModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPetPetModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPetPetModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/CommandDispatcher.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/CommandDispatcher.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPixivModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPixivModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Utils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Version.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Version.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,7 +259,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608525536131</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Sync mirai version;Update cache path">
+      <created>1609507247200</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1609507247200</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -306,7 +303,8 @@
     <MESSAGE value="删除org.json相关类,改用maven库" />
     <MESSAGE value="适配源码到Mirai 2.0-M1&#10;更新Gradle版本到6.7.1" />
     <MESSAGE value="merge remote/origin into local" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge remote/origin into local" />
+    <MESSAGE value="Sync mirai version;Update cache path" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sync mirai version;Update cache path" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

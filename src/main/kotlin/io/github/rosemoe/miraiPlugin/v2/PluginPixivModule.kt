@@ -101,7 +101,7 @@ private fun trimSourceToJson(source: StringBuilder) {
     val beginMarker = "<meta name=\"preload-data\" id=\"meta-preload-data\" content='"
     val begin = source.indexOf(beginMarker)
     source.delete(0, begin + beginMarker.length)
-    val endMarker = "'></head>"
+    val endMarker = "'><"
     val end = source.lastIndexOf(endMarker)
     source.setLength(end)
 }

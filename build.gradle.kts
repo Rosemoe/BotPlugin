@@ -1,16 +1,16 @@
-val miraiCoreVersion = "2.0-M2-2"
-val miraiConsoleVersion = "2.0-M2"
+val miraiCoreVersion = "2.0.0"
+val miraiConsoleVersion = "2.0.0"
 
 plugins {
     val kotlinVersion = "1.4.20"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
     java
-    id("net.mamoe.mirai-console") version "2.0-M2"
+    id("net.mamoe.mirai-console") version "2.0.0"
 }
 
 group = "io.github.Rosemoe"
-version = "2.2.0"
+version = "2.2.1"
 
 repositories {
     mavenLocal()

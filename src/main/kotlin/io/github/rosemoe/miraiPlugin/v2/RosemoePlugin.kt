@@ -11,6 +11,7 @@ import net.mamoe.mirai.event.events.*
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.event.globalEventChannel
 import net.mamoe.mirai.message.MessageReceipt
+import net.mamoe.mirai.message.action.MemberNudge
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.utils.MiraiExperimentalApi
 import java.io.File
@@ -90,7 +91,11 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
     }
 
     fun isDarklistGroup(event: GroupEvent) : Boolean {
-        return config.darkListGroups.contains(event.group.id)
+        return isDarklistGroup(event.group.id)
+    }
+
+    fun isDarklistGroup(id: Long) : Boolean {
+        return config.darkListGroups.contains(id)
     }
 
     @EventHandler
@@ -156,16 +161,18 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
             event.group.sendMessage("${event.member.nick} (${event.member.id}) 被飞出去了,丢人!!!")
     }
 
-    @MiraiExperimentalApi
     @EventHandler
     @Suppress("unused")
-    suspend fun onMemberNudge(event: MemberNudgedEvent) {
-        if (isDarklistGroup(event) || !isModuleEnabled("PetPet")) {
-            return
+    suspend fun onMemberNudge(event: NudgeEvent) {
+        if (event.subject is Group) {
+            val group = event.subject as Group
+            if (isDarklistGroup(group.id) || !isModuleEnabled("PetPet")) {
+                return
+            }
+            val url = event.target.avatarUrl.replace("s=640","s=100")
+            generateGifAndSend(url, group, event.target.id)
         }
-        logger.info(event.toString())
-        val url = event.member.avatarUrl.replace("s=640","s=100")
-        generateGifAndSend(url, event.group, event.member.id)
+
     }
 
     internal fun isModuleEnabled(name: String): Boolean {

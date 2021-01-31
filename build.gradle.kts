@@ -1,16 +1,13 @@
-val miraiCoreVersion = "2.0.0"
-val miraiConsoleVersion = "2.0.0"
-
 plugins {
-    val kotlinVersion = "1.4.20"
+    val kotlinVersion = "1.4.21"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
     java
-    id("net.mamoe.mirai-console") version "2.0.0"
+    id("net.mamoe.mirai-console") version "2.2.1"
 }
 
 group = "io.github.Rosemoe"
-version = "2.2.1"
+version = "2.2.2"
 
 repositories {
     mavenLocal()
@@ -21,14 +18,7 @@ repositories {
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
-    compileOnly("net.mamoe:mirai-core-api:$miraiCoreVersion")
-    compileOnly("net.mamoe:mirai-console:$miraiConsoleVersion")
     implementation("org.json:org.json:2.0")
 
     testImplementation(kotlin("stdlib-jdk8"))
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
 }

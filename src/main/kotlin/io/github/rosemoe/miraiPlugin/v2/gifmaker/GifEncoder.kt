@@ -371,7 +371,7 @@ open class GifEncoder {
             // Assume images with greater where more than n% of the pixels are transparent actually have transparency.
             // See issue #214.
             hasTransparentPixels = transparentPercentage > MIN_TRANSPARENT_PERCENTAGE
-            println("got pixels for frame with $transparentPercentage% transparent pixels")
+            //println("got pixels for frame with $transparentPercentage% transparent pixels")
         }
 
     /**

@@ -116,3 +116,16 @@ fun makeImageResource(image: BufferedImage) : ExternalResource {
     file.deleteOnExit()
     return file.toExternalResource()
 }
+
+/**
+ * Create a new File object
+ * As well as create it in file system if it does not exist
+ */
+fun newFile(path: String) : File {
+    val file = File(path)
+    if (!file.exists()) {
+        file.parentFile.mkdirs()
+        file.createNewFile()
+    }
+    return file
+}

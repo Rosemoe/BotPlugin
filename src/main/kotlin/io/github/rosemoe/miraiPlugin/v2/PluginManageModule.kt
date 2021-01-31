@@ -6,6 +6,9 @@ import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.messageChainOf
 import java.lang.Integer.min
 import java.util.concurrent.locks.ReentrantReadWriteLock
+import javax.script.ScriptEngine
+import javax.script.ScriptEngineFactory
+import javax.script.ScriptEngineManager
 import kotlin.math.ceil
 
 val allowedModuleName = listOf(
@@ -266,6 +269,20 @@ internal fun RosemoePlugin.registerManageCommands() {
     rootDispatcher.register("darklist/add", ::addToDarkList)
     rootDispatcher.register("darklist/remove", ::removeDarkListGroup)
     rootDispatcher.register("darklist/list", ::listDarklistGroups)
+
+    rootDispatcher.register("exec") { event, code ->
+        if (isNotManager(event.sender.id)) {
+            return@register
+        }
+        scriptEngineManager.getEngineByName("nashorn").apply {
+            put("event", event)
+            put("group", event.group)
+            put("bot", event.bot)
+            put("cmds", ScriptFuncs(event))
+            this.context.writer = GroupWriter(event.group)
+            eval(code)
+        }
+    }
 }
 
 private fun RosemoePlugin.isNotManager(id: Long): Boolean {

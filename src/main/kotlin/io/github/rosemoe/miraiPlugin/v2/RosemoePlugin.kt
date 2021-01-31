@@ -17,6 +17,7 @@ import net.mamoe.mirai.utils.MiraiExperimentalApi
 import java.io.File
 import java.util.*
 import java.util.concurrent.locks.ReentrantReadWriteLock
+import javax.script.ScriptEngineManager
 import kotlin.collections.ArrayList
 
 object RosemoePlugin : ListenerHost, KotlinPlugin(
@@ -41,6 +42,8 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
     internal val imageList = ArrayList<File>(1024)
     internal val imageListLock = ReentrantReadWriteLock()
     internal val imageRandom = Random()
+
+    internal val scriptEngineManager = ScriptEngineManager()
 
     internal val dispatcher = CommandDispatcher()
     internal val rootDispatcher = CommandDispatcher()

@@ -12,7 +12,7 @@ fun RosemoePlugin.registerHelps() {
     }
 
     registerHelpItem("", """
-        RosemoePlugin - 帮助
+        BotPlugin - 帮助
         指令表:
         settings - 设置
         sendImage - 请求多张图片
@@ -22,17 +22,10 @@ fun RosemoePlugin.registerHelps() {
         darklist - 控制群聊黑名单
         发送' help <下级指令1> <下级指令2> ... ' 可以获取它们的用法
         比如:
-        help settings
         help settings set
-        其它:
-        - 被At时回復
-        - 入群时欢迎,退群时祖安
-        - 禁言时提示
         关于:
-        BotPlugin (https://github.com/Rosemoe/BotPlugin) for Mirai Console, which is create by Rosemoe
-        Version $version (Build time $build)
-        使用GitHub上的邮件地址联系我.
-        运行于 Mirai (https://github.com/mamoe/mirai) 平台
+        BotPlugin(https://github.com/Rosemoe/BotPlugin)(版本 $version 编译时间 $build),由 Rosemoe 创建
+        运行于Mirai Console(https://github.com/mamoe/mirai-console)
     """.trimIndent())
 
     registerHelpItem("settings", """

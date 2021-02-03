@@ -22,7 +22,7 @@ A plugin for [Mirai Console](https://github.com/mamoe/mirai-console) with image 
 - 复制jar到Console工作目录下的plugins里
 - 见下方'开始使用'栏目
 ### 当前项目环境:
-* Mirai Console Gradle Plugin 2.2.1   
+* Mirai Console Gradle Plugin 2.3.1   
 * Kotlin 1.4.21   
 * OpenJdk 14   
 * Intellij IDEA 2020.3.1   

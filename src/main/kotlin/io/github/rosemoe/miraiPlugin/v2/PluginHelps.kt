@@ -24,7 +24,7 @@ fun RosemoePlugin.registerHelps() {
         比如:
         help settings set
         关于:
-        BotPlugin(https://github.com/Rosemoe/BotPlugin)(版本 $version 编译时间 $build),由 Rosemoe 创建
+        BotPlugin(https://github.com/Rosemoe/BotPlugin)(版本 $pluginVersion 编译时间 $pluginBuildTime),由 Rosemoe 创建
         运行于Mirai Console(https://github.com/mamoe/mirai-console)
     """.trimIndent())
 

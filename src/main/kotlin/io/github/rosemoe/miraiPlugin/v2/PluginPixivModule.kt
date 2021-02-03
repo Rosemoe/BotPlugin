@@ -215,7 +215,7 @@ private fun getArtworkImage(gp: Group, artworkId: Long, index: Int): Message {
 
 @Throws(IOException::class)
 private fun getTargetImage(gp: Group, url: String, artworkId: Long, proxy: Boolean): Image {
-    val file = File("${RosemoePlugin.dataFolderPath}${File.separator}Cache${File.separator}Pixiv${File.separator}${url.substring(url.lastIndexOf("/") + 1)}")
+    val file = File("${cacheDirPath()}${File.separator}Pixiv${File.separator}${url.substring(url.lastIndexOf("/") + 1)}")
     val res : Image
     if (file.exists()) {
         runBlocking(RosemoePlugin.coroutineContext) {

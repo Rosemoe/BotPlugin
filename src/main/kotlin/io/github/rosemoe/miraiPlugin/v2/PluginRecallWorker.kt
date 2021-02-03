@@ -37,14 +37,14 @@ fun RosemoePlugin.startRecallManager() {
                 }catch (e: Exception) {
                     logger.warning("Recall messages failed")
                     if (req.createTime + 60000 * 2 /*2 min*/ < System.currentTimeMillis()) {
-                        runInterruptible (Dispatchers.IO) { taskQueue.put(req) }
+                        launch (Dispatchers.IO) { taskQueue.put(req) }
                         continue
                     }
                     logger.warning("Un-recalled message is outdated")
                 }
             } else {
                 runInterruptible (Dispatchers.IO) { taskQueue.put(req) }
-                delay(30)
+                delay(20)
             }
         }
     }
@@ -52,7 +52,6 @@ fun RosemoePlugin.startRecallManager() {
 
 fun scheduleRecall(receipt: MessageReceipt<Group>, delay: Long) {
     taskQueue.put(Request(delay, receipt))
-    RosemoePlugin.logger.debug("Schedule Recall")
 }
 
 class Request constructor(delay: Long, receipt: MessageReceipt<Group>) {

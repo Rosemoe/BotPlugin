@@ -11,9 +11,7 @@ import net.mamoe.mirai.event.events.*
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.event.globalEventChannel
 import net.mamoe.mirai.message.MessageReceipt
-import net.mamoe.mirai.message.action.MemberNudge
 import net.mamoe.mirai.message.data.*
-import net.mamoe.mirai.utils.MiraiExperimentalApi
 import java.io.File
 import java.util.*
 import java.util.concurrent.locks.ReentrantReadWriteLock
@@ -23,7 +21,7 @@ import kotlin.collections.ArrayList
 object RosemoePlugin : ListenerHost, KotlinPlugin(
     net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription(
         id = "io.github.Rosemoe.miraiPlugin.v2.RosemoePlugin",
-        version = version
+        version = pluginVersion
     ) {
         name("RosemoeBotPlugin")
         author("Rosemoe")
@@ -43,11 +41,10 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
     internal val imageListLock = ReentrantReadWriteLock()
     internal val imageRandom = Random()
 
-    internal val scriptEngineManager = ScriptEngineManager()
+    //internal val scriptEngineManager = ScriptEngineManager()
 
     internal val dispatcher = CommandDispatcher()
     internal val rootDispatcher = CommandDispatcher()
-    private val TEST_REQ = arrayOf("PluginTest.moe")
 
     override fun onEnable() {
         super.onEnable()
@@ -55,6 +52,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         globalEventChannel(this.coroutineContext).registerListenerHost(this)
         registerCommands()
         startRecallManager()
+
     }
 
     private fun registerCommands() {
@@ -79,12 +77,6 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
             // Dispatch message
             if (isModuleEnabled("ImageSender") && (event.message.containsTexts(IMAGE_REQUEST) || event.message.containsImage("B407F708-A2C6-A506-3420-98DF7CAC4A57"))) {
                 sendImageForEvent(event)
-            }
-            if (isModuleEnabled("PetPet") && event.message.containsTexts(TEST_REQ)) {
-                pluginLaunch {
-                    val url = event.sender.avatarUrl.replace("s=640", "s=100")
-                    generateGifAndSend(url, event.group, event.sender.id)
-                }
             }
             handleAtReply(event)
             dispatcher.dispatch(event)

@@ -111,7 +111,7 @@ fun String.getLong() : Long {
 }
 
 fun makeImageResource(image: BufferedImage) : ExternalResource {
-    val file = File.createTempFile("buffered-", ".tmp", File("${RosemoePlugin.dataFolder.absolutePath}${File.separator}Cache${File.separator}Image").also { if(!it.exists()) it.mkdirs() })
+    val file = File.createTempFile("buffered-", ".tmp", File("${cacheDirPath()}${File.separator}ImageTmp").also { if(!it.exists()) it.mkdirs() })
     ImageIO.write(image, "png", file)
     file.deleteOnExit()
     return file.toExternalResource()

@@ -4,11 +4,13 @@ import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.messageChainOf
+import org.mozilla.javascript.Context
+import org.mozilla.javascript.ContextFactory
+import org.mozilla.javascript.Scriptable
+import org.mozilla.javascript.ScriptableObject
+import org.mozilla.javascript.tools.shell.Global
 import java.lang.Integer.min
 import java.util.concurrent.locks.ReentrantReadWriteLock
-import javax.script.ScriptEngine
-import javax.script.ScriptEngineFactory
-import javax.script.ScriptEngineManager
 import kotlin.math.ceil
 
 val allowedModuleName = listOf(
@@ -274,14 +276,31 @@ internal fun RosemoePlugin.registerManageCommands() {
         if (isNotManager(event.sender.id)) {
             return@register
         }
-        scriptEngineManager.getEngineByName("nashorn").apply {
+        val context = Context.enter()
+        try {
+            val script = context.compileString(code, "<group_msg>", 1, null)
+            val scope = context.initStandardObjects()
+            fun setJsObject(name: String, value: Any?) {
+                val jsObj = Context.javaToJS(value, scope)
+                ScriptableObject.putProperty(scope, name, jsObj)
+            }
+            setJsObject("event", event)
+            setJsObject("group", event.group)
+            setJsObject("bot", event.bot)
+            setJsObject("dlg", ScriptMethods(event))
+            context.evaluateString(scope, "function print(msg) { dlg.send(msg + \"\"); }", "<builtin_>", 1, null)
+            script.exec(context, scope)
+        } finally {
+            Context.exit()
+        }
+        /*scriptEngineManager.getEngineByName("javascript").apply {
             put("event", event)
             put("group", event.group)
             put("bot", event.bot)
-            put("cmds", ScriptFuncs(event))
+            put("dlg", ScriptMethods(event))
             this.context.writer = GroupWriter(event.group)
             eval(code)
-        }
+        }*/
     }
 }
 

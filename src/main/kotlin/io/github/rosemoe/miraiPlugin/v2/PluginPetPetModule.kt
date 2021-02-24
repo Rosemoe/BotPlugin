@@ -4,7 +4,6 @@ import io.github.rosemoe.miraiPlugin.v2.gifmaker.GifEncoder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
 import net.mamoe.mirai.contact.Group
-import net.mamoe.mirai.utils.ExternalResource.Companion.toExternalResource
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.File
@@ -60,7 +59,7 @@ suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long
             finish()
         }
     }
-    group.sendMessage(group.uploadImage(outputFile.toExternalResource()))
+    group.sendMessage(group.uploadImageResource(outputFile))
 }
 
 operator fun <K, V> Map<K, V>.minus(x: K): V {

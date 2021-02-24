@@ -3,7 +3,6 @@ package io.github.rosemoe.miraiPlugin.v2
 import kotlinx.coroutines.runBlocking
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.message.data.*
-import net.mamoe.mirai.utils.ExternalResource.Companion.toExternalResource
 import org.json.JSONObject
 import java.io.*
 import java.net.InetSocketAddress
@@ -219,7 +218,7 @@ private fun getTargetImage(gp: Group, url: String, artworkId: Long, proxy: Boole
     val res : Image
     if (file.exists()) {
         runBlocking(RosemoePlugin.coroutineContext) {
-            res = gp.uploadImage(file.toExternalResource())
+            res = gp.uploadImageResource(file)
         }
         return res
     }
@@ -259,11 +258,11 @@ private fun getTargetImage(gp: Group, url: String, artworkId: Long, proxy: Boole
     connection.disconnect()
     if (tmp.renameTo(file)) {
         runBlocking (RosemoePlugin.coroutineContext) {
-            res = gp.uploadImage(file.toExternalResource())
+            res = gp.uploadImageResource(file)
         }
     } else {
         runBlocking (RosemoePlugin.coroutineContext) {
-            res = gp.uploadImage(tmp.toExternalResource())
+            res = gp.uploadImageResource(tmp)
         }
         tmp.delete()
     }

@@ -47,15 +47,14 @@ class ScriptMethods(val event : GroupMessageEvent) {
         }
     }
 
-    fun member(user: String) : NormalMember {
+    fun member(user: String): NormalMember {
         val msg = MiraiCode.deserializeMiraiCode(user, event.group)
         val target = msg.get(0)
-        val member = if (target is At) {
+        return if (target is At) {
             event.group.getMemberOrFail(target.target)
         } else {
             event.group.getMemberOrFail(user.toLong())
         }
-        return member
     }
 
     fun muteAll() {

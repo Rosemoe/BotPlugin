@@ -40,7 +40,7 @@ open class GifEncoder {
             = 0
     private var height = 0
     private var transparent: Int? = null // transparent color if given
-    private var hasTransparentPixels = true
+    private var hasTransparentPixels = false
     private var transIndex // transparent index in color table
             = 0
     var repeat = -1 // no repeat

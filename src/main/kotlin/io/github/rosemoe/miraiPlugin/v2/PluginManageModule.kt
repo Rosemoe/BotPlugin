@@ -5,10 +5,7 @@ import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.messageChainOf
 import org.mozilla.javascript.Context
-import org.mozilla.javascript.ContextFactory
-import org.mozilla.javascript.Scriptable
 import org.mozilla.javascript.ScriptableObject
-import org.mozilla.javascript.tools.shell.Global
 import java.lang.Integer.min
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.math.ceil
@@ -285,6 +282,7 @@ internal fun RosemoePlugin.registerManageCommands() {
                 ScriptableObject.putProperty(scope, name, jsObj)
             }
             setJsObject("event", event)
+            event.sender
             setJsObject("group", event.group)
             setJsObject("bot", event.bot)
             setJsObject("dlg", ScriptMethods(event))

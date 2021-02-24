@@ -4,9 +4,7 @@ import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.messageChainOf
-import net.mamoe.mirai.utils.ExternalResource.Companion.toExternalResource
 import java.io.File
-import java.lang.NumberFormatException
 
 internal fun RosemoePlugin.registerImageCommands() {
     dispatcher.register("sendImage") { event, restContent ->
@@ -96,7 +94,7 @@ internal fun RosemoePlugin.sendImageForEvent(event: GroupMessageEvent) {
                 messageChainOf(
                     At(event.sender),
                     PlainText("这是宁要的图!\n"),
-                    event.group.uploadImage(target.toExternalResource())
+                    event.group.uploadImageResource(target)
                 )
             )
             logger.verbose("Send Image ${target.path} to group ${event.group.name} (${event.group.id})")

@@ -8,14 +8,15 @@ import net.mamoe.mirai.contact.MemberPermission
 import net.mamoe.mirai.event.EventHandler
 import net.mamoe.mirai.event.ListenerHost
 import net.mamoe.mirai.event.events.*
-import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.event.globalEventChannel
 import net.mamoe.mirai.message.MessageReceipt
-import net.mamoe.mirai.message.data.*
+import net.mamoe.mirai.message.data.At
+import net.mamoe.mirai.message.data.Message
+import net.mamoe.mirai.message.data.PlainText
+import net.mamoe.mirai.message.data.messageChainOf
 import java.io.File
 import java.util.*
 import java.util.concurrent.locks.ReentrantReadWriteLock
-import javax.script.ScriptEngineManager
 import kotlin.collections.ArrayList
 
 object RosemoePlugin : ListenerHost, KotlinPlugin(

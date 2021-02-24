@@ -1,15 +1,30 @@
 package io.github.rosemoe.miraiPlugin.v2
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.message.data.Image
 import net.mamoe.mirai.message.data.MessageChain
 import net.mamoe.mirai.message.data.PlainText
-import net.mamoe.mirai.utils.ExternalResource
 import net.mamoe.mirai.utils.ExternalResource.Companion.toExternalResource
 import java.awt.image.BufferedImage
 import java.io.File
-import java.lang.StringBuilder
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import javax.imageio.ImageIO
+
+suspend fun Group.uploadImageResource(file: File): Image {
+    val resource = file.toExternalResource()
+    try {
+        return uploadImage(resource)
+    } finally {
+        coroutineScope {
+            launch(Dispatchers.IO) {
+                resource.close()
+            }
+        }
+    }
+}
 
 fun MessageChain.containsImage( id: String): Boolean {
     for (element in this) {
@@ -110,11 +125,11 @@ fun String.getLong() : Long {
     }
 }
 
-fun makeImageResource(image: BufferedImage) : ExternalResource {
+fun makeImageCache(image: BufferedImage) : File {
     val file = File.createTempFile("buffered-", ".tmp", File("${cacheDirPath()}${File.separator}ImageTmp").also { if(!it.exists()) it.mkdirs() })
     ImageIO.write(image, "png", file)
     file.deleteOnExit()
-    return file.toExternalResource()
+    return file
 }
 
 /**

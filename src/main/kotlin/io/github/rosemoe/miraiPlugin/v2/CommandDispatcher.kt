@@ -4,8 +4,7 @@ import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.Message
 import net.mamoe.mirai.message.data.MessageChain
 import net.mamoe.mirai.message.data.MessageSource
-import java.lang.StringBuilder
-import java.util.HashMap
+import java.util.*
 
 class CommandDispatcher {
 

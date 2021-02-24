@@ -23,26 +23,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94c55dfd-30b6-410f-b206-44bda515c691" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/libs/rhino-1.7.13.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginFiles.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/journal/Journal.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/CommandDispatcher.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/CommandDispatcher.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginAtReplyModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginAtReplyModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginHelps.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginHelps.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginImageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginImageModule.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginManageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginManageModule.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPetPetModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPetPetModule.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPixivModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPixivModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginRecallWorker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginRecallWorker.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/ScriptFuncs.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/ScriptMethods.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/ScriptMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/ScriptMethods.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Utils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Version.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Version.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/gifmaker/GifEncoder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/gifmaker/GifEncoder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/Test.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/Test.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,8 +74,7 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="RosemoeBotPlugin" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="mirai" type="c8890929:TasksNode$1" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
             </expand>
             <select />
@@ -88,13 +86,20 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
         <option value="Kotlin File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-jvm/2.3.1/fc3c62a051ab949d34703c009d13f062b72fbd04/mirai-core-jvm-2.3.1-sources.jar!/commonMain/contact/SendMessageHandler.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-jvm/2.3.1/fc3c62a051ab949d34703c009d13f062b72fbd04/mirai-core-jvm-2.3.1-sources.jar!/commonMain/contact/GroupImpl.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-api-jvm/2.3.1/28cd2a614c74e601686f97eebcaf5f3782eac1a5/mirai-core-api-jvm-2.3.1-sources.jar!/commonMain/message/data/Message.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-jvm/2.3.1/fc3c62a051ab949d34703c009d13f062b72fbd04/mirai-core-jvm-2.3.1-sources.jar!/commonMain/AbstractBot.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-jvm/2.3.1/fc3c62a051ab949d34703c009d13f062b72fbd04/mirai-core-jvm-2.3.1-sources.jar!/commonMain/network/protocol/packet/chat/receive/MessageSvc.PbSendMsg.kt" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -122,13 +127,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AndroidSdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-jvm/2.3.1/7a36936aa7712708874d182007c0d88556a0a155/mirai-core-jvm-2.3.1.jar" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="inlay.hints.kotlin" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="ReaderModeSettings">
+    <option name="enabled" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -182,6 +190,27 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="RosemoeBotPlugin [javadoc]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="javadoc" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="TestKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <module name="RosemoeBotPlugin.test" />
       <option name="VM_PARAMETERS" />
@@ -198,6 +227,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.RosemoeBotPlugin [buildPlugin]" />
+        <item itemvalue="Gradle.RosemoeBotPlugin [javadoc]" />
         <item itemvalue="Application.TestKt" />
         <item itemvalue="Gradle.RosemoeBotPlugin [assemblePlugin]" />
       </list>
@@ -345,7 +375,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612083807004</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Add Mozilla Rhino for JavaScript execution&#10;Update cache directory for each user&#10;Update Mirai to 2.3.1&#10;Remove test message">
+      <created>1612346986085</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1612346986085</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -388,7 +425,8 @@
     <MESSAGE value="Delete useless dependencies&#10;Fix bugs in PetPet module&#10;Remove log from git maker" />
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Add JavaScript Executor for manager only" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add JavaScript Executor for manager only" />
+    <MESSAGE value="Add Mozilla Rhino for JavaScript execution&#10;Update cache directory for each user&#10;Update Mirai to 2.3.1&#10;Remove test message" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Mozilla Rhino for JavaScript execution&#10;Update cache directory for each user&#10;Update Mirai to 2.3.1&#10;Remove test message" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

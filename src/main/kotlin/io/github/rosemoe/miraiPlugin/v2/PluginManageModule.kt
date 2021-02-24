@@ -22,7 +22,8 @@ val allowedModuleName = listOf(
     "MuteTip",
     "ReverseAtReply",
     "ReverseAtReplyImage",
-    "PetPet"
+    "PetPet",
+    "Repeat"
 )
 
 val darklistLock = ReentrantReadWriteLock(true)
@@ -195,8 +196,8 @@ internal fun RosemoePlugin.registerManageCommands() {
     rootDispatcher.register("settings/enable", ::enableModule)
     rootDispatcher.register("settings/reload", ::reloadConfig)
     rootDispatcher.register("settings/reloadBase", ::reloadBaseConfig)
-    rootDispatcher.register("settings/set/ImagePathList", ::setImagePathList)
-    rootDispatcher.register("settings/get/ImagePathList") { event, _ ->
+    rootDispatcher.register("settings/set/imagePathList", ::setImagePathList)
+    rootDispatcher.register("settings/get/imagePathList") { event, _ ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
@@ -208,7 +209,7 @@ internal fun RosemoePlugin.registerManageCommands() {
         }
         event.sendBackAsync(msg.toString())
     }
-    rootDispatcher.register("settings/set/Prefix") { event, prefix ->
+    rootDispatcher.register("settings/set/prefix") { event, prefix ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
@@ -219,7 +220,7 @@ internal fun RosemoePlugin.registerManageCommands() {
         rootDispatcher.prefix = config.commandPrefix
         event.sendBackAsync("当前的前缀是:${dispatcher.prefix}")
     }
-    rootDispatcher.register("settings/get/Prefix") { event, _ ->
+    rootDispatcher.register("settings/get/prefix") { event, _ ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
@@ -227,18 +228,17 @@ internal fun RosemoePlugin.registerManageCommands() {
         }
         event.sendBackAsync("当前的前缀是:${dispatcher.prefix}")
     }
-    rootDispatcher.register("settings/set/RecallDelay") { event, rest ->
+    rootDispatcher.register("settings/set/recallDelay") { event, rest ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
-        val m = rest.getLong()
-        val time = if (m == -1L) 60000 else m
+        val time = rest.toLong(60000)
         config.imageRecallDelay = time
         event.sendBackAsync("recallDelay的值设置为$time")
     }
-    rootDispatcher.register("settings/get/RecallDelay") { event, _ ->
+    rootDispatcher.register("settings/get/recallDelay") { event, _ ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
@@ -246,18 +246,16 @@ internal fun RosemoePlugin.registerManageCommands() {
         }
         event.sendBackAsync("recallDelay的值为${config.imageRecallDelay}")
     }
-    rootDispatcher.register("settings/set/RecallInterval") { event, rest ->
+    rootDispatcher.register("settings/set/recallInterval") { event, rest ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
-        val m = rest.getLong()
-        val time = if (m == -1L) 180 else m
-        config.recallMinPeriod = time
-        event.sendBackAsync("recallInterval的值设置为$time")
+        config.recallMinPeriod = rest.toLong(180)
+        event.sendBackAsync("recallInterval的值设置为${config.recallMinPeriod}")
     }
-    rootDispatcher.register("settings/get/RecallInterval") { event, _ ->
+    rootDispatcher.register("settings/get/recallInterval") { event, _ ->
         if (isNotManager(event.sender.id)) {
             if (!isDarklistGroup(event))
                 event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
@@ -265,6 +263,24 @@ internal fun RosemoePlugin.registerManageCommands() {
         }
         event.sendBackAsync("recallInterval的值为${config.recallMinPeriod}")
     }
+    rootDispatcher.register("settings/set/repeatFactor") { event, factor ->
+        if (isNotManager(event.sender.id)) {
+            if (!isDarklistGroup(event))
+                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
+            return@register
+        }
+        config.repeatFactor = factor.toDouble(0.01)
+        event.sendBackAsync("repeatFactor的值设置为${config.repeatFactor}")
+    }
+    rootDispatcher.register("settings/get/repeatFactor") { event, _ ->
+        if (isNotManager(event.sender.id)) {
+            if (!isDarklistGroup(event))
+                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
+            return@register
+        }
+        event.sendBackAsync("repeatFactor的值为${config.repeatFactor}")
+    }
+
     rootDispatcher.register("darklist/add", ::addToDarkList)
     rootDispatcher.register("darklist/remove", ::removeDarkListGroup)
     rootDispatcher.register("darklist/list", ::listDarklistGroups)
@@ -291,14 +307,6 @@ internal fun RosemoePlugin.registerManageCommands() {
         } finally {
             Context.exit()
         }
-        /*scriptEngineManager.getEngineByName("javascript").apply {
-            put("event", event)
-            put("group", event.group)
-            put("bot", event.bot)
-            put("dlg", ScriptMethods(event))
-            this.context.writer = GroupWriter(event.group)
-            eval(code)
-        }*/
     }
 }
 

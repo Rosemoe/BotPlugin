@@ -117,11 +117,19 @@ fun ReentrantReadWriteLock.unlockWrite() {
     writeLock().unlock()
 }
 
-fun String.getLong() : Long {
+fun String.toLong(default: Long) : Long {
     return try {
         toLong()
     } catch (e: NumberFormatException) {
-        -1
+        default
+    }
+}
+
+fun String.toDouble(default: Double) : Double {
+    return try {
+        toDouble()
+    } catch (e: java.lang.NumberFormatException) {
+        default
     }
 }
 

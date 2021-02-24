@@ -58,4 +58,6 @@ object RosemoePluginConfig : AutoSavePluginConfig("PluginConfig") {
 
     var allowR18ImageInPixiv: Boolean by value(false)
 
+    var repeatFactor: Double by value(0.05)
+
 }

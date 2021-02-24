@@ -79,6 +79,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
             if (isModuleEnabled("ImageSender") && (event.message.containsTexts(IMAGE_REQUEST) || event.message.containsImage("B407F708-A2C6-A506-3420-98DF7CAC4A57"))) {
                 sendImageForEvent(event)
             }
+            randomRepeat(event)
             handleAtReply(event)
             dispatcher.dispatch(event)
         } catch (e: Throwable) {

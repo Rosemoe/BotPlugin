@@ -29,7 +29,7 @@ fun RosemoePlugin.registerPixivCommands() {
         pluginLaunch {
             when (args.size) {
                 1 -> {
-                    val artworkId = args[0].getLong()
+                    val artworkId = args[0].toLong(-1)
                     if (artworkId != -1L) {
                         try {
                             val s = getArtworkInformation(event.group, artworkId)
@@ -43,8 +43,8 @@ fun RosemoePlugin.registerPixivCommands() {
                     }
                 }
                 2 -> {
-                    val artworkId = args[0].getLong()
-                    val index = args[1].getLong().toInt()
+                    val artworkId = args[0].toLong(-1)
+                    val index = args[1].toLong(-1).toInt()
                     if (artworkId != -1L && index != -1) {
                         try {
                             val s = getArtworkImage(event.group, artworkId, index)

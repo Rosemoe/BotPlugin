@@ -8,7 +8,7 @@ import java.io.File
 
 internal fun RosemoePlugin.registerImageCommands() {
     dispatcher.register("sendImage") { event, restContent ->
-        if (isModuleEnabled("BatchImage") && isModuleEnabled("ImageSender")) {
+        if (isModuleEnabled("BatchImg") && isModuleEnabled("ImageSender")) {
             try {
                 val count = restContent.trim().toInt()
                 if (count > config.maxImageRequestCount) {

@@ -46,6 +46,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
 
     internal val dispatcher = CommandDispatcher()
     internal val rootDispatcher = CommandDispatcher()
+    internal val msgs = MessageStates()
 
     override fun onEnable() {
         super.onEnable()
@@ -53,7 +54,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         globalEventChannel(this.coroutineContext).registerListenerHost(this)
         registerCommands()
         startRecallManager()
-
+        msgs.launchClearer(this)
     }
 
     private fun registerCommands() {
@@ -68,22 +69,27 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
     @EventHandler
     @Suppress("unused")
     fun onGroupMessage(event: GroupMessageEvent) {
-        try {
-            // Settings are available everywhere
-            rootDispatcher.dispatch(event)
-            // Check group id
-            if (isDarklistGroup(event)) {
-                return
+        if (msgs.handle(event)) {
+            try {
+                // Settings are available everywhere
+                rootDispatcher.dispatch(event)
+                // Check group id
+                if (isDarklistGroup(event)) {
+                    return
+                }
+                // Dispatch message
+                if (isModuleEnabled("ImageSender") && (event.message.containsTexts(IMAGE_REQUEST) || event.message.containsImage(
+                        "B407F708-A2C6-A506-3420-98DF7CAC4A57"
+                    ))
+                ) {
+                    sendImageForEvent(event)
+                }
+                randomRepeat(event)
+                handleAtReply(event)
+                dispatcher.dispatch(event)
+            } catch (e: Throwable) {
+                event.sendBackAsync(getExceptionInfo(e))
             }
-            // Dispatch message
-            if (isModuleEnabled("ImageSender") && (event.message.containsTexts(IMAGE_REQUEST) || event.message.containsImage("B407F708-A2C6-A506-3420-98DF7CAC4A57"))) {
-                sendImageForEvent(event)
-            }
-            randomRepeat(event)
-            handleAtReply(event)
-            dispatcher.dispatch(event)
-        } catch (e: Throwable) {
-            event.sendBackAsync(getExceptionInfo(e))
         }
     }
 

@@ -3,35 +3,26 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="94c55dfd-30b6-410f-b206-44bda515c691" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginRepeat.kt" afterDir="false" />
+    <list default="true" id="037878f1-2820-430d-a95a-3c63ec86d3ce" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/rosemoe/util/IntPair.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/MessageStates.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/RosemoeBotPlugin.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/RosemoeBotPlugin.main.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/GroupWriter.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginManageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginManageModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPixivModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPixivModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginImageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginImageModule.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePluginConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePluginConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Utils.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +55,8 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="RosemoeBotPlugin" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="mirai" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -77,33 +69,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
-        <option value="Kotlin File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-jvm/2.3.1/fc3c62a051ab949d34703c009d13f062b72fbd04/mirai-core-jvm-2.3.1-sources.jar!/commonMain/contact/SendMessageHandler.kt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-jvm/2.3.1/fc3c62a051ab949d34703c009d13f062b72fbd04/mirai-core-jvm-2.3.1-sources.jar!/commonMain/contact/GroupImpl.kt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-api-jvm/2.3.1/28cd2a614c74e601686f97eebcaf5f3782eac1a5/mirai-core-api-jvm-2.3.1-sources.jar!/commonMain/message/data/Message.kt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-jvm/2.3.1/fc3c62a051ab949d34703c009d13f062b72fbd04/mirai-core-jvm-2.3.1-sources.jar!/commonMain/AbstractBot.kt" root0="FORCE_HIGHLIGHTING" />
-    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-jvm/2.3.1/fc3c62a051ab949d34703c009d13f062b72fbd04/mirai-core-jvm-2.3.1-sources.jar!/commonMain/network/protocol/packet/chat/receive/MessageSvc.PbSendMsg.kt" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="D:\JetBrains\IDEA Community\plugins\maven\lib\maven3" />
-      </MavenGeneralSettings>
-    </option>
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="vmOptionsForImporter" value="-Xmx768m" />
-      </MavenImportingSettings>
-    </option>
-  </component>
-  <component name="ProjectId" id="1iJkISKplPBbzk82cKDBdPnqEWF" />
+  <component name="ProjectId" id="1p0RhltAVKlLO63aqstI3xnvksV" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -112,53 +85,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="android.sdk.path" value="$USER_HOME$/AndroidSdk" />
-    <property name="last_opened_file_path" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.mamoe/mirai-core-jvm/2.3.1/7a36936aa7712708874d182007c0d88556a0a155/mirai-core-jvm-2.3.1.jar" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="inlay.hints.kotlin" />
-    <property name="show.unlinked.gradle.project.popup" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
-  <component name="ReaderModeSettings">
-    <option name="enabled" value="false" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\IdeaProjects\RosemoeBotPlugin\src\main\kotlin\io\github\rosemoe\miraiPlugin\v2" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\20734\Documents\IdeaProjects\RosemoeBotPlugin" />
-      <recent name="C:\Users\20734\Documents\IdeaProjects\RosemoeBotPlugin\src" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Gradle.RosemoeBotPlugin [buildPlugin]">
-    <configuration name="RosemoeBotPlugin [assemblePlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="assemblePlugin" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="RosemoeBotPlugin [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -180,254 +112,21 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="RosemoeBotPlugin [javadoc]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="javadoc" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="TestKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="RosemoeBotPlugin.test" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="org.example.mirai.plugin.TestKt" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.RosemoeBotPlugin [buildPlugin]" />
-        <item itemvalue="Gradle.RosemoeBotPlugin [javadoc]" />
-        <item itemvalue="Application.TestKt" />
-        <item itemvalue="Gradle.RosemoeBotPlugin [assemblePlugin]" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="94c55dfd-30b6-410f-b206-44bda515c691" name="Default Changelist" comment="" />
-      <created>1601633027671</created>
+      <changelist id="037878f1-2820-430d-a95a-3c63ec86d3ce" name="Default Changelist" comment="" />
+      <created>1614318143586</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1601633027671</updated>
+      <updated>1614318143586</updated>
     </task>
-    <task id="LOCAL-00001" summary="修复了玄学编译bugs">
-      <created>1601633923064</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1601633923064</updated>
-    </task>
-    <task id="LOCAL-00002" summary="修复Gradle Task">
-      <created>1601634373807</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1601634373807</updated>
-    </task>
-    <task id="LOCAL-00003" summary="删除无用类">
-      <created>1601634599109</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1601634599109</updated>
-    </task>
-    <task id="LOCAL-00004" summary="更新Mirai Console版本到1.0-RC-dev-29">
-      <created>1601640822926</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1601640822926</updated>
-    </task>
-    <task id="LOCAL-00005" summary="更新mirai console到1.0.0&#10;修改黑名单显示">
-      <created>1605847836377</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1605847836377</updated>
-    </task>
-    <task id="LOCAL-00006" summary="merge branch">
-      <created>1605848222939</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1605848222939</updated>
-    </task>
-    <task id="LOCAL-00007" summary="更新更新更新更新更新更新">
-      <created>1605848488396</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1605848488396</updated>
-    </task>
-    <task id="LOCAL-00008" summary="增加了生成PetPet Gif功能&#10;更新console至1.1.0">
-      <created>1607067011789</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1607067011789</updated>
-    </task>
-    <task id="LOCAL-00009" summary="修复bugs">
-      <created>1607077391618</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1607077391618</updated>
-    </task>
-    <task id="LOCAL-00010" summary="删除org.json相关类,改用maven库">
-      <created>1607077924594</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1607077924594</updated>
-    </task>
-    <task id="LOCAL-00011" summary="适配源码到Mirai 2.0-M1&#10;更新Gradle版本到6.7.1">
-      <created>1608525380223</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1608525380223</updated>
-    </task>
-    <task id="LOCAL-00012" summary="merge remote/origin into local">
-      <created>1608525536131</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1608525536131</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Sync mirai version;Update cache path">
-      <created>1609507247200</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1609507247200</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Fix pixiv module">
-      <created>1609508909911</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1609508909911</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Update to mirai 2.0.0">
-      <created>1610796947773</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1610796947773</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Update README.md">
-      <created>1610797838155</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1610797838155</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Delete useless dependencies&#10;Fix bugs in PetPet module&#10;Remove log from git maker">
-      <created>1612071588600</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1612071588600</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Update README.md">
-      <created>1612071909232</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1612071909232</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Add JavaScript Executor for manager only">
-      <created>1612083807004</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1612083807004</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Add Mozilla Rhino for JavaScript execution&#10;Update cache directory for each user&#10;Update Mirai to 2.3.1&#10;Remove test message">
-      <created>1612346986085</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1612346986085</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Fix resource leaks&#10;Update Mirai to 2.4.0 &amp; Kotlin 1.4.30">
-      <created>1614165724128</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1614165724128</updated>
-    </task>
-    <option name="localTasksCounter" value="22" />
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="true" />
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="CHECK_NEW_TODO" value="false" />
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="修复了玄学编译bugs" />
-    <MESSAGE value="修复Gradle Task" />
-    <MESSAGE value="删除无用类" />
-    <MESSAGE value="更新Mirai Console版本到1.0-RC-dev-29" />
-    <MESSAGE value="更新mirai console到1.0.0&#10;修改黑名单显示" />
-    <MESSAGE value="merge branch" />
-    <MESSAGE value="更新更新更新更新更新更新" />
-    <MESSAGE value="增加了生成PetPet Gif功能&#10;更新console至1.1.0" />
-    <MESSAGE value="修复bugs" />
-    <MESSAGE value="删除org.json相关类,改用maven库" />
-    <MESSAGE value="适配源码到Mirai 2.0-M1&#10;更新Gradle版本到6.7.1" />
-    <MESSAGE value="merge remote/origin into local" />
-    <MESSAGE value="Sync mirai version;Update cache path" />
-    <MESSAGE value="Fix pixiv module" />
-    <MESSAGE value="Update to mirai 2.0.0" />
-    <MESSAGE value="Delete useless dependencies&#10;Fix bugs in PetPet module&#10;Remove log from git maker" />
-    <MESSAGE value="Update README.md" />
-    <MESSAGE value="Add JavaScript Executor for manager only" />
-    <MESSAGE value="Add Mozilla Rhino for JavaScript execution&#10;Update cache directory for each user&#10;Update Mirai to 2.3.1&#10;Remove test message" />
-    <MESSAGE value="Fix resource leaks&#10;Update Mirai to 2.4.0 &amp; Kotlin 1.4.30" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix resource leaks&#10;Update Mirai to 2.4.0 &amp; Kotlin 1.4.30" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>

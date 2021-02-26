@@ -11,6 +11,8 @@ A plugin for [Mirai Console](https://github.com/mamoe/mirai-console) with image 
 * 设置群聊黑名单(注意settings和darklist指令全局可用,黑名单群settings指令只回復manager)
 * 禁言,取消禁言,加群,退群提示(注意:有臭味
 * PetPet图片生成(群聊被戳一戳时,请务必为账号使用ANDROID_PHONE协议以便正常使用)
+* 插件管理员执行Javascript脚本（可用变量：bot,event,dlg，dlg请查看ScriptMethods.kt获取具体用法）
+* 随机复读
 * 没了
 ## 特色
 * 单线程撤回发出的本地图片(防止请求过于频繁被服务器拒绝)
@@ -22,8 +24,8 @@ A plugin for [Mirai Console](https://github.com/mamoe/mirai-console) with image 
 - 复制jar到Console工作目录下的plugins里
 - 见下方'开始使用'栏目
 ### 当前项目环境:
-* Mirai Console Gradle Plugin 2.3.1   
-* Kotlin 1.4.21   
+* Mirai Console Gradle Plugin 2.4.0   
+* Kotlin 1.4.30   
 * OpenJdk 14   
 * Intellij IDEA 2020.3.1   
 **注意! 在编译本项目之前,请留意删除gradle.properties中的网络代理设置**   
@@ -58,16 +60,18 @@ managers:
 ### 设置部分
 只有Plugin Manager(不是Bot Manager)才能使用这个指令!
 ```Bash
-/settings set RecallDelay <时间>
-/settings set RecallInterval <时间>
-/settings set ImagePathList <路径,可用';'分割多个>
-/settings set Prefix <指令前缀,默认'/'>
+/settings set recallDelay <时间>
+/settings set recallInterval <时间>
+/settings set imagePathList <路径,可用';'分割多个>
+/settings set prefix <指令前缀,默认'/'>
+/settings set repeatFactor <概率的小数>
 /settings reload
 /settings reloadBase
-/settings get RecallDelay
-/settings get RecallInterval
-/settings get ImagePathList
-/settings get Prefix
+/settings get recallDelay
+/settings get recallInterval
+/settings get imagePathList
+/settings get prefix
+/settings get repeatFactor
 /settings enable <功能>
 /settings disable <功能>
 ```
@@ -85,7 +89,8 @@ val allowedModuleName = listOf(
     "MuteTip",
     "ReverseAtReply",
     "ReverseAtReplyImage",
-    "PetPet"
+    "PetPet",
+    "Repeat"
 )
 ```
 ### Pixiv
@@ -118,7 +123,7 @@ R18画作将不会发送图片
 ```
 ## Console指令表
 咕了,还没写呢
-## 设置代理
+## 设置Pixiv代理
 * `proxyEnabled` 配置是否启用代理
 * `proxyType` 配置代理类型,必须是socks或者http其中一种,填写其它默认socks
 * `proxyAddress` 配置代理地址,如`127.0.0.1`
@@ -146,4 +151,5 @@ proxyType: socks
 proxyAddress: 127.0.0.1
 proxyPort: 1080
 allowR18ImageInPixiv: false
+repeatFactor: 0.05
 ```

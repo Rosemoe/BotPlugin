@@ -1,6 +1,6 @@
-package io.github.rosemoe.miraiPlugin.v2
+package io.github.rosemoe.miraiPlugin
 
-import io.github.rosemoe.miraiPlugin.v2.gifmaker.GifEncoder
+import io.github.rosemoe.miraiPlugin.gifmaker.GifEncoder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
 import net.mamoe.mirai.contact.Group

@@ -1,4 +1,4 @@
-package io.github.rosemoe.miraiPlugin.v2
+package io.github.rosemoe.miraiPlugin
 
 import kotlinx.coroutines.launch
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
@@ -38,14 +38,9 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
      */
     internal val config = RosemoePluginConfig
 
-    internal val imageList = ArrayList<File>(1024)
-    internal val imageListLock = ReentrantReadWriteLock()
-    internal val imageRandom = Random()
 
-    //internal val scriptEngineManager = ScriptEngineManager()
-
-    internal val dispatcher = CommandDispatcher()
-    internal val rootDispatcher = CommandDispatcher()
+    internal val dispatcher = io.github.rosemoe.miraiPlugin.CommandDispatcher()
+    internal val rootDispatcher = io.github.rosemoe.miraiPlugin.CommandDispatcher()
     internal val msgs = MessageStates()
 
     override fun onEnable() {
@@ -189,6 +184,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
 
     internal fun reloadBaseConfig() {
         reloadPluginConfig(config)
+        reloadPluginConfig(ImageSourceConfig)
         dispatcher.prefix = if(config.commandPrefix.isBlank())  "/" else config.commandPrefix
         rootDispatcher.prefix = dispatcher.prefix
         applyProxySettings()

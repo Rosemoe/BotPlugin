@@ -1,4 +1,4 @@
-package io.github.rosemoe.miraiPlugin.v2.gifmaker
+package io.github.rosemoe.miraiPlugin.gifmaker
 
 object Color {
     const val TRANSPARENT = 0

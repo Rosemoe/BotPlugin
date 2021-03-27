@@ -1,4 +1,4 @@
-package io.github.rosemoe.miraiPlugin.v2
+package io.github.rosemoe.miraiPlugin
 
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.Message
@@ -8,20 +8,20 @@ import java.util.*
 
 class CommandDispatcher {
 
-    private val root = Node()
+    private val root = io.github.rosemoe.miraiPlugin.CommandDispatcher.Node()
 
     var prefix = "/"
 
     private fun dfsRegister(
         depth: Int,
         aliasListMap: Array<Array<String>>,
-        node: Node,
-        action: Action
+        node: io.github.rosemoe.miraiPlugin.CommandDispatcher.Node,
+        action: io.github.rosemoe.miraiPlugin.CommandDispatcher.Action
     ) {
         for (element in aliasListMap[depth]) {
             var next = node.children[element]
             if (next == null) {
-                next = Node()
+                next = io.github.rosemoe.miraiPlugin.CommandDispatcher.Node()
                 node.children[element] = next
             }
             if (depth + 1 == aliasListMap.size) {
@@ -33,7 +33,7 @@ class CommandDispatcher {
     }
 
     fun register(path: String, action: (GroupMessageEvent,String) -> Unit) {
-        register(path, object : Action {
+        register(path, object : io.github.rosemoe.miraiPlugin.CommandDispatcher.Action {
             override fun invoke(event: GroupMessageEvent, restContent: String) {
                 action(event, restContent)
             }
@@ -41,14 +41,14 @@ class CommandDispatcher {
     }
 
     fun register(path: String, action: (GroupMessageEvent) -> Unit) {
-        register(path, object : Action {
+        register(path, object : io.github.rosemoe.miraiPlugin.CommandDispatcher.Action {
             override fun invoke(event: GroupMessageEvent, restContent: String) {
                 action(event)
             }
         })
     }
 
-    private fun register(path: String, action: Action) {
+    private fun register(path: String, action: io.github.rosemoe.miraiPlugin.CommandDispatcher.Action) {
         val subs: Array<String> = path.split("/").toTypedArray()
         val aliasForEach = Array(subs.size) { index ->
             val origin = subs[index]
@@ -105,8 +105,8 @@ class CommandDispatcher {
     }
 
     private class Node {
-        var children: MutableMap<String, Node> = HashMap()
-        var action: Action? = null
+        var children: MutableMap<String, io.github.rosemoe.miraiPlugin.CommandDispatcher.Node> = HashMap()
+        var action: io.github.rosemoe.miraiPlugin.CommandDispatcher.Action? = null
     }
 
     interface Action {

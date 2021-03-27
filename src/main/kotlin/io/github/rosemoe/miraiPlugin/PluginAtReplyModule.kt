@@ -1,4 +1,4 @@
-package io.github.rosemoe.miraiPlugin.v2
+package io.github.rosemoe.miraiPlugin
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking

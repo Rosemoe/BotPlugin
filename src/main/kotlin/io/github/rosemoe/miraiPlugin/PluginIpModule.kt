@@ -1,4 +1,4 @@
-package io.github.rosemoe.miraiPlugin.v2
+package io.github.rosemoe.miraiPlugin
 
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import java.net.Inet4Address

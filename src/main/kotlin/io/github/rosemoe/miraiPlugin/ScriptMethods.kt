@@ -1,6 +1,6 @@
-package io.github.rosemoe.miraiPlugin.v2
+package io.github.rosemoe.miraiPlugin
 
-import io.github.rosemoe.miraiPlugin.v2.RosemoePlugin.sendBack
+import io.github.rosemoe.miraiPlugin.RosemoePlugin.sendBack
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import net.mamoe.mirai.contact.NormalMember

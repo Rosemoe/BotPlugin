@@ -1,4 +1,4 @@
-package io.github.rosemoe.miraiPlugin.v2
+package io.github.rosemoe.miraiPlugin
 
 import io.github.rosemoe.util.IntPair
 import kotlinx.coroutines.CoroutineScope

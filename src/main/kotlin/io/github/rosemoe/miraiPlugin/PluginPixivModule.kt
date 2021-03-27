@@ -1,4 +1,4 @@
-package io.github.rosemoe.miraiPlugin.v2
+package io.github.rosemoe.miraiPlugin
 
 import kotlinx.coroutines.runBlocking
 import net.mamoe.mirai.contact.Group

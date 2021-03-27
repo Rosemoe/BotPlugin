@@ -1,10 +1,15 @@
-package io.github.rosemoe.miraiPlugin.v2
+package io.github.rosemoe.miraiPlugin
 
+import kotlinx.coroutines.runInterruptible
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonEncoder
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.messageChainOf
+import net.mamoe.mirai.utils.ExternalResource
 import java.io.File
+import java.util.concurrent.locks.ReentrantReadWriteLock
 
 internal fun RosemoePlugin.registerImageCommands() {
     dispatcher.register("sendImage") { event, restContent ->
@@ -30,57 +35,39 @@ internal fun RosemoePlugin.registerImageCommands() {
     }
 }
 
+private val imageStorages = ArrayList<ImageStorage>()
+private val lock = ReentrantReadWriteLock()
+
 internal fun RosemoePlugin.initializeImageList() {
-    logger.verbose("Loading images, path count = ${config.imagePathList.size}")
-    fun File.isImage(): Boolean {
-        val title = name.toLowerCase()
-        return title.endsWith(".jpg") || title.endsWith(".png") || title.endsWith(".webp")
-    }
-
-    fun searchForImageFiles(file: File) {
-        if (file.isFile) {
-            if (file.isImage()) {
-                imageList.add(file)
-            }
-        } else {
-            file.listFiles()?.forEach {
-                if (it != null) {
-                    searchForImageFiles(it)
-                }
-            }
-        }
-    }
-
-    imageListLock.lockWrite()
+    logger.verbose("Loading image sources")
+    lock.lockWrite()
     try {
-        logger.verbose("Removing previous images...")
-        imageList.clear()
-        logger.verbose("Indexing images...")
-        config.imagePathList.forEach {
-            searchForImageFiles(File(it))
+        imageStorages.clear()
+        config.imagePathList.forEach {path ->
+            imageStorages.add(LocalImageStorage(path).also {
+                it.init()
+                ImageSourceConfig.sources.add(Json.encodeToString(LocalImageStorage.serializer(), it))
+            })
         }
-
-        logger.info("Image load succeeded. Indexed image count = ${imageList.size}")
+        imageStorages.add(OnlineJsonImageStorage("https://hloli.cn/?m=1.json", "data").also { ImageSourceConfig.sources.add(Json.encodeToString(OnlineJsonImageStorage.serializer(), it)) })
     } finally {
-        imageListLock.unlockWrite()
+        lock.unlockWrite()
     }
+    logger.verbose("Loaded image sources")
 }
 
-private fun RosemoePlugin.randomImageFile(): File? {
-    imageListLock.lockRead()
-    try {
-        val size = imageList.size
-        if (size > 0) {
-            return imageList[imageRandom.nextInt(size)]
-        }
+private fun RosemoePlugin.randomImage(): ExternalResource? {
+    lock.lockRead()
+    val imageStorage = try {
+        imageStorages.random()
     } finally {
-        imageListLock.unlockRead()
+        lock.unlockRead()
     }
-    return null
+    return imageStorage.obtainImage()
 }
 
 internal fun RosemoePlugin.sendImageForEvent(event: GroupMessageEvent) {
-    val target = randomImageFile()
+    val target = randomImage()
     if (target == null) {
         event.sendBackAsync(
             messageChainOf(
@@ -94,10 +81,13 @@ internal fun RosemoePlugin.sendImageForEvent(event: GroupMessageEvent) {
                 messageChainOf(
                     At(event.sender),
                     PlainText("这是宁要的图!\n"),
-                    event.group.uploadImageResource(target)
+                    event.group.uploadImage(target)
                 )
             )
-            logger.verbose("Send Image ${target.path} to group ${event.group.name} (${event.group.id})")
+            runInterruptible {
+                target.close()
+            }
+            logger.verbose("Send Image ${target} to group ${event.group.name} (${event.group.id})")
             val delay = config.imageRecallDelay
             if (delay > 0) {
                 scheduleRecall(receipt, delay)

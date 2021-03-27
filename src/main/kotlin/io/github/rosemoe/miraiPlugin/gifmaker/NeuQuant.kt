@@ -1,4 +1,4 @@
-package io.github.rosemoe.miraiPlugin.v2.gifmaker
+package io.github.rosemoe.miraiPlugin.gifmaker
 
 /*
  * NeuQuant Neural-Net Quantization Algorithm

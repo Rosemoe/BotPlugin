@@ -1,4 +1,4 @@
-package io.github.rosemoe.miraiPlugin.v2.gifmaker
+package io.github.rosemoe.miraiPlugin.gifmaker
 
 import java.io.IOException
 import java.io.OutputStream

@@ -1,4 +1,4 @@
-package io.github.rosemoe.miraiPlugin.v2
+package io.github.rosemoe.miraiPlugin
 
 fun RosemoePlugin.registerHelps() {
     fun registerHelpItem(simplePath: String, content: String) {

@@ -5,36 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="037878f1-2820-430d-a95a-3c63ec86d3ce" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/ImageSourceConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/ImageStorage.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/CommandDispatcher.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/CommandDispatcher.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/MessageStates.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/MessageStates.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginAtReplyModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginAtReplyModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginFiles.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginFiles.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginHelps.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginHelps.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginImageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginImageModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginIpModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginIpModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginManageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginManageModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPetPetModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginPetPetModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPingModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginPingModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginPixivModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginPixivModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginRecallWorker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginRecallWorker.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/PluginRepeat.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginRepeat.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/RosemoePlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/RosemoePluginConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/RosemoePluginConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/ScriptMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/ScriptMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/Utils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/Version.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/Version.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/gifmaker/Color.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/gifmaker/Color.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/gifmaker/GifEncoder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/gifmaker/GifEncoder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/gifmaker/LZWEncoder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/gifmaker/LZWEncoder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/gifmaker/NeuQuant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/gifmaker/NeuQuant.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/v2/journal/Journal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/journal/Journal.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/services/net.mamoe.mirai.console.plugin.jvm.JvmPlugin" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/services/net.mamoe.mirai.console.plugin.jvm.JvmPlugin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/RunMirai.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/ImageStorage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/ImageStorage.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginImageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginImageModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginManageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginManageModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/RosemoePluginConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/RosemoePluginConfig.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,11 +124,19 @@
       <option name="project" value="LOCAL" />
       <updated>1614320890638</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="更新ImageSources，使得可以发送在线图片">
+      <created>1616848640406</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1616848640406</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="防止多bot回复同一群（仅限消息）" />
-    <option name="LAST_COMMIT_MESSAGE" value="防止多bot回复同一群（仅限消息）" />
+    <MESSAGE value="更新ImageSources，使得可以发送在线图片" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新ImageSources，使得可以发送在线图片" />
   </component>
 </project>

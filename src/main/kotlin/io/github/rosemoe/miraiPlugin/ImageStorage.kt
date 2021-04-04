@@ -1,8 +1,10 @@
 package io.github.rosemoe.miraiPlugin
 
-import kotlinx.serialization.Required
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
+import kotlinx.serialization.*
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
+import kotlinx.serialization.modules.subclass
 import net.mamoe.mirai.utils.ExternalResource
 import net.mamoe.mirai.utils.ExternalResource.Companion.toExternalResource
 import org.json.JSONArray
@@ -16,14 +18,37 @@ import java.net.URL
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.random.Random
 
+private val json = Json {
+    ignoreUnknownKeys = true
+    classDiscriminator = "type"
+    serializersModule = SerializersModule {
+        polymorphic(ImageStorage::class) {
+            subclass(LocalImageStorage::class)
+            subclass(OnlineJsonImageStorage::class)
+            subclass(ScriptProxyImageStorage::class)
+        }
+    }
+}
+
+fun ImageStorage.serializeStorage() : String {
+    return json.encodeToString(this)
+}
+
+fun deserializeStorage(data: String) : ImageStorage {
+    return json.decodeFromString(data)
+}
+
+@Serializable
+data class StorageWrapper(@Polymorphic val storage: ImageStorage)
+
 /**
  * Image Storage for sending images
  */
 @Serializable
-open class ImageStorage {
+sealed class ImageStorage {
 
     @Required
-    val storageName: String = "unnamed"
+    var storageName: String = "unnamed"
 
     /**
      * Get a random image from the source
@@ -42,6 +67,7 @@ open class ImageStorage {
 }
 
 @Serializable
+@SerialName("local")
 class LocalImageStorage(private val path: String) : ImageStorage() {
 
     @Transient
@@ -98,6 +124,7 @@ class LocalImageStorage(private val path: String) : ImageStorage() {
 }
 
 @Serializable
+@SerialName("json")
 class OnlineJsonImageStorage(private val requestUrl: String, private val jsonPathForUrl: String) : ImageStorage() {
 
     @Transient
@@ -126,6 +153,7 @@ class OnlineJsonImageStorage(private val requestUrl: String, private val jsonPat
 }
 
 @Serializable
+@SerialName("proxy")
 class ScriptProxyImageStorage(private val script: String) : ImageStorage() {
 
     override fun obtainImage(): ExternalResource? {

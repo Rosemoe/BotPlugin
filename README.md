@@ -2,7 +2,8 @@
 一个运行于[Mirai Console](https://github.com/mamoe/mirai-console)的插件    
 A plugin for [Mirai Console](https://github.com/mamoe/mirai-console) with image sender,pixiv querying and more.
 ## 功能
-* 发送本地圖庫的圖片(请手动下载赫图,另提供指令sendImage一次发送多张)(发送带有'图'和'来'的消息或者色图来图片(不知道这图我也没办法,你可以用图片ID发出去))
+* 发送本地图库的圖片(请手动下载赫图,另提供指令sendImage一次发送多张)(发送带有'图'和'来'的消息或者色图来图片(不知道这图我也没办法,你可以用图片ID发出去)) 
+* 发送在线的Json源图片
 * 发送在线的Pixiv的圖片(允许设置代理,说得好像不设置代理谁进得去呢?)
 * 被At时复读,并且把At的对象换成对方(此外还支持颠倒消息顺序,随机旋转消息图片)
 * 使用系统自带的命令行执行Ping(可能不安全)
@@ -48,35 +49,50 @@ managers:
   - 1919810
   - 12345678
 ```   
-然后重新运行Mirai Console   
-然后用Manager账号在群聊发送
-```Bash
-/settings set ImagePathList 图片或者图片文件夹路径(可用';'分割)
-```
-设定你的图片路径表,即可开始使用   
-如果不想被其他人知道你的图片路径,也可以参照README.md最下方的PluginConfig.yml示例手动写路径表
+然后重新运行Mirai Console
 ## 群聊指令表
 非常建议您先读完下面的指令表再使用
 ### 设置部分
-只有Plugin Manager(不是Bot Manager)才能使用这个指令!
+只有Plugin Manager(不是Bot Manager)才能使用这些指令!
+#### 一般设置
 ```Bash
 /settings set recallDelay <时间>
 /settings set recallInterval <时间>
-/settings set imagePathList <路径,可用';'分割多个>
 /settings set prefix <指令前缀,默认'/'>
 /settings set repeatFactor <概率的小数>
 /settings reload
 /settings reloadBase
 /settings get recallDelay
 /settings get recallInterval
-/settings get imagePathList
 /settings get prefix
 /settings get repeatFactor
 /settings enable <功能>
 /settings disable <功能>
 ```
-reloadBase只刷新配置不重新建立图片索引,算是轻重载    
-功能名称表:
+reloadBase只刷新配置不重新建立图片索引,算是轻重载
+#### 图片源设置
+图片源保存在image_sources.yml中
+```Bash
+添加一个路径：
+/sources path <名称> <路径>
+
+添加一个在线Json图源
+/sources json <名称> <网址> <数据路径>
+对应的网址要返回一个Json文本，其中通过数据路径可以到达url元素
+比如返回下面这段Json：
+{"code":1,"msg":"ok","data":"http:\/\/test.xxx.com\/large\/a15b4afegy1fmvjv7pshlj21hc0u0e0s.jpg"}
+需要设置的数据路径是 data
+
+删除一个源
+/sources remove <名称>
+
+刷新源列表
+对源进行操作时不会立即生效，使用settings reload会导致设置文件被覆盖
+可以使用这个方法来在修改图源列表后刷新图源 
+/sources refresh
+```
+另外，你也可以使用脚本手动完成获取图片的逻辑。至于如何配置使用，请研究ImageSource.kt（懒得写指令了23333）
+#### 功能名称表
 ```Kotlin
 val allowedModuleName = listOf(
     "ImageSender",
@@ -137,9 +153,7 @@ managers:
   - 8101145141
 states: 
   ImageSender: true
-commandPrefix: $
-imagePathList: 
-  - 'D:\BotImages'
+commandPrefix: '/'
 darkListGroups: 
   - 122344646
   - 464544644

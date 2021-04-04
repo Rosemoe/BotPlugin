@@ -3,11 +3,11 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
     java
-    id("net.mamoe.mirai-console") version "2.4.0"
+    id("net.mamoe.mirai-console") version "2.5.0"
 }
 
 group = "io.github.Rosemoe"
-version = "2.3.2"
+version = "2.3.3"
 
 repositories {
     mavenLocal()

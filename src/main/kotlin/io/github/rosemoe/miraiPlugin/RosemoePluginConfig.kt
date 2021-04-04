@@ -24,11 +24,6 @@ object RosemoePluginConfig : AutoSavePluginConfig("PluginConfig") {
     var commandPrefix: String by value("/")
 
     /**
-     * Paths for images
-     */
-    var imagePathList: MutableList<String> by value()
-
-    /**
      * List of ignored groups ids
      */
     var darkListGroups: MutableList<Long> by value()

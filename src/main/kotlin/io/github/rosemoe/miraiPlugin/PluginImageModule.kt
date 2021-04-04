@@ -1,6 +1,7 @@
 package io.github.rosemoe.miraiPlugin
 
 import kotlinx.coroutines.runInterruptible
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonEncoder
 import net.mamoe.mirai.event.events.GroupMessageEvent
@@ -9,6 +10,7 @@ import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.messageChainOf
 import net.mamoe.mirai.utils.ExternalResource
 import java.io.File
+import java.lang.Exception
 import java.util.concurrent.locks.ReentrantReadWriteLock
 
 internal fun RosemoePlugin.registerImageCommands() {
@@ -43,13 +45,15 @@ internal fun RosemoePlugin.initializeImageList() {
     lock.lockWrite()
     try {
         imageStorages.clear()
-        config.imagePathList.forEach {path ->
-            imageStorages.add(LocalImageStorage(path).also {
-                it.init()
-                ImageSourceConfig.sources.add(Json.encodeToString(LocalImageStorage.serializer(), it))
-            })
+        ImageSourceConfig.sources.forEach {
+            try {
+                imageStorages.add(deserializeStorage(it).also {
+                    it.init()
+                })
+            } catch (e: Exception) {
+                logger.error("Error occurred while loading sources", e)
+            }
         }
-        imageStorages.add(OnlineJsonImageStorage("https://hloli.cn/?m=1.json", "data").also { ImageSourceConfig.sources.add(Json.encodeToString(OnlineJsonImageStorage.serializer(), it)) })
     } finally {
         lock.unlockWrite()
     }

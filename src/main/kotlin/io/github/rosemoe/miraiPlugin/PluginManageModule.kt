@@ -1,5 +1,8 @@
 package io.github.rosemoe.miraiPlugin
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.PlainText
@@ -33,8 +36,6 @@ const val ITEM_COUNT_EACH_PAGE = 15
 internal fun RosemoePlugin.registerManageCommands() {
     fun disableModule(event: GroupMessageEvent, restContent: String) {
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return
         }
         event.sendBackAsync(if (disableModule(restContent.trim())) "成功禁用了:${restContent.trim()}" else "禁用${restContent.trim()}失败了")
@@ -42,8 +43,6 @@ internal fun RosemoePlugin.registerManageCommands() {
 
     fun enableModule(event: GroupMessageEvent, restContent: String) {
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return
         }
         event.sendBackAsync(if (enableModule(restContent.trim())) "成功启用了:${restContent.trim()}" else "启用${restContent.trim()}失败了")
@@ -51,8 +50,6 @@ internal fun RosemoePlugin.registerManageCommands() {
 
     fun reloadConfig(event: GroupMessageEvent) {
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return
         }
         try {
@@ -67,8 +64,6 @@ internal fun RosemoePlugin.registerManageCommands() {
     @Suppress("unused")
     fun reloadBaseConfig(event: GroupMessageEvent) {
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return
         }
         try {
@@ -82,8 +77,6 @@ internal fun RosemoePlugin.registerManageCommands() {
 
     fun addToDarkList(event: GroupMessageEvent, restContent: String) {
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return
         }
         val target = restContent.trim()
@@ -110,8 +103,6 @@ internal fun RosemoePlugin.registerManageCommands() {
 
     fun removeDarkListGroup(event: GroupMessageEvent, restContent: String) {
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return
         }
         val target = restContent.trim()
@@ -138,8 +129,6 @@ internal fun RosemoePlugin.registerManageCommands() {
 
     fun listDarklistGroups(event: GroupMessageEvent, restContent: String) {
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return
         }
         darklistLock.lockRead()
@@ -176,43 +165,12 @@ internal fun RosemoePlugin.registerManageCommands() {
         }
     }
 
-    fun setImagePathList(event: GroupMessageEvent, restContent: String) {
-        if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
-            return
-        }
-        config.imagePathList.clear()
-        val list = restContent.split(';')
-        for (item in list) {
-            if (item.isNotBlank())
-                config.imagePathList.add(item.trim())
-        }
-        initializeImageList()
-        event.sendBackAsync("设置图片路径列表成功")
-    }
-
     rootDispatcher.register("settings/disable", ::disableModule)
     rootDispatcher.register("settings/enable", ::enableModule)
     rootDispatcher.register("settings/reload", ::reloadConfig)
     rootDispatcher.register("settings/reloadBase", ::reloadBaseConfig)
-    rootDispatcher.register("settings/set/imagePathList", ::setImagePathList)
-    rootDispatcher.register("settings/get/imagePathList") { event, _ ->
-        if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
-            return@register
-        }
-        val msg = StringBuilder()
-        config.imagePathList.forEach {
-            msg.append(it).append(';')
-        }
-        event.sendBackAsync(msg.toString())
-    }
     rootDispatcher.register("settings/set/prefix") { event, prefix ->
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
         config.commandPrefix = prefix.trim()
@@ -222,16 +180,12 @@ internal fun RosemoePlugin.registerManageCommands() {
     }
     rootDispatcher.register("settings/get/prefix") { event, _ ->
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
         event.sendBackAsync("当前的前缀是:${dispatcher.prefix}")
     }
     rootDispatcher.register("settings/set/recallDelay") { event, rest ->
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
         val time = rest.toLong(60000)
@@ -240,16 +194,12 @@ internal fun RosemoePlugin.registerManageCommands() {
     }
     rootDispatcher.register("settings/get/recallDelay") { event, _ ->
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
         event.sendBackAsync("recallDelay的值为${config.imageRecallDelay}")
     }
     rootDispatcher.register("settings/set/recallInterval") { event, rest ->
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
         config.recallMinPeriod = rest.toLong(180)
@@ -257,16 +207,12 @@ internal fun RosemoePlugin.registerManageCommands() {
     }
     rootDispatcher.register("settings/get/recallInterval") { event, _ ->
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
         event.sendBackAsync("recallInterval的值为${config.recallMinPeriod}")
     }
     rootDispatcher.register("settings/set/repeatFactor") { event, factor ->
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
         config.repeatFactor = factor.toDouble(0.01)
@@ -274,8 +220,6 @@ internal fun RosemoePlugin.registerManageCommands() {
     }
     rootDispatcher.register("settings/get/repeatFactor") { event, _ ->
         if (isNotManager(event.sender.id)) {
-            if (!isDarklistGroup(event))
-                event.sendBackAsync(messageChainOf(At(event.sender), PlainText("你当前不拥有此权限!")))
             return@register
         }
         event.sendBackAsync("repeatFactor的值为${config.repeatFactor}")
@@ -284,6 +228,54 @@ internal fun RosemoePlugin.registerManageCommands() {
     rootDispatcher.register("darklist/add", ::addToDarkList)
     rootDispatcher.register("darklist/remove", ::removeDarkListGroup)
     rootDispatcher.register("darklist/list", ::listDarklistGroups)
+
+    rootDispatcher.register("sources/json") { event, args ->
+        if (isNotManager(event.sender.id)) {
+            return@register
+        }
+        val array = args.trim().split(Regex("[\t\b\n\r ]+"))
+        if (array.size == 3) {
+            ImageSourceConfig.sources.add(
+                    OnlineJsonImageStorage(array[1], array[2]).also { it.storageName = array[0] }.serializeStorage()
+            )
+            event.sendBackAsync("已添加在线源")
+        } else {
+            event.sendBackAsync("参数个数只能是3个")
+        }
+    }
+    rootDispatcher.register("sources/path") { event, args ->
+        if (isNotManager(event.sender.id)) {
+            return@register
+        }
+        val array = args.trim().split(Regex("[\t\b\n\r ]+"))
+        if (array.size == 2) {
+            ImageSourceConfig.sources.add(
+                LocalImageStorage(array[1]).also { it.storageName = array[0] }.serializeStorage()
+            )
+            event.sendBackAsync("已添加路径")
+        } else {
+            logger.warning(array.toString())
+            event.sendBackAsync("参数个数只能是2个")
+        }
+    }
+    rootDispatcher.register("sources/remove") { event, name ->
+        if (isNotManager(event.sender.id)) {
+            return@register
+        }
+        ImageSourceConfig.sources.filter {
+            deserializeStorage(it).storageName == name
+        }.forEach {
+            ImageSourceConfig.sources.remove(it)
+        }
+        event.sendBackAsync("执行成功")
+    }
+    rootDispatcher.register("sources/refresh") { event, _ ->
+        if (isNotManager(event.sender.id)) {
+            return@register
+        }
+        initializeImageList()
+        event.sendBackAsync("图片源已刷新")
+    }
 
     rootDispatcher.register("exec") { event, code ->
         if (isNotManager(event.sender.id)) {

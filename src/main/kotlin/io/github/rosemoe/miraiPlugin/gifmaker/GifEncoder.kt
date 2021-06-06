@@ -504,7 +504,7 @@ open class GifEncoder {
     @Throws(IOException::class)
     protected fun writeString(s: String) {
         for (element in s) {
-            out!!.write(element.toInt())
+            out!!.write(element.code)
         }
     }
 

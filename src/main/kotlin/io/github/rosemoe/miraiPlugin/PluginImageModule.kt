@@ -41,7 +41,7 @@ private val imageStorages = ArrayList<ImageStorage>()
 private val lock = ReentrantReadWriteLock()
 
 internal fun RosemoePlugin.initializeImageList() {
-    logger.verbose("Loading image sources")
+    logger.verbose("正在加载图片源")
     lock.lockWrite()
     try {
         imageStorages.clear()
@@ -51,16 +51,19 @@ internal fun RosemoePlugin.initializeImageList() {
                     it.init()
                 })
             } catch (e: Exception) {
-                logger.error("Error occurred while loading sources", e)
+                logger.error("加载图片源时发生错误", e)
             }
         }
     } finally {
         lock.unlockWrite()
     }
-    logger.verbose("Loaded image sources")
+    logger.verbose("图片源加载完毕")
 }
 
-private fun RosemoePlugin.randomImage(): ExternalResource? {
+private fun randomImage(): ExternalResource? {
+    if (imageStorages.isEmpty()) {
+        return null
+    }
     lock.lockRead()
     val imageStorage = try {
         imageStorages.random()
@@ -91,7 +94,6 @@ internal fun RosemoePlugin.sendImageForEvent(event: GroupMessageEvent) {
             runInterruptible {
                 target.close()
             }
-            logger.verbose("Send Image ${target} to group ${event.group.name} (${event.group.id})")
             val delay = config.imageRecallDelay
             if (delay > 0) {
                 scheduleRecall(receipt, delay)

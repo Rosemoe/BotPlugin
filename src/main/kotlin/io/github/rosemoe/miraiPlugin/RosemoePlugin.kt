@@ -15,13 +15,15 @@ import net.mamoe.mirai.message.data.Message
 import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.messageChainOf
 import java.io.File
+import java.lang.Exception
 import java.util.*
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.collections.ArrayList
+import kotlin.math.log
 
 object RosemoePlugin : ListenerHost, KotlinPlugin(
     net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription(
-        id = "io.github.Rosemoe.miraiPlugin.v2.RosemoePlugin",
+        id = "io.github.rosemoe.miraiPlugin.RosemoePlugin",
         version = pluginVersion
     ) {
         name("RosemoeBotPlugin")
@@ -38,13 +40,18 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
      */
     internal val config = RosemoePluginConfig
 
-
-    internal val dispatcher = io.github.rosemoe.miraiPlugin.CommandDispatcher()
-    internal val rootDispatcher = io.github.rosemoe.miraiPlugin.CommandDispatcher()
+    internal val dispatcher = CommandDispatcher()
+    internal val rootDispatcher = CommandDispatcher()
     internal val msgs = MessageStates()
 
     override fun onEnable() {
         super.onEnable()
+        /*try {
+            logger.verbose("正在检查插件更新...")
+            val source = getWebpageSource("https://github.com/Rosemoe/BotPlugin/releases/latest")
+        } catch (e: Exception) {
+            logger.warning("检查插件更新失败", e)
+        }*/
         initOrReloadConfig()
         globalEventChannel(this.coroutineContext).registerListenerHost(this)
         registerCommands()
@@ -88,11 +95,11 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         }
     }
 
-    fun isDarklistGroup(event: GroupEvent) : Boolean {
+    fun isDarklistGroup(event: GroupEvent): Boolean {
         return isDarklistGroup(event.group.id)
     }
 
-    fun isDarklistGroup(id: Long) : Boolean {
+    private fun isDarklistGroup(id: Long): Boolean {
         return config.darkListGroups.contains(id)
     }
 
@@ -167,7 +174,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
             if (isDarklistGroup(group.id) || !isModuleEnabled("PetPet")) {
                 return
             }
-            val url = event.target.avatarUrl.replace("s=640","s=100")
+            val url = event.target.avatarUrl.replace("s=640", "s=100")
             generateGifAndSend(url, group, event.target.id)
         }
 
@@ -185,16 +192,16 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
     internal fun reloadBaseConfig() {
         reloadPluginConfig(config)
         reloadPluginConfig(ImageSourceConfig)
-        dispatcher.prefix = if(config.commandPrefix.isBlank())  "/" else config.commandPrefix
+        dispatcher.prefix = if (config.commandPrefix.isBlank()) "/" else config.commandPrefix
         rootDispatcher.prefix = dispatcher.prefix
         applyProxySettings()
     }
 
-    suspend fun GroupMessageEvent.sendBack(reply: Message) : MessageReceipt<Group> {
+    suspend fun GroupMessageEvent.sendBack(reply: Message): MessageReceipt<Group> {
         return group.sendMessage(reply)
     }
 
-    suspend fun GroupMessageEvent.sendBack(reply: String) : MessageReceipt<Group> {
+    suspend fun GroupMessageEvent.sendBack(reply: String): MessageReceipt<Group> {
         return group.sendMessage(reply)
     }
 

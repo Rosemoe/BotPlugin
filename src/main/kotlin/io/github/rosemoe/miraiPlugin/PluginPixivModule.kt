@@ -14,7 +14,7 @@ fun RosemoePlugin.applyProxySettings() {
     proxy = config.proxyEnabled
     proxyAddress = config.proxyAddress
     proxyPort = config.proxyPort
-    proxyType = if (config.proxyType.toLowerCase().contentEquals("http")) Proxy.Type.HTTP else Proxy.Type.SOCKS
+    proxyType = if (config.proxyType.lowercase().contentEquals("http")) Proxy.Type.HTTP else Proxy.Type.SOCKS
 }
 
 fun RosemoePlugin.registerPixivCommands() {
@@ -129,7 +129,7 @@ internal fun getArtworkInformation(gp: Group, artworkId: Long): MessageChain {
     if (!RosemoePlugin.config.allowR18ImageInPixiv) {
         for (i in 0 until tags.length()) {
             val tag = tags.getJSONObject(i)
-            if (tag.getString("tag").toLowerCase().contains("r-18")) {
+            if (tag.getString("tag").lowercase().contains("r-18")) {
                 r18 = true
             }
             sb.append(tag.getString("tag"))
@@ -182,7 +182,7 @@ private fun getArtworkImage(gp: Group, artworkId: Long, index: Int): Message {
     if (!RosemoePlugin.config.allowR18ImageInPixiv) {
         for (i in 0 until tags.length()) {
             val tag = tags.getJSONObject(i)
-            if (tag.getString("tag").toLowerCase().contains("r-18")) {
+            if (tag.getString("tag").lowercase().contains("r-18")) {
                 r18 = true
                 break
             }

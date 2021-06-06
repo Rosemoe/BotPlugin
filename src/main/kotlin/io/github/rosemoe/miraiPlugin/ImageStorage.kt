@@ -18,7 +18,7 @@ import java.net.URL
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.random.Random
 
-private val json = Json {
+private val JsonSerialize = Json {
     ignoreUnknownKeys = true
     classDiscriminator = "type"
     serializersModule = SerializersModule {
@@ -31,15 +31,12 @@ private val json = Json {
 }
 
 fun ImageStorage.serializeStorage() : String {
-    return json.encodeToString(this)
+    return JsonSerialize.encodeToString(this)
 }
 
 fun deserializeStorage(data: String) : ImageStorage {
-    return json.decodeFromString(data)
+    return JsonSerialize.decodeFromString(data)
 }
-
-@Serializable
-data class StorageWrapper(@Polymorphic val storage: ImageStorage)
 
 /**
  * Image Storage for sending images
@@ -84,7 +81,7 @@ class LocalImageStorage(private val path: String) : ImageStorage() {
     }
 
     private fun File.isImageFile(): Boolean {
-        val lowerCase = name.toLowerCase()
+        val lowerCase = name.lowercase()
         return lowerCase.endsWith(".jpg") || lowerCase.endsWith(".png") || lowerCase.endsWith(".bmp") || lowerCase.endsWith(
             ".webp"
         )

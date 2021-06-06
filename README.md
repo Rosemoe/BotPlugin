@@ -25,10 +25,10 @@ A plugin for [Mirai Console](https://github.com/mamoe/mirai-console) with image 
 - 复制jar到Console工作目录下的plugins里
 - 见下方'开始使用'栏目
 ### 当前项目环境:
-* Mirai Console Gradle Plugin 2.4.0   
-* Kotlin 1.4.30   
+* Mirai 2.6.5   
+* Kotlin 1.5.10   
 * OpenJdk 14   
-* Intellij IDEA 2020.3.1   
+* Intellij IDEA 2021.1.2   
 **注意! 在编译本项目之前,请留意删除gradle.properties中的网络代理设置**   
 ## 开始使用
 建议使用 Java 11或者更高版本的Java    
@@ -82,6 +82,9 @@ reloadBase只刷新配置不重新建立图片索引,算是轻重载
 比如返回下面这段Json：
 {"code":1,"msg":"ok","data":"http:\/\/test.xxx.com\/large\/a15b4afegy1fmvjv7pshlj21hc0u0e0s.jpg"}
 需要设置的数据路径是 data
+对于下面这段Json：
+{"code":0,"msg":"","quota":8,"quota_min_ttl":7029,"count":1,"data":[{"pid":61732396,"p":0,"uid":946272,"title":"カンナ","author":"Aile\/エル","url":"https:\/\/i.pixiv.cat\/img-original\/img\/2017\/03\/04\/00\/00\/01\/61732396_p0.png","r18":false,"width":583,"height":650,"tags":["カンナカムイ(小林さんちのメイドラゴン)","康娜卡姆依（小林家的龙女仆）","カンナ","康娜","カンナカムイ","康娜卡姆依","小林さんちのメイドラゴン","小林家的龙女仆","尻神様","尻神样","竜娘","龙娘","マジやばくね","that's wicked","高品質パンツ","高品质内裤","魅惑のふともも","魅惑的大腿"]}]}
+需要设置的数据路径是 data/0/url
 
 删除一个源
 /sources remove <名称>

@@ -12,7 +12,7 @@ fun RosemoePlugin.registerPingCommands() {
         if (!isModuleEnabled("Ping")) {
             return
         }
-        val low = restContent.toLowerCase()
+        val low = restContent.lowercase()
         if (low.contains("-t")) {
             throw SecurityException("Rejected Option:-t")
         }

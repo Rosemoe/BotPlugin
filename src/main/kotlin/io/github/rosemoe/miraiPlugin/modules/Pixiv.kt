@@ -1,6 +1,7 @@
 package io.github.rosemoe.miraiPlugin
 
 import kotlinx.coroutines.runBlocking
+import net.mamoe.mirai.contact.Contact
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.message.data.*
 import org.json.JSONObject
@@ -17,53 +18,7 @@ fun RosemoePlugin.applyProxySettings() {
     proxyType = if (config.proxyType.lowercase().contentEquals("http")) Proxy.Type.HTTP else Proxy.Type.SOCKS
 }
 
-fun RosemoePlugin.registerPixivCommands() {
-    dispatcher.register("pixiv/illust") { event, rest ->
-        if (!isModuleEnabled("Pixiv")) {
-            return@register
-        }
-        val args = rest.trim().split(Regex("[ \\n\\t]+")).toMutableList()
-        for ((index, arg) in args.withIndex()) {
-            args[index] = arg.trim()
-        }
-        pluginLaunch {
-            when (args.size) {
-                1 -> {
-                    val artworkId = args[0].toLong(-1)
-                    if (artworkId != -1L) {
-                        try {
-                            val s = getArtworkInformation(event.group, artworkId)
-                            event.sendBack(s)
-                        } catch (e: Throwable) {
-                            event.sendBack("Pixiv画作信息(ID = $artworkId):\n获取失败.可能是画作不存在或网路问题")
-                            logger.warning("Pixiv failure", e)
-                        }
-                    } else {
-                        event.sendBack("数字格式错误:${args[0]}")
-                    }
-                }
-                2 -> {
-                    val artworkId = args[0].toLong(-1)
-                    val index = args[1].toLong(-1).toInt()
-                    if (artworkId != -1L && index != -1) {
-                        try {
-                            val s = getArtworkImage(event.group, artworkId, index)
-                            event.sendBack(s)
-                        } catch (e: Throwable) {
-                            event.sendBack("Pixiv图片(ID = $artworkId, Index = $index):\n获取失败.可能是图片不存在或网路问题")
-                            logger.warning("Pixiv failure", e)
-                        }
-                    } else {
-                        event.sendBack("数字格式错误:${args[0]}")
-                    }
-                }
-                else -> {
-                    event.sendBack("参数必须是1个或者2个")
-                }
-            }
-        }
-    }
-}
+
 
 var proxy = false
 var proxyType = Proxy.Type.HTTP
@@ -106,7 +61,7 @@ private fun trimSourceToJson(source: StringBuilder) {
 }
 
 @Throws(Throwable::class)
-internal fun getArtworkInformation(gp: Group, artworkId: Long): MessageChain {
+internal fun getArtworkInformation(gp: Contact, artworkId: Long): MessageChain {
     var sb: StringBuilder = getArtworkSource(artworkId)
     trimSourceToJson(sb)
     var artwork = JSONObject(sb.toString())
@@ -169,7 +124,7 @@ internal fun getArtworkInformation(gp: Group, artworkId: Long): MessageChain {
 }
 
 @Throws(Throwable::class)
-private fun getArtworkImage(gp: Group, artworkId: Long, index: Int): Message {
+fun getArtworkImage(gp: Contact, artworkId: Long, index: Int): Message {
     val sb: StringBuilder = getArtworkSource(artworkId)
     trimSourceToJson(sb)
     var artwork = JSONObject(sb.toString())
@@ -213,7 +168,7 @@ private fun getArtworkImage(gp: Group, artworkId: Long, index: Int): Message {
 }
 
 @Throws(IOException::class)
-private fun getTargetImage(gp: Group, url: String, artworkId: Long, proxy: Boolean): Image {
+private fun getTargetImage(gp: Contact, url: String, artworkId: Long, proxy: Boolean): Image {
     val file = File("${cacheDirPath()}${File.separator}Pixiv${File.separator}${url.substring(url.lastIndexOf("/") + 1)}")
     val res : Image
     if (file.exists()) {

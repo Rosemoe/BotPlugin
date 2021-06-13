@@ -7,35 +7,56 @@ import net.mamoe.mirai.event.events.*
 import net.mamoe.mirai.message.data.Message
 import net.mamoe.mirai.message.data.MessageChain
 import net.mamoe.mirai.message.data.MessageSource
-import net.mamoe.mirai.utils.MiraiInternalApi
 import java.util.HashMap
 import kotlin.coroutines.CoroutineContext
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
+import kotlin.reflect.KVisibility
 import kotlin.reflect.full.callSuspend
 import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.jvm.jvmErasure
 
-class CommandDispatcher constructor(private val permissionChecker: ManagerChecker, override val coroutineContext: CoroutineContext) : CoroutineScope {
+class CommandDispatcher constructor(
+    private val permissionChecker: Checker,
+    override val coroutineContext: CoroutineContext
+) : CoroutineScope {
 
-    val prefix = "/"
+    var prefix = "/"
 
     private val commands: MutableList<Command> = mutableListOf()
     private val commandTree: MutableMap<Command, Node> = mutableMapOf()
+    private val commandFallback = mutableMapOf<Command, KFunction<*>>()
+
+    fun register(vararg commands: Command) {
+        commands.forEach {
+            register(command = it)
+        }
+    }
 
     fun register(command: Command) {
         if (!commands.contains(command)) {
             commands.add(command)
         }
         val node = Node()
+        //println("Reg: $command")
         command::class.memberFunctions.forEach { func ->
             func.targetAnnotation()?.let {
-                if (func.isExternal && func.parameters.size == 1 && func.parameterClassAt(0) == MsgEvent::class) {
-                    register(node, it.path, func)
+                if ((func.visibility == null || func.visibility == KVisibility.PUBLIC) && func.parameters.size == 2 && func.parameterClassAt(
+                        1
+                    ).qualifiedName == "io.github.rosemoe.miraiPlugin.command.MsgEvent"
+                ) {
+                    //println("Register method")
+                    if (it.path == "") {
+                        commandFallback[command] = func
+                    } else {
+                        register(node, it.path, func)
+                    }
+                } else {
+                    //println("Func: ${func} ${func.parameters.size} ${if(func.parameters.size > 1) func.parameterClassAt(1) else null}")
                 }
             }
         }
-        commandTree.put(command, node)
+        commandTree[command] = node
     }
 
     fun dispatch(event: MessageEvent) {
@@ -49,22 +70,29 @@ class CommandDispatcher constructor(private val permissionChecker: ManagerChecke
             var state = 0
             var node: Node? = null
             val optionStates = OptionStates()
+            var fallback: KFunction<*>? = null
             lateinit var pendingOption: String
             lateinit var options: Array<Option>
+            lateinit var command: Command
             while (regionStart < regionEnd) {
                 val name = text.substring(regionStart, regionEnd)
                 when (state) {
                     0 -> {
+                        //println("State0: ${name}, ${node}")
                         // State 0: Find matching command
                         commands.forEach {
                             //  Check name and permissions
                             if (it.description.name.contains(name) && permissionCheck(
                                     event,
-                                    it.description.permission
+                                    it.description.permission,
+                                    it
                                 )
                             ) {
                                 node = commandTree[it]!!
                                 options = it.description.options
+                                fallback = commandFallback[it]
+                                command = it
+                                //println("Match: ${it}, ${fallback}")
                                 return@forEach
                             }
                         }
@@ -107,11 +135,21 @@ class CommandDispatcher constructor(private val permissionChecker: ManagerChecke
                     }
                     2 -> {
                         // State 2: Start search branches
+                        //println("State2: ${name}, ${node} ${node?.action}")
                         val next = node!!.children[name]
+                        //println("Next: ${next}")
                         if (next == null) {
                             // Terminal node
                             launch(coroutineContext) {
-                                node!!.action?.callSuspend(MsgEvent(event, text.substring(regionStart), optionStates))
+                                //println("Call1: ${if (node!!.action == null) fallback else node!!.action}")
+                                (if (node!!.action == null) fallback else node!!.action)?.callSuspend(
+                                    command,
+                                    MsgEvent(
+                                        event,
+                                        text.substring(regionStart),
+                                        optionStates
+                                    )
+                                )
                             }
                             break
                         } else {
@@ -127,15 +165,23 @@ class CommandDispatcher constructor(private val permissionChecker: ManagerChecke
                 regionStart = getNextWordStart(regionEnd, text)
                 regionEnd = getWordEnd(regionStart, text)
             }
-            if (state == 2 && regionStart >= regionEnd) {
+            if ((state == 2 || state == 1) && regionStart >= regionEnd) {
                 launch(coroutineContext) {
-                    node!!.action?.callSuspend(MsgEvent(event, "", optionStates))
+                    //println("Call2: ${if (node!!.action == null) fallback else node!!.action}")
+                    (if (node!!.action == null) fallback else node!!.action)?.callSuspend(
+                        command,
+                        MsgEvent(
+                            event,
+                            "",
+                            optionStates
+                        )
+                    )
                 }
             }
         }
     }
 
-    private fun permissionCheck(event: MessageEvent, checker: Permission): Boolean {
+    private fun permissionCheck(event: MessageEvent, checker: Permission, command: Command): Boolean {
         return checker.isGranted(
             when (event) {
                 is GroupMessageEvent -> SessionType.GROUP
@@ -143,9 +189,15 @@ class CommandDispatcher constructor(private val permissionChecker: ManagerChecke
                 is FriendMessageEvent -> SessionType.FRIEND
                 else -> SessionType.UNKNOWN
             },
-            if (event is GroupTempMessageEvent) event.sender.permission else null,
-            permissionChecker.isPluginManager(event.sender)
-        )
+            if (event is GroupMessageEvent) event.sender.permission else null,
+            RosemoePlugin.config.managers.contains(event.sender.id)
+        ) &&
+                permissionChecker.shouldRunCommand(
+                    event.sender,
+                    command,
+                    if (event is GroupMessageEvent) event.group.id else 0
+                )
+
     }
 
     private fun dfsRegister(
@@ -171,7 +223,7 @@ class CommandDispatcher constructor(private val permissionChecker: ManagerChecke
     private fun register(root: Node, path: String, action: KFunction<*>) {
         val subs: Array<String> = path.split("/").toTypedArray()
         val aliasForEach = Array(subs.size) { index ->
-            subs[index].split("/").toTypedArray()
+            subs[index].split(",").toTypedArray()
         }
         dfsRegister(0, aliasForEach, root, action)
     }
@@ -180,9 +232,9 @@ class CommandDispatcher constructor(private val permissionChecker: ManagerChecke
         return parameters[index].type.jvmErasure
     }
 
-    private fun <T> KFunction<T>.targetAnnotation(): CommandTarget? {
+    private fun <T> KFunction<T>.targetAnnotation(): Path? {
         annotations.forEach {
-            if (it is CommandTarget) {
+            if (it is Path) {
                 return it
             }
         }

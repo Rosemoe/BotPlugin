@@ -3,11 +3,11 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
     java
-    id("net.mamoe.mirai-console") version "2.6.5"
+    id("net.mamoe.mirai-console") version "2.6.6"
 }
 
 group = "io.github.Rosemoe"
-version = "2.3.4"
+version = "2.4.0"
 
 repositories {
     mavenLocal()
@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("net.mamoe:mirai-core-all:2.6.5")
+    compileOnly("net.mamoe:mirai-core-all:2.6.6")
     compileOnly(kotlin("stdlib-jdk8"))
     implementation("org.json:org.json:2.0")
     implementation(files("libs/rhino-1.7.13.jar"))

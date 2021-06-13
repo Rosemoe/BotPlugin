@@ -21,7 +21,7 @@ object RosemoePluginConfig : AutoSavePluginConfig("PluginConfig") {
     /**
      * Prefix in group for commands outside
      */
-    var commandPrefix: String by value("/")
+    var commandPrefix by value("/")
 
     /**
      * List of ignored groups ids
@@ -31,28 +31,32 @@ object RosemoePluginConfig : AutoSavePluginConfig("PluginConfig") {
     /**
      * Delay for image recalling
      */
-    var imageRecallDelay: Long by value(60000L)
+    var imageRecallDelay by value(60000L)
 
     /**
      * Min interval for recalling a message
      */
-    var recallMinPeriod: Long by value(180L)
+    var recallMinPeriod by value(180L)
 
     /**
      * Max Image count for batch image sender (In one request)
      */
-    var maxImageRequestCount: Int by value(16)
+    var maxImageRequestCount by value(16)
 
-    var proxyEnabled: Boolean by value(false)
+    var proxyEnabled by value(false)
 
-    var proxyType: String by value("http")
+    var proxyType by value("http")
 
-    var proxyAddress: String by value("127.0.0.1")
+    var proxyAddress by value("127.0.0.1")
 
-    var proxyPort: Int by value(1080)
+    var proxyPort by value(1080)
 
-    var allowR18ImageInPixiv: Boolean by value(false)
+    var allowR18ImageInPixiv by value(false)
 
-    var repeatFactor: Double by value(0.05)
+    var repeatFactor by value(0.05)
+
+    var msgOnJoinFormat by value("欢迎\$nick加入本群~")
+
+    var msgOnLeaveFormat by value("\$nick (\$id) 怎么溜号了，真你妈的怪啊！！！")
 
 }

@@ -6,8 +6,6 @@ A plugin for [Mirai Console](https://github.com/mamoe/mirai-console) with image 
 * 发送在线的Json源图片
 * 发送在线的Pixiv的圖片(允许设置代理,说得好像不设置代理谁进得去呢?)
 * 被At时复读,并且把At的对象换成对方(此外还支持颠倒消息顺序,随机旋转消息图片)
-* 使用系统自带的命令行执行Ping(可能不安全)
-* 查询网址的IP地址
 * 在群聊中更新某些配置(带有用户控制(废话))
 * 设置群聊黑名单(注意settings和darklist指令全局可用,黑名单群settings指令只回復manager)
 * 禁言,取消禁言,加群,退群提示(注意:有臭味
@@ -99,8 +97,6 @@ reloadBase只刷新配置不重新建立图片索引,算是轻重载
 ```Kotlin
 val allowedModuleName = listOf(
     "ImageSender",
-    "Ping",
-    "IpList",
     "Pixiv",
     "BatchImg",
     "AtReply",

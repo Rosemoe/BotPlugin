@@ -17,6 +17,6 @@ fun RosemoePlugin.randomRepeat(event: GroupMessageEvent) {
         return
     }
     if (nextDouble() < config.repeatFactor) {
-        event.sendBackAsync(event.message.asSequence().filter { predicate -> !(predicate is MessageSource) }.toMessageChain())
+        event.sendAsync(event.message.asSequence().filter { predicate -> !(predicate is MessageSource) }.toMessageChain())
     }
 }

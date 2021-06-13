@@ -1,5 +1,6 @@
-package io.github.rosemoe.miraiPlugin
+package io.github.rosemoe.miraiPlugin.utils
 
+import io.github.rosemoe.miraiPlugin.RosemoePlugin
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -14,7 +15,7 @@ val taskQueue = LinkedBlockingQueue<Request>(8192 * 2)
 
 suspend fun <E : Any?> BlockingQueue<E>.awaitTake() : E = runInterruptible (Dispatchers.IO) { take() }
 
-suspend fun recall(target: MessageReceipt<Group>) {
+suspend fun recall(target: MessageReceipt<*>) {
     net.mamoe.mirai.Mirai.recallMessage(target.bot, target.source)
 }
 
@@ -50,11 +51,11 @@ fun RosemoePlugin.startRecallManager() {
     }
 }
 
-fun scheduleRecall(receipt: MessageReceipt<Group>, delay: Long) {
+fun scheduleRecall(receipt: MessageReceipt<*>, delay: Long) {
     taskQueue.put(Request(delay, receipt))
 }
 
-class Request constructor(delay: Long, receipt: MessageReceipt<Group>) {
+class Request constructor(delay: Long, receipt: MessageReceipt<*>) {
 
     val createTime = System.currentTimeMillis()
 

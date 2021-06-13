@@ -1,6 +1,5 @@
 package io.github.rosemoe.miraiPlugin
 
-import io.github.rosemoe.util.IntPair
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -8,8 +7,6 @@ import kotlinx.coroutines.launch
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.locks.ReentrantReadWriteLock
-import kotlin.concurrent.read
-import kotlin.coroutines.CoroutineContext
 
 class MessageStates {
 

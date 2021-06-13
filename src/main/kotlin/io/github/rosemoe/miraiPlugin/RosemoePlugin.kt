@@ -1,10 +1,21 @@
 package io.github.rosemoe.miraiPlugin
 
+import io.github.rosemoe.miraiPlugin.RosemoePlugin.sendAsync
+import io.github.rosemoe.miraiPlugin.command.CommandDispatcher
+import io.github.rosemoe.miraiPlugin.command.Checker
+import io.github.rosemoe.miraiPlugin.command.Command
+import io.github.rosemoe.miraiPlugin.command.MsgEvent
+import io.github.rosemoe.miraiPlugin.commands.*
+import io.github.rosemoe.miraiPlugin.commands.Setu.initializeImageList
+import io.github.rosemoe.miraiPlugin.commands.Setu.sendImageForEvent
+import io.github.rosemoe.miraiPlugin.utils.startRecallManager
 import kotlinx.coroutines.launch
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.console.plugin.jvm.reloadPluginConfig
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.contact.MemberPermission
+import net.mamoe.mirai.contact.User
+import net.mamoe.mirai.contact.nameCardOrNick
 import net.mamoe.mirai.event.EventHandler
 import net.mamoe.mirai.event.ListenerHost
 import net.mamoe.mirai.event.events.*
@@ -14,12 +25,6 @@ import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.Message
 import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.messageChainOf
-import java.io.File
-import java.lang.Exception
-import java.util.*
-import java.util.concurrent.locks.ReentrantReadWriteLock
-import kotlin.collections.ArrayList
-import kotlin.math.log
 
 object RosemoePlugin : ListenerHost, KotlinPlugin(
     net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription(
@@ -29,7 +34,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         name("RosemoeBotPlugin")
         author("Rosemoe")
     }
-) {
+) , Checker {
     /**
      * Constant fields
      */
@@ -40,9 +45,8 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
      */
     internal val config = RosemoePluginConfig
 
-    internal val dispatcher = CommandDispatcher()
-    internal val rootDispatcher = CommandDispatcher()
-    internal val msgs = MessageStates()
+    internal val dispatcher = CommandDispatcher(this, coroutineContext)
+    private val msgs = MessageStates()
 
     override fun onEnable() {
         super.onEnable()
@@ -60,12 +64,55 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
     }
 
     private fun registerCommands() {
-        registerImageCommands()
-        registerManageCommands()
-        registerPingCommands()
-        registerIpCommands()
-        registerPixivCommands()
-        registerHelps()
+        dispatcher.register(Blacklist, Help, Pixiv, Settings, Setu, Sources)
+    }
+
+    private fun isManagementCommand(command: Command) : Boolean {
+        return command == Blacklist || command == Sources || command == Settings
+    }
+
+    override fun shouldRunCommand(user: User, command: Command, group: Long): Boolean {
+        if (group != 0L && isDarklistGroup(group)) {
+            return config.managers.contains(user.id) && isManagementCommand(command)
+        } else {
+            return true
+        }
+    }
+
+    @EventHandler
+    @Suppress("unused")
+    suspend fun onFriendMessage(event: FriendMessageEvent) {
+        try {
+            // Dispatch message
+            if (isModuleEnabled("ImageSender") && (event.message.containsTexts(IMAGE_REQUEST) || event.message.containsImage(
+                    "B407F708-A2C6-A506-3420-98DF7CAC4A57"
+                ))
+            ) {
+                sendImageForEvent(MsgEvent(event))
+            }
+            dispatcher.dispatch(event)
+        } catch (e: Throwable) {
+            event.sender.sendMessage(getExceptionInfo(e))
+            logger.error(e)
+        }
+    }
+
+    @EventHandler
+    @Suppress("unused")
+    suspend fun onGroupTempMessage(event: GroupTempMessageEvent) {
+        try {
+            // Dispatch message
+            if (isModuleEnabled("ImageSender") && (event.message.containsTexts(IMAGE_REQUEST) || event.message.containsImage(
+                    "B407F708-A2C6-A506-3420-98DF7CAC4A57"
+                ))
+            ) {
+                sendImageForEvent(MsgEvent(event))
+            }
+            dispatcher.dispatch(event)
+        } catch (e: Throwable) {
+            event.sender.sendMessage(getExceptionInfo(e))
+            logger.error(e)
+        }
     }
 
     @EventHandler
@@ -73,24 +120,19 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
     fun onGroupMessage(event: GroupMessageEvent) {
         if (msgs.handle(event)) {
             try {
-                // Settings are available everywhere
-                rootDispatcher.dispatch(event)
-                // Check group id
-                if (isDarklistGroup(event)) {
-                    return
-                }
                 // Dispatch message
                 if (isModuleEnabled("ImageSender") && (event.message.containsTexts(IMAGE_REQUEST) || event.message.containsImage(
                         "B407F708-A2C6-A506-3420-98DF7CAC4A57"
                     ))
                 ) {
-                    sendImageForEvent(event)
+                    sendImageForEvent(MsgEvent(event))
                 }
                 randomRepeat(event)
                 handleAtReply(event)
                 dispatcher.dispatch(event)
             } catch (e: Throwable) {
-                event.sendBackAsync(getExceptionInfo(e))
+                event.sendAsync(getExceptionInfo(e))
+                logger.error(e)
             }
         }
     }
@@ -139,6 +181,10 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         )
     }
 
+    private fun processFormat(format: String, event: GroupMemberEvent) : String {
+        return format.replace("\$nick", event.user.nameCardOrNick).replace("\$id", event.user.id.toString())
+    }
+
     @EventHandler
     @Suppress("unused")
     suspend fun onMemberJoin(event: MemberJoinEvent) {
@@ -148,7 +194,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         if (!isModuleEnabled("Welcome")) {
             return
         }
-        event.group.sendMessage("欢迎 ${event.member.nick} 加入本群!")
+        event.group.sendMessage(processFormat(config.msgOnJoinFormat, event))
     }
 
     @EventHandler
@@ -160,10 +206,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         if (!isModuleEnabled("Welcome")) {
             return
         }
-        if (event is MemberLeaveEvent.Quit)
-            event.group.sendMessage("${event.member.nick} (${event.member.id}) 滚蛋了,丢人!!!")
-        else
-            event.group.sendMessage("${event.member.nick} (${event.member.id}) 被飞出去了,丢人!!!")
+        event.group.sendMessage(processFormat(config.msgOnLeaveFormat, event))
     }
 
     @EventHandler
@@ -193,7 +236,6 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         reloadPluginConfig(config)
         reloadPluginConfig(ImageSourceConfig)
         dispatcher.prefix = if (config.commandPrefix.isBlank()) "/" else config.commandPrefix
-        rootDispatcher.prefix = dispatcher.prefix
         applyProxySettings()
     }
 
@@ -205,13 +247,13 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         return group.sendMessage(reply)
     }
 
-    fun GroupMessageEvent.sendBackAsync(reply: Message) {
+    fun GroupMessageEvent.sendAsync(reply: Message) {
         pluginLaunch {
             group.sendMessage(reply)
         }
     }
 
-    fun GroupMessageEvent.sendBackAsync(reply: String) {
+    fun GroupMessageEvent.sendAsync(reply: String) {
         pluginLaunch {
             group.sendMessage(reply)
         }

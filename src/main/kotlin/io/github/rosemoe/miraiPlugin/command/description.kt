@@ -7,7 +7,7 @@ import net.mamoe.mirai.contact.MemberPermission
  * @param name The names of command
  * @param options The options of command
  */
-class CommandDescription constructor(val name: Array<String>, val options: Array<Option>, val permission: Permission)
+class CommandDescription constructor(val name: Array<String>, val permission: Permission, val options: Array<Option> = arrayOf())
 
 /**
  * Describes an option of command
@@ -66,7 +66,7 @@ class Permissions constructor(
         }
     }
 
-    fun getHighPermission() : Permissions {
+    fun withManager() : Permissions {
         return Permissions(group, permission, true, friend, temp)
     }
 

@@ -3,6 +3,7 @@ package io.github.rosemoe.miraiPlugin
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import net.mamoe.mirai.contact.Contact
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.message.data.Image
 import net.mamoe.mirai.message.data.MessageChain
@@ -17,7 +18,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 import javax.imageio.ImageIO
 import javax.net.ssl.HttpsURLConnection
 
-suspend fun Group.uploadImageResource(file: File): Image {
+suspend fun Contact.uploadImageResource(file: File): Image {
     val resource = file.toExternalResource()
     try {
         return uploadImage(resource)

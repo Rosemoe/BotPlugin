@@ -1,15 +1,20 @@
 package io.github.rosemoe.miraiPlugin.command
 
 import io.github.rosemoe.miraiPlugin.RosemoePlugin
+import net.mamoe.mirai.Bot
+import net.mamoe.mirai.contact.Contact
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.contact.User
+import net.mamoe.mirai.event.events.FriendMessageEvent
 import net.mamoe.mirai.event.events.GroupMessageEvent
+import net.mamoe.mirai.event.events.GroupTempMessageEvent
 import net.mamoe.mirai.event.events.MessageEvent
 import net.mamoe.mirai.message.MessageReceipt
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.utils.ExternalResource
+import java.lang.IllegalArgumentException
 
-class MsgEvent constructor(val event: MessageEvent, val restContent: String, val optionStates: OptionStates) {
+class MsgEvent constructor(val event: MessageEvent, val restContent: String = "", val optionStates: OptionStates = OptionStates()) {
 
     val sender: User
         get() = event.sender
@@ -20,25 +25,66 @@ class MsgEvent constructor(val event: MessageEvent, val restContent: String, val
     val message: MessageChain
         get() = event.message
 
-    suspend fun uploadImage(res: ExternalResource) : Image {
-        return sender.uploadImage(res)
-    }
+    val bot: Bot
+        get() = event.bot
 
-    suspend fun GroupMessageEvent.sendMessage(reply: Message): MessageReceipt<Group> {
-        return group.sendMessage(reply)
-    }
+    val subject: Contact
+        get() {
+            if (event is GroupMessageEvent) {
+                return event.group
+            } else {
+                return sender
+            }
+        }
 
-    suspend fun GroupMessageEvent.sendMessage(reply: String): MessageReceipt<Group> = sendMessage(PlainText(reply))
-
-    fun GroupMessageEvent.sendMessageAsync(reply: Message) {
-        RosemoePlugin.pluginLaunch {
-            group.sendMessage(reply)
+    fun group() : Group {
+        if (event is GroupMessageEvent) {
+            return event.group
+        } else {
+            throw IllegalArgumentException("非群聊环境无法获取群号")
         }
     }
 
-    fun GroupMessageEvent.sendMessageAsync(reply: String) {
+    fun groupOrNull() : Group? {
+        if (event is GroupMessageEvent) {
+            return event.group
+        } else {
+            return null
+        }
+    }
+
+    fun groupId() : Long {
+        if (event is GroupMessageEvent) {
+            return event.group.id
+        } else {
+            throw IllegalArgumentException("非群聊环境无法获取群号")
+        }
+    }
+
+    suspend fun uploadImage(res: ExternalResource) : Image {
+        return subject.uploadImage(res)
+    }
+
+    suspend fun send(reply: Message): MessageReceipt<*> {
+        return when(event) {
+            is GroupMessageEvent -> event.group.sendMessage(reply)
+            is FriendMessageEvent -> event.friend.sendMessage(reply)
+            is GroupTempMessageEvent -> event.group.sendMessage(reply)
+            else -> throw IllegalArgumentException("Failed to send back for event object: $event")
+        }
+    }
+
+    suspend fun send(reply: String): MessageReceipt<*> = send(PlainText(reply))
+
+    fun sendAsync(reply: Message) {
         RosemoePlugin.pluginLaunch {
-            group.sendMessage(reply)
+            send(reply)
+        }
+    }
+
+    fun sendAsync(reply: String) {
+        RosemoePlugin.pluginLaunch {
+            send(reply)
         }
     }
 

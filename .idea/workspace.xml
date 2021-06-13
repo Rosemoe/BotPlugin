@@ -5,20 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="037878f1-2820-430d-a95a-3c63ec86d3ce" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/command/Command.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/command/CommandDispatcher.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/command/CommandTarget.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/command/OptionStates.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/command/description.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/ImageStorage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/ImageStorage.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginImageModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginImageModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginPingModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginPingModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginPixivModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/PluginPixivModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/CommandDispatcher.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/CommandDispatcher.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/RosemoePlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/RosemoePlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/Version.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/Version.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/gifmaker/GifEncoder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/io/github/rosemoe/miraiPlugin/gifmaker/GifEncoder.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +61,7 @@
       <list>
         <option value="Class" />
         <option value="Kotlin File" />
+        <option value="Kotlin Annotation" />
         <option value="Kotlin Class" />
       </list>
     </option>

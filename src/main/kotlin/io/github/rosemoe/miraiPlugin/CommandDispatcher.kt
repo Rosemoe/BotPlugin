@@ -8,7 +8,7 @@ import java.util.*
 
 class CommandDispatcher {
 
-    private val root = io.github.rosemoe.miraiPlugin.CommandDispatcher.Node()
+    private val root = Node()
 
     var prefix = "/"
 

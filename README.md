@@ -54,7 +54,7 @@ managers:
 非常建议您先读完下面的指令表再使用
 ### 设置部分
 只有Plugin Manager(不是Bot Manager)才能使用这些指令!
-#### 一般设置
+#### 全局设置
 ```Bash
 /settings set recallDelay <时间>
 /settings set recallInterval <时间>
@@ -84,7 +84,7 @@ reloadBase只刷新配置不重新建立图片索引,算是轻重载
 需要设置的数据路径是 data
 对于下面这段Json：
 {"code":0,"msg":"","quota":8,"quota_min_ttl":7029,"count":1,"data":[{"pid":61732396,"p":0,"uid":946272,"title":"カンナ","author":"Aile\/エル","url":"https:\/\/i.pixiv.cat\/img-original\/img\/2017\/03\/04\/00\/00\/01\/61732396_p0.png","r18":false,"width":583,"height":650,"tags":["カンナカムイ(小林さんちのメイドラゴン)","康娜卡姆依（小林家的龙女仆）","カンナ","康娜","カンナカムイ","康娜卡姆依","小林さんちのメイドラゴン","小林家的龙女仆","尻神様","尻神样","竜娘","龙娘","マジやばくね","that's wicked","高品質パンツ","高品质内裤","魅惑のふともも","魅惑的大腿"]}]}
-需要设置的数据路径是 data/0/url
+需要设置的数据路径是 data\0\url
 
 删除一个源
 /sources remove <名称>

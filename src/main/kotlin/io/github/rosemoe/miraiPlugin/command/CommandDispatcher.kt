@@ -1,18 +1,22 @@
 package io.github.rosemoe.miraiPlugin.command
 
 import io.github.rosemoe.miraiPlugin.RosemoePlugin
-import net.mamoe.mirai.event.events.GroupMessageEvent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import net.mamoe.mirai.event.events.*
 import net.mamoe.mirai.message.data.Message
 import net.mamoe.mirai.message.data.MessageChain
 import net.mamoe.mirai.message.data.MessageSource
+import net.mamoe.mirai.utils.MiraiInternalApi
 import java.util.HashMap
 import kotlin.coroutines.CoroutineContext
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
+import kotlin.reflect.full.callSuspend
 import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.jvm.jvmErasure
 
-class CommandDispatcher {
+class CommandDispatcher constructor(private val permissionChecker: ManagerChecker, override val coroutineContext: CoroutineContext) : CoroutineScope {
 
     val prefix = "/"
 
@@ -26,10 +30,7 @@ class CommandDispatcher {
         val node = Node()
         command::class.memberFunctions.forEach { func ->
             func.targetAnnotation()?.let {
-                if (func.isExternal && func.parameters.size == 3 && func.parameterClassAt(0) == GroupMessageEvent::class && func.parameterClassAt(
-                        1
-                    ) == String::class && func.parameterClassAt(2) == OptionStates::class
-                ) {
+                if (func.isExternal && func.parameters.size == 1 && func.parameterClassAt(0) == MsgEvent::class) {
                     register(node, it.path, func)
                 }
             }
@@ -37,7 +38,7 @@ class CommandDispatcher {
         commandTree.put(command, node)
     }
 
-    fun dispatch(event: GroupMessageEvent, coroutineContext: CoroutineContext) {
+    fun dispatch(event: MessageEvent) {
         var text = StringBuilder().also {
             toString(event.message, it)
         }.toString()
@@ -46,25 +47,105 @@ class CommandDispatcher {
             var regionStart = getNextWordStart(0, text)
             var regionEnd = getWordEnd(regionStart, text)
             var state = 0
-            lateinit var command: Command
+            var node: Node? = null
+            val optionStates = OptionStates()
+            lateinit var pendingOption: String
+            lateinit var options: Array<Option>
             while (regionStart < regionEnd) {
                 val name = text.substring(regionStart, regionEnd)
                 when (state) {
                     0 -> {
                         // State 0: Find matching command
                         commands.forEach {
-                            //  Check name
-                            if (it.description.name.contains(name)) {
-
+                            //  Check name and permissions
+                            if (it.description.name.contains(name) && permissionCheck(
+                                    event,
+                                    it.description.permission
+                                )
+                            ) {
+                                node = commandTree[it]!!
+                                options = it.description.options
+                                return@forEach
                             }
                         }
+                        if (node == null) {
+                            // No matching command
+                            return
+                        }
+                        state = 1
+                    }
+                    1 -> {
+                        // State 1: Collect options
+                        if (name.startsWith("-")) {
+                            val optionName = name.substring(1)
+                            var notFound = true
+                            options.forEach {
+                                if (it.name == optionName) {
+                                    // Option matches
+                                    if (it.hasArgument) {
+                                        // Switch to get option argument
+                                        pendingOption = it.name
+                                        state = 3
+                                    } else {
+                                        // Just set flag
+                                        optionStates.optionStates[optionName] = ""
+                                    }
+                                    notFound = false
+                                    return@forEach
+                                }
+                            }
+                            // No option matches this name, switch to command types
+                            if (notFound) {
+                                state = 2
+                                continue
+                            }
+                        } else {
+                            // Not a valid option statement, switch to command types
+                            state = 2
+                            continue
+                        }
+                    }
+                    2 -> {
+                        // State 2: Start search branches
+                        val next = node!!.children[name]
+                        if (next == null) {
+                            // Terminal node
+                            launch(coroutineContext) {
+                                node!!.action?.callSuspend(MsgEvent(event, text.substring(regionStart), optionStates))
+                            }
+                            break
+                        } else {
+                            node = next
+                        }
+                    }
+                    3 -> {
+                        // State 3: Seek for option argument
+                        optionStates.optionStates[pendingOption] = name
+                        state = 1
                     }
                 }
                 regionStart = getNextWordStart(regionEnd, text)
                 regionEnd = getWordEnd(regionStart, text)
             }
-
+            if (state == 2 && regionStart >= regionEnd) {
+                launch(coroutineContext) {
+                    node!!.action?.callSuspend(MsgEvent(event, "", optionStates))
+                }
+            }
         }
+    }
+
+    private fun permissionCheck(event: MessageEvent, checker: Permission): Boolean {
+        return checker.isGranted(
+            when (event) {
+                is GroupMessageEvent -> SessionType.GROUP
+                is GroupTempMessageEvent -> SessionType.TEMP
+                is FriendMessageEvent -> SessionType.FRIEND
+                else -> SessionType.UNKNOWN
+            },
+            if (event is GroupTempMessageEvent) event.sender.permission else null,
+            permissionChecker.isPluginManager(event.sender)
+        )
     }
 
     private fun dfsRegister(
@@ -110,7 +191,7 @@ class CommandDispatcher {
 
     private class Node {
         var children: MutableMap<String, Node> = HashMap()
-        lateinit var action: KFunction<*>
+        var action: KFunction<*>? = null
     }
 
     private fun getNextWordStart(i: Int, msg: String): Int {

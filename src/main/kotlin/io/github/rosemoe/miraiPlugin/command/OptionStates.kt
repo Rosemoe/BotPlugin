@@ -2,7 +2,7 @@ package io.github.rosemoe.miraiPlugin.command
 
 class OptionStates {
 
-    val optionStates: Map<String, String> = mutableMapOf()
+    val optionStates: MutableMap<String, String> = mutableMapOf()
 
     fun isOptionSet(name: String) : Boolean {
         return optionStates[name] != null

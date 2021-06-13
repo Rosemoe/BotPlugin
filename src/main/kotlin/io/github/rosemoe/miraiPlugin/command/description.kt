@@ -14,7 +14,7 @@ class CommandDescription constructor(val name: Array<String>, val options: Array
  * @param name The unique name of the option, such as -XX:useConcurrentGC
  * @param hasArgument Whether there is an argument for the option
  */
-class Option constructor(val name: Boolean, val hasArgument: Boolean)
+class Option constructor(val name: String, val hasArgument: Boolean)
 
 /**
  * Describes the permission of a command
@@ -61,6 +61,8 @@ class Permissions constructor(
                 friend
             SessionType.TEMP ->
                 temp
+            SessionType.UNKNOWN->
+                false
         }
     }
 
@@ -93,5 +95,6 @@ class CompoundPermission constructor(val subPermissions: List<Permission>) : Per
 enum class SessionType {
     GROUP,
     FRIEND,
-    TEMP
+    TEMP,
+    UNKNOWN
 }

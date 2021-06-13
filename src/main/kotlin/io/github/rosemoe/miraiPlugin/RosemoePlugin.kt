@@ -218,7 +218,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
     }
 
     fun pluginLaunch(action: suspend () -> Unit) {
-        RosemoePlugin.launch {
+        RosemoePlugin.launch(coroutineContext) {
             action()
         }
     }

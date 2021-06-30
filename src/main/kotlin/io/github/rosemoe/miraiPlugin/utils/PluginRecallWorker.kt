@@ -5,18 +5,29 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runInterruptible
-import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.message.MessageReceipt
-import net.mamoe.mirai.message.bot
+import net.mamoe.mirai.message.data.MessageSource
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.atomic.AtomicBoolean
 
 val taskQueue = LinkedBlockingQueue<Request>(8192 * 2)
 
 suspend fun <E : Any?> BlockingQueue<E>.awaitTake() : E = runInterruptible (Dispatchers.IO) { take() }
 
 suspend fun recall(target: MessageReceipt<*>) {
-    net.mamoe.mirai.Mirai.recallMessage(target.bot, target.source)
+    target.recall()
+}
+
+fun resetRecallSign(source: MessageSource) {
+    try {
+        val internalClass = Class.forName("net.mamoe.mirai.internal.message.MessageSourceInternal")
+        val method = internalClass.getDeclaredMethod("isRecalledOrPlanned")
+        val value = method.invoke(source) as AtomicBoolean
+        value.compareAndExchange(true, false)
+    }catch (ignored: Exception) {
+
+    }
 }
 
 /**
@@ -36,12 +47,17 @@ fun RosemoePlugin.startRecallManager() {
                     val interval = config.recallMinPeriod
                     delay(if(interval <= 0L) 180L else interval)
                 }catch (e: Exception) {
-                    logger.warning("Recall messages failed")
-                    if (req.createTime + 60000 * 2 /*2 min*/ < System.currentTimeMillis()) {
+                    logger.warning("Recall message failed")
+                    logger.verbose(e)
+                    if ((req.createTime + 120000) > System.currentTimeMillis()) {
+                        val source = req.target.source
+                        resetRecallSign(source)
                         launch (Dispatchers.IO) { taskQueue.put(req) }
+                        delay(10000)
                         continue
                     }
-                    logger.warning("Un-recalled message is outdated")
+                    delay(10000)
+                    logger.warning("Un-recalled message is outdated: now: ${System.currentTimeMillis()} createTime: ${req.createTime}")
                 }
             } else {
                 runInterruptible (Dispatchers.IO) { taskQueue.put(req) }

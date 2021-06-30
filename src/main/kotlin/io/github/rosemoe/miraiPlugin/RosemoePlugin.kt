@@ -81,7 +81,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
 
     @EventHandler
     @Suppress("unused")
-    suspend fun onFriendMessage(event: FriendMessageEvent) {
+    fun onFriendMessage(event: FriendMessageEvent) {
         try {
             // Dispatch message
             if (isModuleEnabled("ImageSender") && (event.message.containsTexts(IMAGE_REQUEST) || event.message.containsImage(
@@ -92,14 +92,16 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
             }
             dispatcher.dispatch(event)
         } catch (e: Throwable) {
-            event.sender.sendMessage(getExceptionInfo(e))
+            pluginLaunch {
+                event.sender.sendMessage(getExceptionInfo(e))
+            }
             logger.error(e)
         }
     }
 
     @EventHandler
     @Suppress("unused")
-    suspend fun onGroupTempMessage(event: GroupTempMessageEvent) {
+    fun onGroupTempMessage(event: GroupTempMessageEvent) {
         try {
             // Dispatch message
             if (isModuleEnabled("ImageSender") && (event.message.containsTexts(IMAGE_REQUEST) || event.message.containsImage(
@@ -110,7 +112,9 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
             }
             dispatcher.dispatch(event)
         } catch (e: Throwable) {
-            event.sender.sendMessage(getExceptionInfo(e))
+            pluginLaunch {
+                event.sender.sendMessage(getExceptionInfo(e))
+            }
             logger.error(e)
         }
     }

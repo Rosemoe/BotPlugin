@@ -96,14 +96,17 @@ object Setu : Command(
             )
         } else {
             pluginLaunch {
+                //val startTime = System.currentTimeMillis()
+                val img = event.uploadImage(target)
+                //logger.info("Uploaded image in ${System.currentTimeMillis() - startTime} ms")
                 val receipt = event.send(
                     if (event.groupOrNull() == null)
-                        messageChainOf(PlainText("这是宁要的图!\n"), event.uploadImage(target))
+                        messageChainOf(PlainText("这是宁要的图!\n"), img)
                     else
                         messageChainOf(
                             At(event.sender),
                             PlainText("这是宁要的图!\n"),
-                            event.uploadImage(target)
+                            img
                         )
                 )
                 runInterruptible {

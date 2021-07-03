@@ -105,7 +105,8 @@ val allowedModuleName = listOf(
     "ReverseAtReply",
     "ReverseAtReplyImage",
     "PetPet",
-    "Repeat"
+    "Repeat",
+    "Help"
 )
 ```
 ### Pixiv

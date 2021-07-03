@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.github.Rosemoe"
-version = "2.4.1"
+version = "2.4.2"
 
 repositories {
     mavenLocal()

@@ -1,5 +1,6 @@
 package io.github.rosemoe.miraiPlugin.commands
 
+import io.github.rosemoe.miraiPlugin.RosemoePlugin
 import io.github.rosemoe.miraiPlugin.command.*
 import io.github.rosemoe.miraiPlugin.pluginBuildTime
 import io.github.rosemoe.miraiPlugin.pluginVersion
@@ -12,19 +13,21 @@ object Help : Command(
     )
 ) {
 
-    private val items: MutableMap<String, String>
+    private val items: MutableMap<String, String> = mutableMapOf()
 
     init {
-        items = mutableMapOf()
         init()
     }
 
-    fun registerHelpItem(path: String, content: String) {
+    private fun registerHelpItem(path: String, content: String) {
         items[path] = content
     }
 
     @Path("")
     fun seekHelp(event: MsgEvent) {
+        if (!RosemoePlugin.isModuleEnabled("Help")) {
+            return
+        }
         val content = items[event.restContent.trim().replace(Regex("[\b\t\n]+"), "/")]
         if (content == null) {
             event.sendAsync("找不到相关帮助（（（")

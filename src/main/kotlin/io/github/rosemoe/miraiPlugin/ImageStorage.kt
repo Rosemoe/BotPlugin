@@ -100,7 +100,7 @@ class LocalImageStorage(private val path: String) : ImageStorage() {
 
     private fun File.isImageFile(): Boolean {
         val lowerCase = name.lowercase()
-        return lowerCase.endsWith(".jpg") || lowerCase.endsWith(".png") || lowerCase.endsWith(".bmp") || lowerCase.endsWith(
+        return lowerCase.endsWith(".jpeg") || lowerCase.endsWith(".jpg") || lowerCase.endsWith(".png") || lowerCase.endsWith(".bmp") || lowerCase.endsWith(
             ".webp"
         )
     }

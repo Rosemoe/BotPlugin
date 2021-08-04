@@ -94,9 +94,15 @@ reloadBase只刷新配置不重新建立图片索引,算是轻重载
 ```
 另外，你也可以使用脚本手动完成获取图片的逻辑。至于如何配置使用，请研究ImageSource.kt（懒得写指令了23333）
 #### 功能名称表
+
+见 [这里](BotPlugin/src/main/kotlin/io/github/rosemoe/miraiPlugin/commands/Settings.kt) 的 `allowedModuleName` 。
+
 ```Kotlin
 val allowedModuleName = listOf(
     "ImageSender",
+    "YuScript",
+    "Ping",
+    "IpList",
     "Pixiv",
     "BatchImg",
     "AtReply",

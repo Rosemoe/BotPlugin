@@ -62,7 +62,7 @@ object Help : Command(
         settings - 设置
         sendImage - 请求多张图片
         pixiv - Pixiv相关功能
-        darklist - 控制群聊黑名单
+        blacklist - 控制群聊黑名单
         发送' help <下级指令1> <下级指令2> ... ' 可以获取它们的用法
         比如:
         help settings set
@@ -178,22 +178,6 @@ object Help : Command(
     """.trimIndent()
         )
 
-        val ipListHelp = """
-        帮助:ipList/ipList4/ipList6
-        用法:
-        ipList <网址>
-        ipList4 <网址>
-        ipList6 <网址>
-        说明:获取网站的IP地址列表
-        ipList4只获取IP v4地址
-        ipList6只获取IP v6地址
-        IP v6需要本地网络连接有v6网络访问权限才可以
-    """.trimIndent()
-
-        registerHelpItem("ipList", ipListHelp)
-        registerHelpItem("ipList4", ipListHelp)
-        registerHelpItem("ipList6", ipListHelp)
-
         registerHelpItem(
             "pixiv", """
         帮助:pixiv
@@ -213,7 +197,7 @@ object Help : Command(
         )
 
         registerHelpItem(
-            "darklist", """
+            "blacklist", """
         帮助:darklist
         - add <群号或this>
         添加黑名单

@@ -114,7 +114,7 @@ private fun generateFrame(head: BufferedImage, i: Int): BufferedImage {
 private fun getUserHead(url: String, memberId: Long): File {
     return getTargetImage(
         url,
-        "${userDirPath(memberId)}${File.separator}avatar.png",
+        "${userDirPath(memberId)}${File.separator}avatar.jpg",
         false
     )
 }

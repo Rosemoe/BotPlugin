@@ -62,20 +62,11 @@ private val hands: Array<BufferedImage> by lazy {
 }
 
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {
-    val outputFile = newFile("${userDirPath(id)}${File.separator}PetPet.gif")
+    val outputFile = "${userDirPath(id)}${File.separator}PetPet.gif"
     runInterruptible(Dispatchers.IO) {
-        val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
-        val outputStream = FileOutputStream(outputFile)
-        GifEncoder().run {
-            delay = duration
-            repeat = 0
-            setTransparent(Color.TRANSLUCENT)
-            start(outputStream)
-            for (i in 0 until MAX_FRAME) {
-                addFrame(generateFrame(head, i))
-            }
-            finish()
-        }
+        getUserHead(url, id)
+        val userAvator = "${userDirPath(id)}${File.separator}avator.jpg"
+        Runtime.getRuntime().exec(".${File.separator}petpet " + "${userAvator}" + " ${outputFile}")
     }
     group.sendMessage(group.uploadImageResource(outputFile))
 }
@@ -114,7 +105,7 @@ private fun generateFrame(head: BufferedImage, i: Int): BufferedImage {
 private fun getUserHead(url: String, memberId: Long): File {
     return getTargetImage(
         url,
-        "${userDirPath(memberId)}${File.separator}avatar.jpg",
+        "${userDirPath(memberId)}${File.separator}avator.jpg",
         true
     )
 }

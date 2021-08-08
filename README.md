@@ -1,6 +1,13 @@
 # BotPlugin
 一个运行于[Mirai Console](https://github.com/mamoe/mirai-console)的插件    
 A plugin for [Mirai Console](https://github.com/mamoe/mirai-console) with image sender,pixiv querying and more.
+
+## 修改
+
+PetPet 默认启用缓存
+
+修正 用户头像存储格式
+
 ## 功能
 * 发送本地图库的圖片(请手动下载赫图,另提供指令sendImage一次发送多张)(发送带有'图'和'来'的消息或者色图来图片(不知道这图我也没办法,你可以用图片ID发出去)) 
 * 发送在线的Json源图片

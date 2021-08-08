@@ -115,7 +115,7 @@ private fun getUserHead(url: String, memberId: Long): File {
     return getTargetImage(
         url,
         "${userDirPath(memberId)}${File.separator}avatar.jpg",
-        false
+        true
     )
 }
 

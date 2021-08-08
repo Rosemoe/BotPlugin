@@ -14,7 +14,7 @@ PetPet 默认启用缓存
 * 发送在线的Pixiv的圖片(允许设置代理,说得好像不设置代理谁进得去呢?)
 * 被At时复读,并且把At的对象换成对方(此外还支持颠倒消息顺序,随机旋转消息图片)
 * 在群聊中更新某些配置(带有用户控制(废话))
-* 设置群聊黑名单(注意settings和darklist指令全局可用,黑名单群settings指令只回復manager)
+* 设置群聊黑名单(注意settings和blacklist指令全局可用,黑名单群settings指令只回復manager)
 * 禁言,取消禁言,加群,退群提示(注意:有臭味
 * PetPet图片生成(群聊被戳一戳时,请务必为账号使用ANDROID_PHONE协议以便正常使用)
 * 插件管理员执行Javascript脚本（可用变量：bot,event,dlg，dlg请查看ScriptMethods.kt获取具体用法）

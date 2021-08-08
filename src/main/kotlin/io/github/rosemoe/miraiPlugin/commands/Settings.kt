@@ -27,9 +27,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 
 val allowedModuleName = listOf(
     "ImageSender",
-    "YuScript",
-    "Ping",
-    "IpList",
     "Pixiv",
     "BatchImg",
     "AtReply",

@@ -29,8 +29,8 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class Petpet {
-
-    static {
+    // https://github.com/fuzzdota/kotlin-jni-example
+    init {
         System.loadLibrary("petpet_jni");
     }
     

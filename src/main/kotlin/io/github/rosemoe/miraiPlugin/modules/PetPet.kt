@@ -28,22 +28,12 @@ import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 
-public class Petpet {
-    // https://github.com/fuzzdota/kotlin-jni-example
-    init {
-        System.loadLibrary("petpet_jni");
-    }
-    companion object {
-        public external fun GeneratePetpetToFile(image: String, gif: String, speed: Int): String;
-    }
-}
-
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {
     val outputFile = "${userDirPath(id)}${File.separator}PetPet.gif"
     runInterruptible(Dispatchers.IO) {
         getUserHead(url, id)
         var head = "${userDirPath(id)}${File.separator}avatar.jpg"
-        Petpet.GeneratePetpetToFile(head, outputFile, 10)
+        Runtime.getRuntime().exec(".${File.separator}petpet ${head} ${outputFile} 10")
     }
     group.sendMessage(group.uploadImageResource(File(outputFile)))
 }

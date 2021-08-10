@@ -45,7 +45,7 @@ suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long
         var head = "${userDirPath(id)}${File.separator}avatar.jpg"
         Petpet.GeneratePetpetToFile(head, outputFile, 10)
     }
-    group.sendMessage(group.uploadImageResource(outputFile))
+    group.sendMessage(group.uploadImageResource(File(outputFile)))
 }
 
 operator fun <K, V> Map<K, V>.minus(x: K): V {

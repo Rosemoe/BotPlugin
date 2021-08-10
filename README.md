@@ -2,10 +2,6 @@
 一个运行于[Mirai Console](https://github.com/mamoe/mirai-console)的插件    
 A plugin for [Mirai Console](https://github.com/mamoe/mirai-console) with image sender,pixiv querying and more.
 
-## 修改
-
-PetPet 默认启用缓存
-
 修正 用户头像存储格式
 
 ## 功能

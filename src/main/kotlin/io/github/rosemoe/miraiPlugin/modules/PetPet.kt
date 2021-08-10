@@ -18,104 +18,46 @@
 
 package io.github.rosemoe.miraiPlugin
 
-import io.github.rosemoe.miraiPlugin.gifmaker.GifEncoder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
 import net.mamoe.mirai.contact.Group
-import java.awt.Color
-import java.awt.image.BufferedImage
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
-import javax.imageio.ImageIO
-import kotlin.math.max
-
-private const val OUT_SIZE = 112//hand size
-private const val MAX_FRAME = 5
-
-private const val squish = 1.25
-private const val scale = 0.875
-private const val spriteY = 20.0
-private const val duration = 16
-
-private val frameOffsets = listOf(
-    mapOf("x" to 0, "y" to 0, "w" to 0, "h" to 0),
-    mapOf("x" to -4, "y" to 12, "w" to 4, "h" to -12),
-    mapOf("x" to -12, "y" to 18, "w" to 12, "h" to -18),
-    mapOf("x" to -8, "y" to 12, "w" to 4, "h" to -12),
-    mapOf("x" to -4, "y" to 0, "w" to 0, "h" to 0)
-)
-
-private val hands: Array<BufferedImage> by lazy {
-    val handImage = ImageIO.read(
-        getTargetImage(
-            "https://benisland.neocities.org/petpet/img/sprite.png",
-            "${RosemoePlugin.dataFolderPath}${File.separator}hand.png"
-        )
-    )
-    Array(MAX_FRAME) {
-        handImage.getSubimage(it * OUT_SIZE, 0, OUT_SIZE, OUT_SIZE)
-    }
-}
 
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {
-    val outputFile = newFile("${userDirPath(id)}${File.separator}PetPet.gif")
+    val outputFile = "${userDirPath(id)}${File.separator}PetPet.gif"
+    var generationSuccess = true
     runInterruptible(Dispatchers.IO) {
-        val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
-        val outputStream = FileOutputStream(outputFile)
-        GifEncoder().run {
-            delay = duration
-            repeat = 0
-            setTransparent(Color.TRANSLUCENT)
-            start(outputStream)
-            for (i in 0 until MAX_FRAME) {
-                addFrame(generateFrame(head, i))
-            }
-            finish()
+        getUserHead(url, id)
+        val head = "${userDirPath(id)}${File.separator}avator.jpg"
+        try {
+            Runtime.getRuntime()
+                   .exec(".${File.separator}petpet ${head} ${outputFile} 10")
+                   .waitFor()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            generationSuccess = false
         }
     }
-    group.sendMessage(group.uploadImageResource(outputFile))
+    if (generationSuccess) {
+        group.sendMessage(group.uploadImageResource(File(outputFile)))
+    }
 }
 
 operator fun <K, V> Map<K, V>.minus(x: K): V {
     return getValue(x)
 }
 
-private fun getSpriteFrame(i: Int): Map<String, Int> {
-    val offset = frameOffsets[i]
-    return mapOf(
-        "dx" to ((offset - "x") * squish * 0.4).toInt(),
-        "dy" to (spriteY + (offset - "y") * squish * 0.9).toInt(),
-        "dw" to ((OUT_SIZE + (offset - "w") * squish) * scale).toInt(),
-        "dh" to ((OUT_SIZE + (offset - "h") * squish) * scale).toInt()
-    )
-}
-
-private fun generateFrame(head: BufferedImage, i: Int): BufferedImage {
-    val cf = getSpriteFrame(i)
-    val result = BufferedImage(OUT_SIZE, OUT_SIZE, BufferedImage.TYPE_INT_ARGB)
-    result.createGraphics().apply {
-        //color = Color.WHITE
-        //drawRect(0, 0, OUT_SIZE, OUT_SIZE)
-        //fillRect(0, 0, OUT_SIZE, OUT_SIZE)
-        create().apply {
-            translate(cf - "dx" + 15, cf - "dy" + 15)
-            drawImage(head, 0, 0, ((cf - "dw") * 0.9).toInt(), ((cf - "dh") * 0.9).toInt(), null)
-        }
-        drawImage(hands[i], 0, max(0.0, ((cf - "dy") * 0.75 - max(0.0, spriteY) - 0.5)).toInt(), null, null)
-    }
-    return result
-}
-
 @Throws(IOException::class)
 private fun getUserHead(url: String, memberId: Long): File {
     return getTargetImage(
         url,
-        "${userDirPath(memberId)}${File.separator}avatar.jpg",
-        true
+        "${userDirPath(memberId)}${File.separator}avator.jpg",
+        false
     )
 }
 

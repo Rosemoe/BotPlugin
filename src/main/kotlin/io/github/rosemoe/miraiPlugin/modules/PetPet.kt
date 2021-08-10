@@ -68,7 +68,7 @@ suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long
     val outputFile = File("${userDirPath(id)}${File.separator}PetPet.gif")
     val time = System.currentTimeMillis()
     
-    if (!USE_CACHE || !outputFile.exists() || time - outputFile.lastModified() > OUTDATE_THRESHOLD) {
+    if (!USE_CACHE || !outputFile.exists() || time - outputFile.lastModified() >= OUTDATE_THRESHOLD) {
         runInterruptible(Dispatchers.IO) {
             val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
             val outputStream = FileOutputStream(outputFile)
@@ -128,8 +128,9 @@ private fun getUserHead(url: String, memberId: Long): File {
 
 @Throws(IOException::class)
 private fun getTargetImage(url: String, pathname: String, isUseCache: Boolean = true): File {
+    val time = System.currentTimeMillis()
     val file = File(pathname)
-    if (isUseCache && file.exists()) {
+    if (isUseCache && file.exists() && time - file.lastModified() < OUTDATE_THRESHOLD) {
         return file
     }
     val connection = (URL(url).openConnection() as HttpURLConnection).apply {

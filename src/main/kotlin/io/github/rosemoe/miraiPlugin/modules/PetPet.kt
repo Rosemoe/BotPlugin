@@ -64,7 +64,7 @@ private val hands: Array<BufferedImage> by lazy {
 }
 
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {
-    val outputFile = newFile("${userDirPath(id)}${File.separator}PetPet.gif")
+    val outputFile = File("${userDirPath(id)}${File.separator}PetPet.gif")
     if (!USE_CACHE || !outputFile.exists()) {
         runInterruptible(Dispatchers.IO) {
             val head = ImageIO.read(FileInputStream(getUserHead(url, id)))

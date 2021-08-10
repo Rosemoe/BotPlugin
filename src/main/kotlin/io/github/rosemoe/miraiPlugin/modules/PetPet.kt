@@ -30,12 +30,14 @@ import java.net.URL
 
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {
     val outputFile = "${userDirPath(id)}${File.separator}PetPet.gif"
-    val generationSuccess = true
+    var generationSuccess = true
     runInterruptible(Dispatchers.IO) {
         getUserHead(url, id)
-        var head = "${userDirPath(id)}${File.separator}avator.jpg"
+        val head = "${userDirPath(id)}${File.separator}avator.jpg"
         try {
-            Runtime.getRuntime().exec(".${File.separator}petpet ${head} ${outputFile} 10").waitFor()
+            Runtime.getRuntime()
+                   .exec(".${File.separator}petpet ${head} ${outputFile} 10")
+                   .waitFor()
         } catch (e: Exception) {
             e.printStackTrace()
             generationSuccess = false

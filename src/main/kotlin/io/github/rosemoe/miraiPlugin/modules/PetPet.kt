@@ -33,8 +33,10 @@ import java.net.URL
 import javax.imageio.ImageIO
 import kotlin.math.max
 
-private const val OUT_SIZE = 112//hand size
+private const val OUT_SIZE = 112 //hand size
 private const val MAX_FRAME = 5
+
+private const val USE_CACHE = false;
 
 private const val squish = 1.25
 private const val scale = 0.875
@@ -62,19 +64,21 @@ private val hands: Array<BufferedImage> by lazy {
 }
 
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {
-    val outputFile = newFile("${userDirPath(id)}${File.separator}PetPet.gif")
-    runInterruptible(Dispatchers.IO) {
-        val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
-        val outputStream = FileOutputStream(outputFile)
-        GifEncoder().run {
-            delay = duration
-            repeat = 0
-            setTransparent(Color.TRANSLUCENT)
-            start(outputStream)
-            for (i in 0 until MAX_FRAME) {
-                addFrame(generateFrame(head, i))
+    val outputFile = File("${userDirPath(id)}${File.separator}PetPet.gif")
+    if (!USE_CACHE || !outputFile.exists()) {
+        runInterruptible(Dispatchers.IO) {
+            val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
+            val outputStream = FileOutputStream(outputFile)
+            GifEncoder().run {
+                delay = duration
+                repeat = 0
+                setTransparent(Color.TRANSLUCENT)
+                start(outputStream)
+                for (i in 0 until MAX_FRAME) {
+                    addFrame(generateFrame(head, i))
+                }
+                finish()
             }
-            finish()
         }
     }
     group.sendMessage(group.uploadImageResource(outputFile))
@@ -115,7 +119,7 @@ private fun getUserHead(url: String, memberId: Long): File {
     return getTargetImage(
         url,
         "${userDirPath(memberId)}${File.separator}avatar.jpg",
-        false
+        USE_CACHE
     )
 }
 

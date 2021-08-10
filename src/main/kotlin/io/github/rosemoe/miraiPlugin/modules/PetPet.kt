@@ -37,6 +37,7 @@ private const val OUT_SIZE = 112 //hand size
 private const val MAX_FRAME = 5
 
 private const val USE_CACHE = false;
+private const val OUTDATE_THRESHOLD = 60*60*1000; // 1 hour by default
 
 private const val squish = 1.25
 private const val scale = 0.875
@@ -65,7 +66,9 @@ private val hands: Array<BufferedImage> by lazy {
 
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {
     val outputFile = File("${userDirPath(id)}${File.separator}PetPet.gif")
-    if (!USE_CACHE || !outputFile.exists()) {
+    val time = System.currentTimeMillis()
+    
+    if (!USE_CACHE || !outputFile.exists() || outputFile.lastModified() - time > OUTDATE_THRESHOLD) {
         runInterruptible(Dispatchers.IO) {
             val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
             val outputStream = FileOutputStream(outputFile)

@@ -21,6 +21,7 @@ package io.github.rosemoe.miraiPlugin
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
 import net.mamoe.mirai.contact.Group
+import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
@@ -32,8 +33,8 @@ class Petpet {
     static {
         System.loadLibrary("petpet_jni");
     }
-
-    public static native String GeneratePetpetToFile(String image, String gif, int speed);
+    
+    public external fun GeneratePetpetToFile(image: String, gif: String, speed: Int): String;
 
 }
 

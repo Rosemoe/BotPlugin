@@ -28,14 +28,14 @@ import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 
-class Petpet {
+public class Petpet {
     // https://github.com/fuzzdota/kotlin-jni-example
     init {
         System.loadLibrary("petpet_jni");
     }
-    
-    public external fun GeneratePetpetToFile(image: String, gif: String, speed: Int): String;
-
+    companion object {
+        public external fun GeneratePetpetToFile(image: String, gif: String, speed: Int): String;
+    }
 }
 
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {

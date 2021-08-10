@@ -30,12 +30,20 @@ import java.net.URL
 
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {
     val outputFile = "${userDirPath(id)}${File.separator}PetPet.gif"
+    val generationSuccess = true
     runInterruptible(Dispatchers.IO) {
         getUserHead(url, id)
-        var head = "${userDirPath(id)}${File.separator}avatar.jpg"
-        Runtime.getRuntime().exec(".${File.separator}petpet ${head} ${outputFile} 10")
+        var head = "${userDirPath(id)}${File.separator}avator.jpg"
+        try {
+            Runtime.getRuntime().exec(".${File.separator}petpet ${head} ${outputFile} 10").waitFor()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            generationSuccess = false
+        }
     }
-    group.sendMessage(group.uploadImageResource(File(outputFile)))
+    if (generationSuccess) {
+        group.sendMessage(group.uploadImageResource(File(outputFile)))
+    }
 }
 
 operator fun <K, V> Map<K, V>.minus(x: K): V {
@@ -46,7 +54,7 @@ operator fun <K, V> Map<K, V>.minus(x: K): V {
 private fun getUserHead(url: String, memberId: Long): File {
     return getTargetImage(
         url,
-        "${userDirPath(memberId)}${File.separator}avatar.jpg",
+        "${userDirPath(memberId)}${File.separator}avator.jpg",
         true
     )
 }

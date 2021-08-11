@@ -67,8 +67,9 @@ private val hands: Array<BufferedImage> by lazy {
 suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long) {
     val outputFile = File("${userDirPath(id)}${File.separator}PetPet.gif")
     val time = System.currentTimeMillis()
+    val lastModified = outputFile.lastModified()
     
-    if (!USE_CACHE || !outputFile.exists() || time - outputFile.lastModified() >= OUTDATE_THRESHOLD) {
+    if (!USE_CACHE || lastModified == 0 || time - lastModified >= OUTDATE_THRESHOLD) {
         runInterruptible(Dispatchers.IO) {
             val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
             val outputStream = FileOutputStream(outputFile)

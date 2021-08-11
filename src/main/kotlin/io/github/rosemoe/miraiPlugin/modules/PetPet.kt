@@ -34,11 +34,11 @@ suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long
     runInterruptible(Dispatchers.IO) {
         getUserHead(url, id)
         val head = "${userDirPath(id)}${File.separator}avator.jpg"
-        var process = Runtime.getRuntime().exec(".${File.separator}petpet ${head} ${outputFile} 10", ["RUST_BACKTRACE=1"])
+        var process = Runtime.getRuntime().exec(".${File.separator}petpet ${head} ${outputFile} 10", arrayOf(["RUST_BACKTRACE=1"]))
         try {
             if (process.waitFor() != 0) { // if errors occured at native
                 generationSuccess = false
-                var error = getErrorStream().readText() // print Rust backtrace
+                var error: String = getErrorStream().readText() // print Rust backtrace
                 throw Exception(error)
             }
         } catch (e: Exception) {

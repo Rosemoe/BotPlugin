@@ -33,9 +33,9 @@ suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long
     var generationSuccess = true
     runInterruptible(Dispatchers.IO) {
         getUserHead(url, id)
-        val head = "${userDirPath(id)}${File.separator}avator.jpg"
-        var process = Runtime.getRuntime().exec(".${File.separator}petpet ${head} ${outputFile} 10", arrayOf(["RUST_BACKTRACE=1"]))
+        val head = "${userDirPath(id)}${File.separator}avatar.jpg"
         try {
+            val process = Runtime.getRuntime().exec(".${File.separator}petpet ${head} ${outputFile} 10", arrayOf(["RUST_BACKTRACE=1"]))
             if (process.waitFor() != 0) { // if errors occured at native
                 generationSuccess = false
                 var error: String = getErrorStream().readText() // print Rust backtrace
@@ -59,7 +59,7 @@ operator fun <K, V> Map<K, V>.minus(x: K): V {
 private fun getUserHead(url: String, memberId: Long): File {
     return getTargetImage(
         url,
-        "${userDirPath(memberId)}${File.separator}avator.jpg",
+        "${userDirPath(memberId)}${File.separator}avatar.jpg",
         false
     )
 }

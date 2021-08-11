@@ -36,9 +36,9 @@ suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long
         val head = "${userDirPath(id)}${File.separator}avator.jpg"
         var process = Runtime.getRuntime().exec(".${File.separator}petpet ${head} ${outputFile} 10", ["RUST_BACKTRACE=1"])
         try {
-            if (process.waitFor() != 0) {
+            if (process.waitFor() != 0) { // if errors occured at native
                 generationSuccess = false
-                var error = getErrorStream().readText()
+                var error = getErrorStream().readText() // print Rust backtrace
                 throw Exception(error)
             }
         } catch (e: Exception) {

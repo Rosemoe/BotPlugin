@@ -132,7 +132,7 @@ private fun getTargetImage(url: String, pathname: String, isUseCache: Boolean = 
     val time = System.currentTimeMillis()
     val file = File(pathname)
     val lastModified = file.lastModified()
-    if (isUseCache && file.lastModified() != 0 && time - lastModified < OUTDATE_THRESHOLD) {
+    if (isUseCache && file.lastModified() != 0L && time - lastModified < OUTDATE_THRESHOLD) {
         return file
     }
     val connection = (URL(url).openConnection() as HttpURLConnection).apply {

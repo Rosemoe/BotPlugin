@@ -69,7 +69,7 @@ suspend fun RosemoePlugin.generateGifAndSend(url: String, group: Group, id: Long
     val time = System.currentTimeMillis()
     val lastModified = outputFile.lastModified()
     
-    if (!USE_CACHE || lastModified == 0 || time - lastModified >= OUTDATE_THRESHOLD) {
+    if (!USE_CACHE || lastModified == 0L || time - lastModified >= OUTDATE_THRESHOLD) {
         runInterruptible(Dispatchers.IO) {
             val head = ImageIO.read(FileInputStream(getUserHead(url, id)))
             val outputStream = FileOutputStream(outputFile)

@@ -106,27 +106,91 @@ reloadBase只刷新配置不重新建立图片索引,算是轻重载
 
 图片源保存在image_sources.yml中
 
-```text
-
 添加一个路径：
+
+```
 /sources path <名称> <路径>
+```
 
 添加一个在线Json图源
+
+```
 /sources json <名称> <网址> <数据路径>
+```
+
 对应的网址要返回一个Json文本，其中通过数据路径可以到达url元素
+
 比如返回下面这段Json：
-{"code":1,"msg":"ok","data":"http:\/\/test.xxx.com\/large\/a15b4afegy1fmvjv7pshlj21hc0u0e0s.jpg"}
+
+```json
+{
+  "code": 1,
+  "msg": "ok",
+  "data": "http://test.xxx.com/large/a15b4afegy1fmvjv7pshlj21hc0u0e0s.jpg"
+}
+```
+
 需要设置的数据路径是 data
+
 对于下面这段Json：
-{"code":0,"msg":"","quota":8,"quota_min_ttl":7029,"count":1,"data":[{"pid":61732396,"p":0,"uid":946272,"title":"カンナ","author":"Aile\/エル","url":"https:\/\/i.pixiv.cat\/img-original\/img\/2017\/03\/04\/00\/00\/01\/61732396_p0.png","r18":false,"width":583,"height":650,"tags":["カンナカムイ(小林さんちのメイドラゴン)","康娜卡姆依（小林家的龙女仆）","カンナ","康娜","カンナカムイ","康娜卡姆依","小林さんちのメイドラゴン","小林家的龙女仆","尻神様","尻神样","竜娘","龙娘","マジやばくね","that's wicked","高品質パンツ","高品质内裤","魅惑のふともも","魅惑的大腿"]}]}
+
+```json
+{
+  "code": 0,
+  "msg": "",
+  "quota": 8,
+  "quota_min_ttl": 7029,
+  "count": 1,
+  "data": [
+    {
+      "pid": 61732396,
+      "p": 0,
+      "uid": 946272,
+      "title": "カンナ",
+      "author": "Aile/エル",
+      "url": "https://i.pixiv.cat/img-original/img/2017/03/04/00/00/01/61732396_p0.png",
+      "r18": false,
+      "width": 583,
+      "height": 650,
+      "tags": [
+        "カンナカムイ(小林さんちのメイドラゴン)",
+        "康娜卡姆依（小林家的龙女仆）",
+        "カンナ",
+        "康娜",
+        "カンナカムイ",
+        "康娜卡姆依",
+        "小林さんちのメイドラゴン",
+        "小林家的龙女仆",
+        "尻神様",
+        "尻神样",
+        "竜娘",
+        "龙娘",
+        "マジやばくね",
+        "that's wicked",
+        "高品質パンツ",
+        "高品质内裤",
+        "魅惑のふともも",
+        "魅惑的大腿"
+      ]
+    }
+  ]
+}
+```
+
 需要设置的数据路径是 data\0\url
 
 删除一个源
+```
 /sources remove <名称>
+```
 
 刷新源列表
+
 对源进行操作时不会立即生效，使用settings reload会导致设置文件被覆盖
-可以使用这个方法来在修改图源列表后刷新图源 
+
+可以使用这个方法来在修改图源列表后刷新图源
+
+```
 /sources refresh
 ```
 

@@ -6,7 +6,7 @@ A plugin for [Mirai Console](https://github.com/mamoe/mirai-console) with image 
 
 ## petpet-rs 部署
 
-请在 [petpet-rs](https://github.com/poly000/petpet-rs/release/latest) 下载对应平台的二进制，以及 `any-resourses.tar`
+请在 [petpet-rs](https://github.com/poly000/petpet-rs/release/latest) 下载对应平台的二进制，以及 `res`
 
 并把 petpet 二进制文件（以 `petpet(.exe)` 命名）放在 `mirai` 运行的目录，`res` 中的文件放在此目录的同名子目录。
 

@@ -155,10 +155,14 @@ class OnlineJsonImageStorage(private val requestUrl: String, private val jsonPat
             } else if (obj is String) {
                 break
             } else {
-                throw IllegalArgumentException("Unable to extract content from ${obj}")
+                throw IllegalArgumentException("Unable to extract content from $obj")
             }
         }
-        return URL(obj.toString()).openConnection().getInputStream().toExternalResource()
+        var url = obj.toString()
+        if (url.startsWith("//")) {
+            url = "https:$url"
+        }
+        return URL(url).openConnection().getInputStream().toExternalResource()
     }
 
     override fun init() {
@@ -187,6 +191,8 @@ class ScriptProxyImageStorage(private val script: String) : ImageStorage() {
                 return null
             } else if (result is ExternalResource) {
                 return result
+            } else if (result is String) {
+                return URL(result).openConnection().getInputStream().toExternalResource()
             }
             logWarning("ImageStorage named '${storageName}' attempted to execute its script but got unexpected result type ${result.javaClass.name}")
             return null

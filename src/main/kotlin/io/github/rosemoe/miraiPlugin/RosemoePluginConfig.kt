@@ -75,6 +75,12 @@ object RosemoePluginConfig : AutoSavePluginConfig("PluginConfig") {
 
     var msgOnJoinFormat by value("欢迎\$nick加入本群~")
 
-    var msgOnLeaveFormat by value("\$nick (\$id) 怎么溜号了，真你妈的怪啊！！！")
+    var msgOnLeaveFormat by value("\$nick (\$id) 离开了我们...")
+
+    var repeatDetectGroups: MutableList<Long> by value()
+
+    var messageRecordSize by value(12)
+
+    var messageDuplicateLimit by value(6)
 
 }

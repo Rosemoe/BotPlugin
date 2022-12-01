@@ -35,7 +35,7 @@ import kotlin.reflect.full.memberFunctions
 import kotlin.reflect.jvm.jvmErasure
 
 class CommandDispatcher constructor(
-    private val permissionChecker: Checker,
+    private val permissionChecker: CommandPermissionChecker,
     override val coroutineContext: CoroutineContext
 ) : CoroutineScope {
 
@@ -250,9 +250,9 @@ class CommandDispatcher constructor(
         return parameters[index].type.jvmErasure
     }
 
-    private fun <T> KFunction<T>.targetAnnotation(): Path? {
+    private fun <T> KFunction<T>.targetAnnotation(): CommandTriggerPath? {
         annotations.forEach {
-            if (it is Path) {
+            if (it is CommandTriggerPath) {
                 return it
             }
         }

@@ -18,13 +18,14 @@
 
 package io.github.rosemoe.miraiPlugin
 
-import io.github.rosemoe.miraiPlugin.command.Checker
+import io.github.rosemoe.miraiPlugin.command.CommandPermissionChecker
 import io.github.rosemoe.miraiPlugin.command.Command
 import io.github.rosemoe.miraiPlugin.command.CommandDispatcher
 import io.github.rosemoe.miraiPlugin.command.MsgEvent
 import io.github.rosemoe.miraiPlugin.commands.*
 import io.github.rosemoe.miraiPlugin.commands.Setu.initializeImageList
 import io.github.rosemoe.miraiPlugin.commands.Setu.sendImageForEvent
+import io.github.rosemoe.miraiPlugin.modules.handleGpMessageForRepeating
 import io.github.rosemoe.miraiPlugin.utils.startRecallManager
 import kotlinx.coroutines.launch
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
@@ -51,7 +52,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         name("RosemoeBotPlugin")
         author("Rosemoe")
     }
-) , Checker {
+) , CommandPermissionChecker {
     /**
      * Constant fields
      */
@@ -78,15 +79,14 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         registerCommands()
         startRecallManager()
         msgs.launchClearer(this)
-        //registerCommand()
     }
 
     private fun registerCommands() {
-        dispatcher.register(Blacklist, Help, Pixiv, Settings, Setu, Sources)
+        dispatcher.register(Blocklist, Help, Pixiv, Settings, Setu, Sources)
     }
 
     private fun isManagementCommand(command: Command) : Boolean {
-        return command == Blacklist || command == Sources || command == Settings
+        return command == Blocklist || command == Sources || command == Settings
     }
 
     override fun shouldRunCommand(user: User, command: Command, group: Long): Boolean {
@@ -151,6 +151,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
                 }
                 randomRepeat(event)
                 handleAtReply(event)
+                handleGpMessageForRepeating(event)
                 dispatcher.dispatch(event)
             } catch (e: Throwable) {
                 event.sendAsync(getExceptionInfo(e))

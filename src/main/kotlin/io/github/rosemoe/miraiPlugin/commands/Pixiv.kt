@@ -31,7 +31,7 @@ object Pixiv : Command(
     )
 ) {
 
-    @Path("illust,i")
+    @CommandTriggerPath("illust,i")
     suspend fun fetchIllustration(event: MsgEvent) {
         if (!RosemoePlugin.isModuleEnabled("Pixiv")) {
             return

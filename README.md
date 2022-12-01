@@ -59,7 +59,7 @@ managers:
 /settings set prefix <指令前缀,默认'/'>
 /settings set repeatFactor <概率的小数>
 /settings reload
-/settings reloadBase
+/settings reloadq
 /settings get recallDelay
 /settings get recallInterval
 /settings get prefix
@@ -133,9 +133,9 @@ R18画作将不会发送图片
 ```
 ### 黑名单
 ```Bash
-/darklist add <群号或this>
-/darklist remove <群号或this>
-/darklist list <页码,可选,每页15个>
+/blocklist add <群号或this>
+/blocklist remove <群号或this>
+/blocklist list <页码,可选,每页15个>
 ```
 ## Console指令表
 咕了,还没写呢

@@ -41,7 +41,7 @@ object Help : Command(
         items[path] = content
     }
 
-    @Path("")
+    @CommandTriggerPath("")
     fun seekHelp(event: MsgEvent) {
         if (!RosemoePlugin.isModuleEnabled("Help")) {
             return

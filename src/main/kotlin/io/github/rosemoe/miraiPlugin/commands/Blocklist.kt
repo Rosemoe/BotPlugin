@@ -23,16 +23,16 @@ import io.github.rosemoe.miraiPlugin.command.*
 import kotlin.math.ceil
 
 @Suppress("unused")
-object Blacklist: Command(
+object Blocklist: Command(
     CommandDescription(
-    arrayOf("blacklist"),  Permissions.GROUP.withManager() + Permissions.FRIEND.withManager() + Permissions.TEMP.withManager())
+    arrayOf("blocklist"),  Permissions.GROUP.withManager() + Permissions.FRIEND.withManager() + Permissions.TEMP.withManager())
 ) {
 
-    @Path("add")
+    @CommandTriggerPath("add")
     fun addToDarkList(event: MsgEvent) {
         val restContent = event.restContent
         val target = restContent.trim()
-        darklistLock.lockWrite()
+        blocklistLock.lockWrite()
         try {
             val groupId = if (target.contentEquals("this")) event.groupId() else try {
                 target.toLong()
@@ -49,15 +49,15 @@ object Blacklist: Command(
                 }
             }
         } finally {
-            darklistLock.unlockWrite()
+            blocklistLock.unlockWrite()
         }
     }
 
-    @Path("remove")
+    @CommandTriggerPath("remove")
     fun removeDarkListGroup(event: MsgEvent) {
         val restContent = event.restContent
         val target = restContent.trim()
-        darklistLock.lockWrite()
+        blocklistLock.lockWrite()
         try {
             val groupId = if (target.contentEquals("this")) event.groupId() else try {
                 target.toLong()
@@ -74,14 +74,14 @@ object Blacklist: Command(
                 }
             }
         } finally {
-            darklistLock.unlockWrite()
+            blocklistLock.unlockWrite()
         }
     }
 
-    @Path("list")
+    @CommandTriggerPath("list")
     fun listDarklistGroups(event: MsgEvent) {
         val restContent = event.restContent
-        darklistLock.lockRead()
+        blocklistLock.lockRead()
         try {
             val groups = RosemoePlugin.config.darkListGroups
             val pageCount = ceil(groups.size / ITEM_COUNT_EACH_PAGE.toDouble()).toInt()
@@ -111,7 +111,7 @@ object Blacklist: Command(
             }
             event.sendAsync(msg.toString())
         } finally {
-            darklistLock.unlockRead()
+            blocklistLock.unlockRead()
         }
     }
 

@@ -38,7 +38,7 @@ object Setu : Command(
     )
 ) {
 
-    @Path("")
+    @CommandTriggerPath("")
     fun sendSetu(event: MsgEvent) {
         if (RosemoePlugin.isModuleEnabled("BatchImg") && RosemoePlugin.isModuleEnabled("ImageSender")) {
             try {

@@ -20,6 +20,7 @@ package io.github.rosemoe.miraiPlugin.commands
 
 import io.github.rosemoe.miraiPlugin.*
 import io.github.rosemoe.miraiPlugin.command.*
+import io.github.rosemoe.miraiPlugin.modules.onDisableRepeatBreakingForGroup
 import io.github.rosemoe.miraiPlugin.utils.ScriptMethods
 import org.mozilla.javascript.Context
 import org.mozilla.javascript.ScriptableObject
@@ -39,28 +40,31 @@ val allowedModuleName = listOf(
     "Help"
 )
 
-val darklistLock = ReentrantReadWriteLock(true)
+val blocklistLock = ReentrantReadWriteLock(true)
 
 const val ITEM_COUNT_EACH_PAGE = 15
 
 @Suppress("unused")
-object Settings : Command(CommandDescription(
-    arrayOf("settings"),  Permissions.GROUP.withManager() + Permissions.FRIEND.withManager() + Permissions.TEMP.withManager())
+object Settings : Command(
+    CommandDescription(
+        arrayOf("settings"),
+        Permissions.GROUP.withManager() + Permissions.FRIEND.withManager() + Permissions.TEMP.withManager()
+    )
 ) {
 
-    @Path("disable")
+    @CommandTriggerPath("disable")
     fun disableModule(event: MsgEvent) {
         val rest = event.restContent
         event.sendAsync(if (RosemoePlugin.disableModule(rest.trim())) "成功禁用了:${rest.trim()}" else "禁用${rest.trim()}失败了")
     }
 
-    @Path("enable")
+    @CommandTriggerPath("enable")
     fun enableModule(event: MsgEvent) {
         val rest = event.restContent
         event.sendAsync(if (RosemoePlugin.enableModule(rest.trim())) "成功启用了:${rest.trim()}" else "启用${rest.trim()}失败了")
     }
 
-    @Path("reload")
+    @CommandTriggerPath("reload")
     fun reloadConfig(event: MsgEvent) {
         try {
             RosemoePlugin.initOrReloadConfig()
@@ -71,7 +75,7 @@ object Settings : Command(CommandDescription(
         }
     }
 
-    @Path("reloadBase")
+    @CommandTriggerPath("reloadq")
     fun reloadBaseConfig(event: MsgEvent) {
         try {
             RosemoePlugin.reloadBaseConfig()
@@ -82,54 +86,54 @@ object Settings : Command(CommandDescription(
         }
     }
 
-    @Path("set/prefix")
+    @CommandTriggerPath("set/prefix")
     fun setCommandPrefix(event: MsgEvent) {
         RosemoePlugin.config.commandPrefix = event.restContent.trim()
         RosemoePlugin.dispatcher.prefix = RosemoePlugin.config.commandPrefix
         event.sendAsync("当前的前缀是:${RosemoePlugin.dispatcher.prefix}")
     }
 
-    @Path("get/prefix")
+    @CommandTriggerPath("get/prefix")
     fun getCommandPrefix(event: MsgEvent) {
         event.sendAsync("当前的前缀是:${RosemoePlugin.dispatcher.prefix}")
     }
 
-    @Path("set/recallDelay")
+    @CommandTriggerPath("set/recallDelay")
     fun setRecallDelay(event: MsgEvent) {
         val time = event.restContent.toLong(60000)
         RosemoePlugin.config.imageRecallDelay = time
         event.sendAsync("recallDelay的值设置为$time")
     }
 
-    @Path("get/recallDelay")
+    @CommandTriggerPath("get/recallDelay")
     fun getRecallDelay(event: MsgEvent) {
         event.sendAsync("recallDelay的值为${RosemoePlugin.config.imageRecallDelay}")
     }
 
-    @Path("set/recallInterval")
+    @CommandTriggerPath("set/recallInterval")
     fun setRecallInterval(event: MsgEvent) {
         val time = event.restContent.toLong(60000)
         RosemoePlugin.config.recallMinPeriod = time
         event.sendAsync("recallInterval的值设置为$time")
     }
 
-    @Path("get/recallInterval")
+    @CommandTriggerPath("get/recallInterval")
     fun getRecallInterval(event: MsgEvent) {
         event.sendAsync("recallInterval的值为${RosemoePlugin.config.recallMinPeriod}")
     }
 
-    @Path("set/repeatFactor")
+    @CommandTriggerPath("set/repeatFactor")
     fun setRepeatFactor(event: MsgEvent) {
         RosemoePlugin.config.repeatFactor = event.restContent.toDouble(0.01)
         event.sendAsync("repeatFactor的值设置为${RosemoePlugin.config.repeatFactor}")
     }
 
-    @Path("get/repeatFactor")
+    @CommandTriggerPath("get/repeatFactor")
     fun getRepeatFactor(event: MsgEvent) {
         event.sendAsync("repeatFactor的值为${RosemoePlugin.config.repeatFactor}")
     }
 
-    @Path("exec")
+    @CommandTriggerPath("exec")
     fun executeScript(event: MsgEvent) {
         val code = event.restContent
         val context = Context.enter()
@@ -152,26 +156,63 @@ object Settings : Command(CommandDescription(
         }
     }
 
-    @Path("set/joinMsg")
+    @CommandTriggerPath("set/joinMsg")
     fun setMsgOnJoin(event: MsgEvent) {
         RosemoePlugin.config.msgOnJoinFormat = event.restContent
         event.sendAsync("设置成功")
     }
 
-    @Path("get/joinMsg")
+    @CommandTriggerPath("get/joinMsg")
     fun getMsgOnJoin(event: MsgEvent) {
         event.sendAsync("入群提示的模板为：\n${RosemoePlugin.config.msgOnJoinFormat}")
     }
 
-    @Path("set/leaveMsg")
+    @CommandTriggerPath("set/leaveMsg")
     fun setMsgOnLeave(event: MsgEvent) {
         RosemoePlugin.config.msgOnLeaveFormat = event.restContent
         event.sendAsync("设置成功")
     }
 
-    @Path("get/leaveMsg")
+    @CommandTriggerPath("get/leaveMsg")
     fun getMsgOnLeave(event: MsgEvent) {
         event.sendAsync("退群提示的模板为：\n${RosemoePlugin.config.msgOnLeaveFormat}")
+    }
+
+    @CommandTriggerPath("rb/add")
+    fun enableRepeatBreakingForGroup(event: MsgEvent) {
+        val groupId = resolveGroupPresentation(event, event.restContent)
+        if (groupId == 0L) {
+            return
+        }
+        if (!RosemoePlugin.config.repeatDetectGroups.contains(groupId)) {
+            RosemoePlugin.config.repeatDetectGroups.add(groupId)
+        }
+        event.sendAsync("添加成功")
+    }
+
+    @CommandTriggerPath("rb/remove")
+    fun disableRepeatBreakingForGroup(event: MsgEvent) {
+        val groupId = resolveGroupPresentation(event, event.restContent)
+        if (groupId == 0L) {
+            return
+        }
+        RosemoePlugin.config.repeatDetectGroups.remove(groupId)
+        RosemoePlugin.onDisableRepeatBreakingForGroup(groupId)
+        event.sendAsync("删除成功")
+    }
+
+    private fun resolveGroupPresentation(event: MsgEvent, text: String): Long {
+        val groupPresentation = text.trim()
+        return if (groupPresentation == "this") {
+            event.groupId()
+        } else {
+            try {
+                groupPresentation.toLong()
+            } catch (e: NumberFormatException) {
+                event.sendAsync("群号格式有误")
+                0
+            }
+        }
     }
 
     fun RosemoePlugin.disableModule(name: String): Boolean {

@@ -27,7 +27,7 @@ object Sources: Command(
         arrayOf("sources"),  Permissions.GROUP.withManager() + Permissions.FRIEND.withManager() + Permissions.TEMP.withManager())
 ) {
 
-    @Path("json")
+    @CommandTriggerPath("json")
     fun addJson(event: MsgEvent) {
         val array = event.restContent.trim().split(Regex("[\t\b\n\r ]+"))
         if (array.size == 3) {
@@ -40,7 +40,7 @@ object Sources: Command(
         }
     }
 
-    @Path("path")
+    @CommandTriggerPath("path")
     fun addPath(event: MsgEvent) {
         val array = event.restContent.trim().split(Regex("[\t\b\n\r ]+"))
         if (array.size == 2) {
@@ -54,7 +54,7 @@ object Sources: Command(
         }
     }
 
-    @Path("remove")
+    @CommandTriggerPath("remove")
     fun removeSource(event: MsgEvent) {
         ImageSourceConfig.sources.filter {
             deserializeStorage(it).storageName == event.restContent
@@ -64,7 +64,7 @@ object Sources: Command(
         event.sendAsync("执行成功")
     }
 
-    @Path("refresh")
+    @CommandTriggerPath("refresh")
     fun refresh(event: MsgEvent) {
         RosemoePlugin.initializeImageList()
         event.sendAsync("图片源已刷新")

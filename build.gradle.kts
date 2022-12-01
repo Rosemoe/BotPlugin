@@ -16,12 +16,13 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 plugins {
-    val kotlinVersion = "1.5.10"
+    val kotlinVersion = "1.7.10"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
     java
-    id("net.mamoe.mirai-console") version "2.6.7"
+    id("net.mamoe.mirai-console") version "2.13.0"
 }
 
 group = "io.github.Rosemoe"
@@ -35,7 +36,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("net.mamoe:mirai-core-all:2.6.7")
+    compileOnly("net.mamoe:mirai-core-all:2.13.0")
     compileOnly(kotlin("stdlib-jdk8"))
     implementation("org.json:org.json:2.0")
     implementation(files("libs/rhino-1.7.13.jar"))

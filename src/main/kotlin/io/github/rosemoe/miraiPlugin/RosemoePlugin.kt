@@ -18,9 +18,9 @@
 
 package io.github.rosemoe.miraiPlugin
 
-import io.github.rosemoe.miraiPlugin.command.CommandDispatcher
 import io.github.rosemoe.miraiPlugin.command.Checker
 import io.github.rosemoe.miraiPlugin.command.Command
+import io.github.rosemoe.miraiPlugin.command.CommandDispatcher
 import io.github.rosemoe.miraiPlugin.command.MsgEvent
 import io.github.rosemoe.miraiPlugin.commands.*
 import io.github.rosemoe.miraiPlugin.commands.Setu.initializeImageList
@@ -78,6 +78,7 @@ object RosemoePlugin : ListenerHost, KotlinPlugin(
         registerCommands()
         startRecallManager()
         msgs.launchClearer(this)
+        //registerCommand()
     }
 
     private fun registerCommands() {
